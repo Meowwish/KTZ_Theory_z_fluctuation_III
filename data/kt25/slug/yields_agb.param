@@ -1,0 +1,405 @@
+#######################################
+# An example parameter file for SLUG2 #
+#######################################
+
+# This parameter file provides an example setup for simulating a
+# single star cluster of fixed mass, within which the stars are taken
+# to be coeval.
+#
+# Notes:
+#
+# 1. Meanings of all parameters are explained below.
+#
+# 2. For some parameters, a default value is listed. These parameters
+#    are optional, and if not specified will got to the default
+#    value. All other parameters are mandatory unless noted otherwise
+#    below.
+#
+# 3. The parameters need not be specified in any particular order.
+#
+# 4. When manually specifying paths, the path can be given as either
+#    an asbolute path or a relative one. Relative paths are assumed
+#    to be relative to the directory specified by the $SLUG_DIR
+#    environment variable if it is set. If not set, they are assumed
+#    to be relative to the current working directory.
+#
+# 5. Although the defaults paths listed below have been written out
+#    using UNIX-style path separators (/), the actual code
+#    implementation will set the default using whatever path separator
+#    is appropriate for the file system on which the code was
+#    compiled. Thus the defaults should work on systems that use
+#    windows-style path separators (\) as well.
+
+
+##############
+# Basic data #
+##############
+
+# Name of the model; this will become the base name for all output
+# files
+# Default: SLUG_DEF
+model_name        yields_agb
+
+# Directory into which to write output
+# Default: directory from which executable is called
+#out_dir           output
+
+# Level of verbosity while running; allowed values:
+# -- 0 (run silently except for runtime warnings and errors)
+# -- 1 (some basic output)
+# -- 2 (lots of output)
+# Default: 1
+verbosity        2
+
+
+##################################################################
+# Parameters controlling simulation execution and physical model #
+##################################################################
+
+# Type of simulation. Allowed values:
+# -- cluster (simulate a simple stellar population all formed at time
+#    0)
+# -- galaxy (continuous star formation)
+# Default: galaxy
+sim_type  	  cluster
+
+# Number of model galaxies to run
+# Default: 1
+n_trials          1
+
+# Number of trials after which to write a checkpoint
+# Default: no checkpointing
+#checkpoint_interval   100
+
+# Logarithmic time stepping? Allowed values:
+# -- 0 (no)
+# -- 1 (yes)
+# Default: 0
+log_time          1
+
+# Length of time step (in yr for linear time step, in dex for
+# logarithmic)
+time_step    	  0.02
+
+# Starting time (in yr)
+# Default: start_time = time_step, only if log_time = 0; otherwise
+# must be set
+start_time        1.0e6
+
+# Maximum evolution time, in yr.
+end_time	  1.01e10
+
+# Star formation rate in case where sim_type = galaxy, in Msun/yr; can
+# be omitted, and will be ignored, if sim_type = cluster. If, instead
+# of a numerical value, the string "sfh" appears, this indicates that
+# the star formation history should be read from a star formation
+# history file.
+#sfr    		  0.001
+
+# Star formation history file. Can be omitted, and will be ignored, if
+# sim_type = cluster or if sfr is not equal to the special string sfh.
+#sfh              sfh.txt
+
+# Mass of cluster for cluster mode simulation, in Msun; if this set to
+# "cmf", then a new cluster mass will be drawn for each trial from the
+# cmf; can be omitted, and will be ignored, if sim_type = galaxy
+cluster_mass      1
+
+# Redshift; if set to a non-zero value, this causes all spectra to be
+# redshifted by the specified amount. In this case photometry and
+# spectra are computed in the observed frame.
+# Default: 0
+#redshift             0
+
+# Read a random number generator seed from a file?
+# -- 0 (no, seed is automatically generated)
+# -- 1 (yes)
+# Default: 0
+#read_rng_seed     0
+
+# Save the random number generator seed?
+# -- 0 (no)
+# -- 1 (yes)
+# Default: 0
+#save_rng_seed     0
+
+# Name of random number generator seed file for
+# reading/writing. Important exception: unlike every other file, this
+# is NOT assumed to be relative to the SLUG_DIR directory if given as
+# a relative path.
+#rng_seed_file     seed.txt
+
+# Tolerance for IMF integration
+imf_integrator_tol 1.0e-6
+
+#############################################
+# Parameters controlling simulation outputs #
+#############################################
+
+# Write out cluster physical properties? Allowed values:
+# -- 0 (no)
+# -- 1 (yes)
+# Default: 1
+out_cluster       1
+
+# Write out cluster photometry? Allowed values:
+# -- 0 (no)
+# -- 1 (yes)
+# Default: 1
+out_cluster_phot  0
+
+# Write out cluster spectra? Allowed values:
+# -- 0 (no)
+# -- 1 (yes)
+# Default: 1
+out_cluster_spec  0
+
+# Write out cluster yields? Allowed values:
+# -- 0 (no)
+# -- 1 (yes)
+# Default: 1
+out_cluster_yield  1
+
+# Write out integrated physical properties of galaxy? Can be omitted,
+# and will be ignored, if sim_type = cluster.  Allowed values:
+# -- 0 (no)
+# -- 1 (yes)
+# Default: 1
+#out_integrated     1
+
+# Write out integrated photometry? Can be omitted, and will be ignored,
+# if sim_type = cluster. Allowed values:
+# -- 0 (no)
+# -- 1 (yes)
+# Default: 1
+#out_integrated_phot  1
+
+# Write out integrated spectra? Can be omitted, and will be ignored,
+# if sim_type = cluster. Allowed values:
+# -- 0 (no)
+# -- 1 (yes)
+# Default: 1
+#out_integrated_spec  1
+
+# Write out integrated yields? Can be omitted, and will be ignored,
+# if sim_type = cluster. Allowed values:
+# -- 0 (no)
+# -- 1 (yes)
+# Default: 1
+#out_integrated_yield  1
+
+# Write output as binary, ASCII, or FITS; allowed values:
+# -- binary
+# -- ascii
+# -- fits
+# Default: ascii
+output_mode      fits
+
+
+#####################################################################
+# Parameters controlling the physical models used for stars         #
+#####################################################################
+
+# IMF (initial mass function) file name
+# Default: lib/imf/chabrier.imf (Chabrier 2005 IMF)
+imf   	          lib/imf/chabrier.imf
+
+# CMF (cluster mass function) file name; ignored if sim_type = cluster
+# and cluster_mass is not "cmf"
+# Default: lib/cmf/slug_default.cmf (dN/dM ~ M^-2)
+#cmf               lib/cmf/slug_default.cmf
+
+# CLF (cluster lifetime function) file name
+# Default: lib/clf/slug_default.clf (dN/dt ~ t^-1.9)
+clf               lib/clf/nodisrupt.clf
+
+# Stellar tracks to use; allowed values are:
+# -- geneva_2013_vvcrit_00 (Geneva 2013 models, non-rotating)
+# -- geneva_2013_vvcrit_40 (Geneva 2013 models, rotating 40% breakup)
+# -- geneva_mdot_std (Geneva pre-2013 models, standard mass loss rate)
+# -- geneva_mdot_enhanced (Geneva pre-2013 models, x2 mass loss rate)
+# -- padova_tpagb_yes (Padova models, added TP-AGB stars)
+# -- padova_tpagb_no (Padova models, no TP-AGB stars)
+# -- mist_2016_vvcrit_00 (MIST 2016 v1.0 models, non-rotating)
+# -- mist_2016_vvcrit_40 (MIST 2016 v1.0 models, rotating 40% breakup)
+# -- Any file name specifying a track file (generally lib/tracks/...)
+# Default: geneva_2013_vvcrit_00
+tracks	  	  mist_2016_vvcrit_40
+
+# Directory containing stellar atmosphere models
+# Default: lib/atmospheres
+#atmospheres 	  lib/atmospheres
+
+# Spectral synthesis mode, describing which models to use for stellar
+# atmospheres; allowed values are 
+# -- planck (treat stars as blackbodies)
+# -- kurucz (use Kurucz atmospheres, as compiled by Lejeune+ 1997)
+# -- kurucz+hillier (use Hillier models for WR stars, kurucz for all others)
+# -- kurucz+pauldrach (use Pauldrach models for OB stars, kurucz for others)
+# -- sb99 (emulate starburst99 -- Pauldrach for OB stars, Hillier for WR 
+#          stars, kurucz for others)
+# Default: sb99
+specsyn_mode	   sb99
+
+# Fraction of stars born in clusters (must be 0 - 1); can be omitted
+# if sim_type = cluster
+# Default: 1.0
+#clust_frac        1.0
+
+# Minimum stellar mass for full stochastic treatment; lower mass stars are 
+# handled assuming that they are continuously-distributed
+# Default: 0.0
+min_stoch_mass    120
+
+# Metallicity; the metallicity of the stellar track set being used,
+# relative to solar (i.e. solar = 1). Note that this keyword should be
+# omitted if you specify the tracks by giving a track file name, since
+# in that case the metallicity will be deduced from which file you
+# have chosen.
+# Default: 1.0
+#metallicity       1.0
+
+
+#####################################################################
+# Parameters controlling extinction                                 #
+#####################################################################
+
+# Extinction; to turn on extintion, set the parameter A_V. If set to
+# a number, this extinction will be applied to all spectra and
+# photometry. Default behavior, if the A_V parameter is omitted
+# entirely, is not to apply any extinction. If the parameter A_V is
+# set to a real number, this will be interpreted as a uniform
+# extinction that is applied to all light output. Finally, if this
+# parameter is set to any string that cannot be converted to a real
+# number, it will be interpreted as a file name giving the name of a
+# PDF file specifying the distribution of extinctions.
+A_V                  lib/avdist/slug_default.av
+
+# File specifying the shape fof the extinction curve
+# Default: lib/extinct/SB_ATT_SLUG.dat (Calzetti+ 2000 starburst
+# attenuation curve)
+extinction_curve     lib/extinct/SB_ATT_SLUG.dat
+
+# Should the same extinction be applied to nebular light and
+# starlight? Default is yes, but if nebular_extinction_factor is set,
+# the stellar extinction will be multiplied by this factor before it
+# is applied to the nebular light, i.e.,
+#    A_{V,neb} = nebular_extinction_factor * A_V
+# As with A_V, this parameter can be set to a real number, to specify
+# a single factor, or to the name of a PDF file specifying a
+# distribution.
+nebular_extinction_factor  lib/avdist/neb_factor_default.av
+
+
+#####################################################################
+# Parameters controlling the nebular emission                       #
+#####################################################################
+
+# Compute nebular emission or not
+# -- 0 (no)
+# -- 1 (yes)
+# Default: 1
+#compute_nebular      1
+
+# Directory containing atomic data; only needed if nebular emission is
+# being used
+# Default: lib/atomic
+#atomic_data           lib/atomic
+
+# Turn of metal line emission (also includes He line emission) in the
+# nebular computation?
+# -- 0 (no)
+# -- 1 (yes)
+# Default: 0
+#nebular_no_metals    0
+
+# Hydrogen number density to assume for nebular emission computation,
+# in cm^-3
+# Default: 1.0e2
+#nebular_den          1.0e2
+
+# Gas temperature to assume for nebular emission computation, in K; if
+# set to a value <= 0, temperatures will be computed based on the
+# tabulated cloudy results
+# Default: -1.0
+#nebular_temp         -1.0
+
+# Log of dimensionless ionization parameter (volume-weighted mean
+# value) for nebular emission computation; allowed values are -3,
+# -2.5, and -2
+# Default: -3.0
+#nebular_logU          -3.0
+
+# Fraction of ionizing photons assumed to absorbed by H and produce
+# nebular emission within the observed aperture; values < 1 can
+# represent either absorption by dust instead of gas, or escape of
+# ionizing photons outside the observed aperture
+# Default: 0.73 (i.e, 73% of ionizing photons absorbed by H within the
+# observed aperture, 27% not)
+#nebular_phi          0.73
+
+#############################################
+# Parameters describing photometric filters #
+#############################################
+
+# All these parameters can be omitted if no photometric output is
+# requested, i.e. if out_integrated_phot = 0 and out_cluster_phot = 0
+# (see below).
+
+# Photometric filters to be used; can be comma- or
+# whitespace-separated. For a list of available filters, see the file
+# lib/filters/FILTER_LIST. In addition to those filters, the following
+# special values are always available:
+# -- QH0 : H ionizing photon luminosity, in phot/s
+# -- QHe0 : He ionizing photon luminosity, in phot/s
+# -- QHe1 : He+ ionizing photon luminosity, in phot/s
+# -- Lbol : bolometric luminosity, in L_sun
+#phot_bands         
+
+# Directory containing photometric filter data
+# Default: lib/filters
+#filters	           lib/filters
+
+# Photometry mode; allowed values are
+# -- L_nu (report frequency-averaged luminosity in band, in erg/s/Hz)
+# -- L_lambda (report wavelength-averaged luminosity in band, in erg/s/A)
+# -- AB (report absolute AB magnitude)
+# -- STMAG (report absolute ST magnitude)
+# -- VEGA (report absolute Vega magnitude)
+# Default: L_nu
+#phot_mode          L_nu
+
+
+############################################
+# Parameters controlling yield calculation #
+############################################
+
+# Directory specifying where yield data can be found
+# Default: lib/yields
+yield_dir	   lib/yields
+
+# Model to use for yield calculation. Currently the following models
+# are available:
+# sukhbold16 = Solar metallicity type II SN yields from Sukhbold et
+#              al. (2016, ApJ, 821, 38); no other yields
+# karakas16+doherty14 = metallicity-dependent AGB star yields from
+#                       Karakas & Lugaro (2016, ApJ, 825, 26), and super-
+#                       AGB star yields from Doherty+ (2014, MNRAS, 437, 195)
+# sukhbold16+karakas16+doherty14 = sukhbold16 used for SNII,
+#                                  karakas16+doherty14 for AGB
+yield_mode         karakas16+doherty14
+
+# Disable decay of radioactive isotopes? Allowed values:
+# -- 0 (decay occurs, outputs are mass still present at output time)
+# -- 1 (decay disabled, outputs are total mss of isotope ever
+#       produced)
+# Default: 0
+# no_decay_isotopes	0
+
+# When using multiple yield tables, which isotopes should be included
+# in the output: only those present in all tables, or any isotopes
+# present in any of the tables? Allowed values:
+# -- intersection (only isotopes present in all yield tables)
+# -- union (all isotopes present in nay of the yield tables)
+# Default: intersection
+isotopes_included	union
