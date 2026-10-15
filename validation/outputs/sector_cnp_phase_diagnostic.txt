@@ -1,0 +1,2 @@
+{'dx_kpc': 0.2, 'fwhm_beam_kpc': 0.4, 'sigma_beam_kpc': 0.16986436005760383, 's_eff_kpc': 0.18014966227495202, 'q': 1.1101880374038757, 'ell_star_kpc': 0.6012487006222965, 'cluster_fraction': 0.5, 'sigma_cl_kpc': 0.35, 'N_ch': 20.0, 'ell_src_kpc': 0.4949747468305833, 'n_realizations': 10}
+sector theory with midpoint-modulated C_NP: [0.91462144 0.72344755 0.5125868 ] sim [0.91522368 0.731875   0.51493706] resid [0.00060225 0.00842745 0.00235026] rmse 0.005063211288656416

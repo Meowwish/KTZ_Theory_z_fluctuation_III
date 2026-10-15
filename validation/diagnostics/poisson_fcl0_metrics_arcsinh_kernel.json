@@ -1,0 +1,43 @@
+{
+ "scalar_setup": {
+  "dx_kpc": 0.2,
+  "fwhm_beam_kpc": 0.4,
+  "sigma_beam_kpc": 0.16986436005760383,
+  "s_eff_kpc": 0.18014966227495202,
+  "q": 1.1101880374038757,
+  "ell_star_kpc": 0.6012487006222965,
+  "cluster_fraction": 0.0,
+  "sigma_cl_kpc": 0.35,
+  "N_ch": 20.0,
+  "ell_src_kpc": 0.4949747468305833,
+  "n_realizations": 10
+ },
+ "cross_setup": {
+  "dx_kpc": 0.05,
+  "fwhm_beam_kpc": 0.1,
+  "sigma_beam_kpc": 0.04246609001440096,
+  "q_AGB": 1.1770837108434267,
+  "q_CCSN": 0.6802016779123486,
+  "expected_parent_events": 1128917.5554486217,
+  "n_realisations": 12,
+  "narrow_limit_kpc": 0.1,
+  "NFFT": 1024
+ },
+ "cross": {
+  "rmse": 0.036981474716587845,
+  "bias": 0.02728735530886146,
+  "pearson": 0.9993241652992337,
+  "max_abs": 0.0789792009066862,
+  "within_2sigma": 61
+ },
+ "cross_noCNP": {
+  "rmse": 0.036981474716587845,
+  "bias": 0.02728735530886146,
+  "max_abs": 0.0789792009066862
+ },
+ "ktz_minus_kt25": {
+  "min": -0.04089134790073867,
+  "max": 0.41595376444506893
+ },
+ "runtime_s": 1042.5854713916779
+}
