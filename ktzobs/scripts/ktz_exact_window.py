@@ -66,6 +66,65 @@ def _grid_key(npz, *names):
 
 
 # ----------------------------------------------------------------------------------
+# exact projected mean-field (C_M) responses on a Chebyshev-Lobatto library in the rate log-slope
+# (added 2026-10-15; replaces the 7-node linear interpolation of ``mean_response`` when supplied)
+# ----------------------------------------------------------------------------------
+def chebyshev_lobatto_nodes(n_nodes, bound):
+    """n Chebyshev-Lobatto points on [-bound, bound], ascending, endpoints included."""
+    return -bound*np.cos(np.pi*np.arange(n_nodes)/(n_nodes-1))
+
+
+def exact_mean_field_response(pixel_map, reference_radius, slopes, edges, annulus_width):
+    """Exact projected mean-field pair responses (n_slope, 3, 2, n_bins) at arbitrary rate log-slopes.
+
+    For each slope s the two mean-field pieces f0 = P exp(s (R - r_ref)) and f1 = P [exp(s (R - r_ref)) g] are formed on
+    the actual valid-cell mask (P = annular-mean projection), and the finite-window pair sums are evaluated with the
+    FFT ``PairStatistic`` on the same separation bins.  Pieces and normalisation (per ordered pair) are identical to
+    ``build_window_response``: [f0 f0], [f0 f1 + f1 f0], [f1 f1], each as (numerator, endpoint denominator)."""
+    pm = pixel_map
+    valid = pm["valid_mask"].astype(bool); radius = np.hypot(pm["x_grid_kpc"], pm["y_grid_kpc"])
+    labels = np.floor(radius/annulus_width).astype(int); modulation = pm["arm_source_modulation"]
+    ps = PairStatistic(valid, pixel=float(pm["pixel_size_kpc"]), edges=np.asarray(edges))
+    slopes = np.atleast_1d(np.asarray(slopes, float)); out = np.empty((len(slopes), 3, 2, ps.nb))
+    for i, slope in enumerate(slopes):
+        rate = np.exp(slope*(radius-reference_radius))
+        f0 = annular_project(rate, valid, labels); f1 = annular_project(rate*modulation, valid, labels)
+        n0, e0, c = ps.sums(f0, valid); n1, e1, _ = ps.sums(f1, valid); nt, et, _ = ps.sums(f0+f1, valid)
+        with np.errstate(invalid="ignore", divide="ignore"):
+            out[i] = np.asarray([[n0, e0], [nt-n0-n1, et-e0-e1], [n1, e1]])/np.where(c > 0, c, np.nan)[None, None, :]
+    return out
+
+
+def mean_field_response_library(pixel_map, reference_radius, edges, annulus_width, slope_bound, n_nodes):
+    """Chebyshev-Lobatto library of the exact mean-field responses over |slope| <= slope_bound."""
+    nodes = chebyshev_lobatto_nodes(n_nodes, slope_bound)
+    return dict(mean_response_cheb=exact_mean_field_response(pixel_map, reference_radius, nodes, edges, annulus_width),
+                mean_response_cheb_nodes=nodes, mean_response_cheb_bound=np.asarray(float(slope_bound)))
+
+
+class ChebyshevSlopeInterpolator:
+    """Barycentric polynomial interpolation through Chebyshev-Lobatto nodes (spectrally convergent for the smooth,
+    entire slope dependence of the mean-field responses); NaN outside the node interval, like the grid interpolator."""
+
+    def __init__(self, nodes, values, bound):
+        self.nodes = np.asarray(nodes, float); self.values = np.asarray(values, float); self.bound = float(bound)
+        n = len(self.nodes); w = (-1.0)**np.arange(n); w[0] *= 0.5; w[-1] *= 0.5; self.w = w
+        self.flat = self.values.reshape(n, -1)
+
+    def __call__(self, slopes):
+        s = np.asarray(slopes, float).reshape(-1)
+        diff = s[:, None]-self.nodes[None, :]
+        hit = diff == 0.0
+        with np.errstate(divide="ignore", invalid="ignore"):
+            k = self.w[None, :]/diff
+            res = (k @ self.flat)/k.sum(axis=1)[:, None]
+        rows, cols = np.nonzero(hit)
+        res[rows] = self.flat[cols]
+        res[np.abs(s) > self.bound*(1+1e-12)] = np.nan
+        return res.reshape((len(s),)+self.values.shape[1:])
+
+
+# ----------------------------------------------------------------------------------
 # exact window responses restricted to all / same-pointing / cross-pointing pairs
 # ----------------------------------------------------------------------------------
 def build_window_response(pixel_map, pointing_labels, reference_radius, selection="all",
@@ -323,7 +382,9 @@ class ExactWindowKTZ:
         eg = R["rate_log_slope_grid"] if "rate_log_slope_grid" in R else R["eta_grid"]
         return dict(pinterp=RegularGridInterpolator((np.log(self.ell_grid), np.log(self.eps_grid), eg), pgrid, bounds_error=False, fill_value=np.nan),
                     ninterp=RegularGridInterpolator((np.log(self.ell_grid), np.log(self.eps_grid), eg, np.log(self.src_grid)), ngrid, bounds_error=False, fill_value=np.nan),
-                    minterp=RegularGridInterpolator((eg,), np.nan_to_num(R["mean_response"]), bounds_error=False, fill_value=np.nan),
+                    minterp=(ChebyshevSlopeInterpolator(R["mean_response_cheb_nodes"], np.nan_to_num(R["mean_response_cheb"]), R["mean_response_cheb_bound"])
+                             if "mean_response_cheb" in R else
+                             RegularGridInterpolator((eg,), np.nan_to_num(R["mean_response"]), bounds_error=False, fill_value=np.nan)),
                     delta=np.nan_to_num(R["delta_response"]) if "delta_response" in R else None,
                     counts=R["ordered_pair_counts"] if "ordered_pair_counts" in R else None)
 

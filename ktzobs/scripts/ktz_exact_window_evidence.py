@@ -18,8 +18,27 @@ ACTIVE = {"L0": [0, 1, 4], "L1": [0, 1, 2, 3, 4], "L1n": [0, 1, 4, 5, 6], "L2": 
 COMPONENTS = {"L0": [0], "L1": [0, 1, 2], "L1n": [0, 3], "L2": [0, 1, 2, 3]}
 
 
+EPS_MIN, EPS_MAX = 0.015, 0.9   # manuscript epsilon prior range
+
+
+def eps_from_u(u, emin=EPS_MIN, emax=EPS_MAX):
+    """Inverse CDF of the normalised prior p(eps) = (1+eps)^-1 / ln[(1+emax)/(1+emin)] on [emin, emax]."""
+    return (1+emin)*((1+emax)/(1+emin))**np.asarray(u, float) - 1
+
+
+def u_from_eps(eps, emin=EPS_MIN, emax=EPS_MAX):
+    """CDF of the same prior."""
+    return np.log((1+np.asarray(eps, float))/(1+emin))/np.log((1+emax)/(1+emin))
+
+
 class NestedModel:
-    def __init__(self, model, name):
+    """eps_prior="legacy": uniform in logit(eps) with the likelihood multiplied by 2/(1+eps) (published runs; reproduced for audit).
+    eps_prior="manuscript" (2026-10-16 fix): eps drawn by the inverse CDF of the normalised p(eps) = (1+eps)^-1/ln[(1+eps_max)/(1+eps_min)],
+    and no epsilon weight in the likelihood (the prior enters once, through the prior transform)."""
+    def __init__(self, model, name, eps_prior="legacy"):
+        assert eps_prior in ("legacy", "manuscript"); self.eps_prior = eps_prior
+        if eps_prior == "manuscript":
+            assert abs(model.eps_grid[0]-EPS_MIN) < 1e-12 and abs(model.eps_grid[-1]-EPS_MAX) < 1e-12
         self.m = model; self.name = name
         base = name.rstrip("q"); self.withq = name.endswith("q")
         self.active = list(ACTIVE[base]) + ([7] if self.withq else [])
@@ -40,6 +59,8 @@ class NestedModel:
                 else:
                     from scipy.special import erfinv
                     x[:, 3] = m.eta_prior_sigma*np.sqrt(2)*erfinv(2*u[:, j]-1)
+            elif i == 1 and self.eps_prior == "manuscript":
+                x[:, 1] = logit(eps_from_u(u[:, j]))
             elif i == 4:
                 a, b = (self.lo[4]-m.slope_mu)/m.slope_sd, (self.hi[4]-m.slope_mu)/m.slope_sd
                 x[:, 4] = truncnorm.ppf(u[:, j], a, b, loc=m.slope_mu, scale=m.slope_sd)
@@ -73,7 +94,9 @@ class NestedModel:
             return -np.inf
         pred, _ = self.predict_joint(x)
         res = (pred-self.m.y) @ self.m.precision_root_joint.T
-        ll = -0.5*np.sum(res**2)+np.log(2)-np.log1p(expit(x[0, 1]))   # shared epsilon prior factor
+        ll = -0.5*np.sum(res**2)
+        if self.eps_prior == "legacy":
+            ll += np.log(2)-np.log1p(expit(x[0, 1]))   # shared epsilon prior factor (legacy definition)
         return float(ll) if np.isfinite(ll) else -np.inf
 
 

@@ -20,7 +20,7 @@ from scripts.ktz_exact_window_evidence import NestedModel
 import amusing_ktz_stage as st
 
 ap = argparse.ArgumentParser(); ap.add_argument("--name", default="NGC1084"); ap.add_argument("--variant", default="d16_mockcov"); ap.add_argument("--nlive", type=int, default=400); ap.add_argument("--seed", type=int, default=2)
-ap.add_argument("--models", default="L0,L1,L1n,L2"); ap.add_argument("--ell-max", type=float, default=3.2); ap.add_argument("--ell-min", type=float, default=0.08, help="lower bound of the ell_star grid/prior [kpc] (split-prior runs)"); ap.add_argument("--tag", default="", help="suffix for the output files (split-prior runs)"); ap.add_argument("--l0-tag", help="plot-only: take the L0 curves and summary from the run with this tag (its dominant prior piece)"); ap.add_argument("--m1", type=float, help="phase [deg] of an m=1 nuisance pattern cos(phi-phi0); its amplitude is marginalised in every model (models become L0q..L2q)"); ap.add_argument("--rmax-fit", type=float, default=1e9, help="exclude separation bins with r > rmax_fit from the likelihood"); ap.add_argument("--rmin-fit", type=float, default=0.0, help="exclude separation bins with r < rmin_fit from the likelihood (variance set to 1e4, no covariance)"); ap.add_argument("--src-max", type=float, default=2.5); ap.add_argument("--plot-only", action="store_true"); ap.add_argument("--figname", help="output figure stem (default <g>_single_pointing_<variant>)")
+ap.add_argument("--models", default="L0,L1,L1n,L2"); ap.add_argument("--ell-max", type=float, default=3.2); ap.add_argument("--ell-min", type=float, default=0.08, help="lower bound of the ell_star grid/prior [kpc] (split-prior runs)"); ap.add_argument("--tag", default="", help="suffix for the output files (split-prior runs)"); ap.add_argument("--l0-tag", help="plot-only: take the L0 curves and summary from the run with this tag (its dominant prior piece)"); ap.add_argument("--m1", type=float, help="phase [deg] of an m=1 nuisance pattern cos(phi-phi0); its amplitude is marginalised in every model (models become L0q..L2q)"); ap.add_argument("--rmax-fit", type=float, default=1e9, help="exclude separation bins with r > rmax_fit from the likelihood"); ap.add_argument("--rmin-fit", type=float, default=0.0, help="exclude separation bins with r < rmin_fit from the likelihood (variance set to 1e4, no covariance)"); ap.add_argument("--src-max", type=float, default=2.5); ap.add_argument("--plot-only", action="store_true"); ap.add_argument("--cm-nodes", type=int, default=0, help="if > 0: evaluate the projected mean-field (C_M) responses from an exact Chebyshev-Lobatto library with this many nodes in the rate log-slope instead of the 7-node linear interpolation (added 2026-10-15)"); ap.add_argument("--figname", help="output figure stem (default <g>_single_pointing_<variant>)"); ap.add_argument("--eps-prior", default="legacy", choices=("legacy", "manuscript"), help="'manuscript': normalised p(eps) ~ 1/(1+eps) through the prior transform, no epsilon weight in the likelihood (2026-10-16 fix)"); ap.add_argument("--support", default="legacy", choices=("legacy", "intrinsic"), help="with --unified-response: prediction support; 'intrinsic' evaluates every point of the intrinsic ell_*/eps prior (fix of the legacy grid truncation, 2026-10-16)"); ap.add_argument("--unified-response", action="store_true", help="evaluate C_2p,0, C_2p,N and C_NP from the 65-node Chebyshev-Lobatto, cubic-Hermite stochastic response library <g>_stochastic_response_H65.npz with per-sample kernels (no slope or (ell, eps, ell_src) grid interpolation; added 2026-10-16)")
 a = ap.parse_args(); g = a.name.lower(); out = ROOT / "outputs" / a.name / "ktz" / a.variant
 pm = dict(np.load(out / f"{g}_pixel_map.npz")); morph = json.loads((out / f"{g}_morphology.json").read_text())
 diag = np.genfromtxt(out / f"{g}_diagnostics.csv", delimiter=",", names=True); fit_cov = np.load(out / f"{g}_fit_covariance.npz")["covariance"].copy()
@@ -41,8 +41,41 @@ if a.m1 is not None:   # deterministic unit-amplitude m=1 field cos(phi - phi0) 
     ps1 = kew.PairStatistic(valid_, pixel=float(pm["pixel_size_kpc"]), edges=np.concatenate(([diag["r_kpc"][0]-0.5*(diag["r_kpc"][1]-diag["r_kpc"][0])], diag["r_kpc"]+0.5*(diag["r_kpc"][1]-diag["r_kpc"][0])))); n1, e1, c1 = ps1.sums(f1, valid_)
     resp = dict(resp); resp["delta_response"] = np.asarray([np.divide(n1, c1, out=np.zeros(nb), where=c1 > 0), np.divide(e1, c1, out=np.zeros(nb), where=c1 > 0)]); nuisance_max = 3.0
     zero = {k: (np.zeros_like(v) if k in ("response", "mean_response", "delta_response", "ordered_pair_counts") else v) for k, v in resp.items()}
+if a.cm_nodes > 0:   # exact C_M responses: Chebyshev-Lobatto library, verified first against the stored response nodes
+    _dr = diag["r_kpc"][1]-diag["r_kpc"][0]; _edges = np.concatenate(([diag["r_kpc"][0]-0.5*_dr], diag["r_kpc"]+0.5*_dr))
+    _aw = 0.4 if float(pm["pixel_size_kpc"]) >= 0.1 else 0.2
+    _chk = kew.exact_mean_field_response(pm, morph["r_ref_kpc"], resp["rate_log_slope_grid"], _edges, _aw)
+    _ref = np.asarray(resp["mean_response"]); _err = np.nanmax(np.abs(_chk-_ref))/np.nanmax(np.abs(_ref))
+    assert _err < 1e-10, f"exact mean-field response does not reproduce the stored response nodes (max rel {_err:.2e})"
+    lib = kew.mean_field_response_library(pm, morph["r_ref_kpc"], _edges, _aw, st.SLOPE_BOUND, a.cm_nodes)
+    np.savez_compressed(out / f"{g}_mean_response_cheb{a.cm_nodes}.npz", **lib, check_vs_stored_nodes_max_rel=_err)
+    resp = dict(resp); resp.update(lib)
+    zero = {k: (np.zeros_like(v) if k in ("response", "mean_response", "mean_response_cheb", "delta_response", "ordered_pair_counts") else v) for k, v in resp.items()}
+    print(f"C_M responses: exact Chebyshev-Lobatto library, {a.cm_nodes} nodes on |slope| <= {st.SLOPE_BOUND}; stored-node check max rel {_err:.1e}", flush=True)
 model = kew.SplitKTZ(morph, diag, fit_cov, resp, resp, zero, split, fit_cov, grids, use_D=False, sigma_q_max=nuisance_max, src_length_bounds=(0.12, None), eta_prior="flat",
                      rate_log_slope_bound=st.SLOPE_BOUND, beam_fwhm_kpc=morph.get("effective_fwhm_kpc", st.TARGET_FWHM_KPC))
+if a.unified_response:   # unified converged stochastic responses (2026-10-16); library provenance and consistency checked first
+    import hashlib, ktz_unified_response as kur
+    from scipy.special import exp1 as _E1
+    _L = dict(np.load(out / f"{g}_stochastic_response_H65.npz"))
+    _dr = diag["r_kpc"][1]-diag["r_kpc"][0]; _edges = np.concatenate(([diag["r_kpc"][0]-0.5*_dr], diag["r_kpc"]+0.5*_dr))
+    assert str(_L["pixel_map_md5"]) == hashlib.md5(open(out / f"{g}_pixel_map.npz", "rb").read()).hexdigest(), "library built from a different pixel map"
+    assert np.allclose(_L["edges"], _edges, rtol=0, atol=1e-12) and float(_L["annulus_width"]) == (0.4 if float(pm["pixel_size_kpc"]) >= 0.1 else 0.2)
+    assert np.array_equal(_L["ordered_pair_counts"], resp["ordered_pair_counts"]) and str(_L["basis"]) == "hermite"
+    # shared slope nodes (-0.9, 0, +0.9): library and stored 7-node response must give the same contraction with smooth
+    # test kernels up to the legacy hat-basis discretisation (stored response: linear basis on 10/60 pc knots)
+    _kr, _krs = _L["kernel_radius"], resp["kernel_radius"]; _nk = len(_kr); _maxe = 0.0
+    for _ell, _eps in ((1.0, 0.5), (2.0, 0.3)):
+        _kh = np.r_[-np.log(_eps), 0.5*(_E1(_kr[1:]**2/(4*_ell**2))-_E1(_kr[1:]**2/(4*(_eps*_ell)**2))), 0.0, -(np.exp(-_kr[1:]**2/(4*_ell**2))-np.exp(-_kr[1:]**2/(4*(_eps*_ell)**2)))/_kr[1:]]
+        _ks = np.r_[-np.log(_eps), 0.5*(_E1(_krs[1:]**2/(4*_ell**2))-_E1(_krs[1:]**2/(4*(_eps*_ell)**2)))]
+        for _s_i, _s in enumerate(resp["rate_log_slope_grid"]):
+            _j = int(np.argmin(np.abs(_L["rate_log_slope_grid"]-_s)))
+            if abs(_L["rate_log_slope_grid"][_j]-_s) < 1e-12:
+                _a = np.nan_to_num(_L["response"][_j, :2]) @ _kh; _b = np.nan_to_num(resp["response"][_s_i, :2]) @ _ks
+                _maxe = max(_maxe, float(np.max(np.abs(_a-_b))/np.max(np.abs(_b))))
+    assert _maxe < 2e-3, f"library inconsistent with the stored response at the shared nodes ({_maxe:.1e})"
+    print(f"stochastic library: shared-node consistency with the stored response {_maxe:.1e} (legacy hat-basis discretisation)", flush=True)
+    UNI = kur.install(model, _L, log=print, support=a.support)
 r = diag["r_kpc"]; obs = diag["xi_centered"]; err = np.sqrt(np.diag(np.load(out / f"{g}_fit_covariance.npz")["covariance"]))   # plotting: unmasked errors
 NAMES = ["ell_star", "epsilon", "beta_src", "eta", "kappa", "t_star", "sigma", "A_src", "ell_src"]
 sfx = a.tag
@@ -52,12 +85,12 @@ if not a.plot_only:
     import dynesty
     res_all = {}; arrays = {}
     for name in a.models.split(","):
-        nm = NestedModel(model, name + ("q" if a.m1 is not None else "")); nd = len(nm.active); t0 = time.time()
+        nm = NestedModel(model, name + ("q" if a.m1 is not None else ""), eps_prior=a.eps_prior); nd = len(nm.active); t0 = time.time()
         sampler = dynesty.NestedSampler(nm.loglike, lambda u: u, nd, nlive=a.nlive, rstate=np.random.default_rng(a.seed), bound="multi", sample="rwalk")
         sampler.run_nested(dlogz=0.05, print_progress=False); res = sampler.results
         w = np.exp(res.logwt - res.logz[-1]); w /= w.sum(); rng = np.random.default_rng(a.seed)
         X = nm.fill(res.samples[rng.choice(len(w), 4000, p=w)]); der = np.asarray(model.derived(X[:, :7])).T
-        xmap = nm.fill(res.samples[np.argmax(res.logl)][None])[0]; chi2 = float(-2*(res.logl.max() - np.log(2) + np.log1p(expit(xmap[1]))))
+        xmap = nm.fill(res.samples[np.argmax(res.logl)][None])[0]; chi2 = float(-2*(res.logl.max() - np.log(2) + np.log1p(expit(xmap[1])))) if a.eps_prior == "legacy" else float(-2*res.logl.max())
         pred, _ = nm.predict_joint(X)
         terms = model.raw_terms(X); terms[:, nm.mask] = 0.0; comps = model._ratio(terms)  # (n, 5, nb) normalised components
         pmap, _ = nm.predict_joint(xmap[None])
@@ -77,7 +110,7 @@ if not a.plot_only:
 A = dict(np.load(npz)); S = json.loads(js.read_text())
 if a.l0_tag:   # L0 from its own dominant prior piece
     A0 = dict(np.load(out / f"{g}_paper_nested{a.l0_tag}.npz")); S0 = json.loads((out / f"{g}_paper_nested{a.l0_tag}.json").read_text())
-    for k in list(A0):
+    for k in list(A0): 
         if k.startswith("L0_"): A[k] = A0[k]
     S["L0"] = S0["L0"]
 # ---------------- figure ----------------
