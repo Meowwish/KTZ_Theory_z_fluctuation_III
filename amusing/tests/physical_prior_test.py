@@ -18,8 +18,35 @@ from scripts.ktz_exact_window import ExactWindowKTZ
 from scripts.ktz_exact_window_evidence import NestedModel
 from scripts.physical_prior import inputs_from_model, inputs_from_metadata, retained_prior_mass, condition_summary, condition_split_summary
 
+
+def assert_summary_close(actual, expected, path='$'):
+    """Keep structure and discrete values exact; allow round-off in floats."""
+    if isinstance(expected, dict):
+        assert isinstance(actual, dict) and actual.keys() == expected.keys(), path
+        for key in expected:
+            assert_summary_close(actual[key], expected[key], f'{path}.{key}')
+    elif isinstance(expected, list):
+        assert isinstance(actual, list) and len(actual) == len(expected), path
+        for i, (value, reference) in enumerate(zip(actual, expected)):
+            assert_summary_close(value, reference, f'{path}[{i}]')
+    elif isinstance(expected, (float, np.floating)):
+        np.testing.assert_allclose(actual, expected, rtol=0, atol=1e-12, err_msg=path)
+    else:
+        assert actual == expected, path
+
+
 report=json.loads((ROOT/'amusing/metadata/prior_normalization_20261018.json').read_text())
 checks=0
+# Round-off must pass, while numerical or structural changes must still fail.
+assert_summary_close({'weights': [0.5 + 3.6e-15]}, {'weights': [0.5]})
+checks+=1
+for changed in ({'weights': [0.5 + 1e-9]}, {'weights': [0.5], 'extra': 1}):
+    try:
+        assert_summary_close(changed, {'weights': [0.5]})
+    except AssertionError:
+        checks+=1
+    else:
+        raise AssertionError('Summary comparison accepted a material change')
 for label,case in report['cases'].items():
     inp=case['prior_inputs']; result=case['summary']
     for name in ('L0','L1','L1n','L2'):
@@ -29,11 +56,11 @@ for label,case in report['cases'].items():
         z=np.logaddexp.reduce(np.log(row['prior_masses_physical'])+row['logZ_pieces'])
         assert abs(z-row['logZ'])<1e-12
         assert abs(row['logZ']-(row['logZ_box']-np.log(row['retained_prior_mass'])))<1e-12
-        assert condition_summary(row,row['retained_prior_mass'])==row
+        assert_summary_close(condition_summary(row,row['retained_prior_mass']),row)
         checks+=5
     assert abs(result['L1n']['retained_prior_mass']/result['L0']['retained_prior_mass']-5/13)<1e-14
     assert abs(result['L2']['retained_prior_mass']/result['L1']['retained_prior_mass']-5/13)<1e-14
-    assert condition_split_summary(result,inp)==result
+    assert_summary_close(condition_split_summary(result,inp),result)
     checks+=3
 
 # Independent direct count of the actual NestedModel transform and bounds_ok,
@@ -49,7 +76,7 @@ for label in labels:
          mass_factor=inp['mass_factor'],gamma_area=inp['gamma_area'],metadata={'r_ref_kpc':inp['r_ref']},
          y=np.zeros(1),precision_root_joint=np.eye(1))
     m.derived=types.MethodType(ExactWindowKTZ.derived,m)
-    assert inputs_from_model(m)==inp
+    assert_summary_close(inputs_from_model(m),inp)
     for name in ('L0','L1','L1n','L2'):
         nm=NestedModel(m,name+'q',eps_prior='manuscript')
         u=qmc.Sobol(len(nm.active),scramble=True,seed=1810).random_base2(19)
@@ -102,7 +129,7 @@ with tempfile.TemporaryDirectory(prefix='ktz_prior_cli_') as tmp:
     second=json.loads(output.read_text())
     for name in ('L0','L1','L1n','L2'):
         assert abs(second[name]['logZ']-first[name]['logZ'])<1e-12
-        assert second[name]['weights']==first[name]['weights']
+        assert_summary_close(second[name]['weights'],first[name]['weights'])
         checks+=2
     assert all(p.read_bytes()==b for p,b in source_bytes.items());checks+=1
 print(f'PASS: {checks} assertions; evidence-only correction, split weights, idempotence, direct counts, unmodified likelihood and both CLI input conventions')
