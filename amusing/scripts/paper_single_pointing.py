@@ -17,9 +17,11 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT.parents[0] / "ktzobs")); sys.path.insert(0, str(ROOT / "scripts"))
 from scripts import ktz_exact_window as kew
 from scripts.ktz_exact_window_evidence import NestedModel
+from scripts.physical_prior import inputs_from_model, retained_prior_mass, condition_summary
 import amusing_ktz_stage as st
 
 ap = argparse.ArgumentParser(); ap.add_argument("--name", default="NGC1084"); ap.add_argument("--variant", default="d16_mockcov"); ap.add_argument("--nlive", type=int, default=400); ap.add_argument("--seed", type=int, default=2)
+ap.add_argument("--evidence-prior", choices=("physical", "box"), help="default: physical for --eps-prior manuscript, box for legacy; physical conditions the joint base prior on all physical cuts, after sampling")
 ap.add_argument("--models", default="L0,L1,L1n,L2"); ap.add_argument("--ell-max", type=float, default=3.2); ap.add_argument("--ell-min", type=float, default=0.08, help="lower bound of the ell_star grid/prior [kpc] (split-prior runs)"); ap.add_argument("--tag", default="", help="suffix for the output files (split-prior runs)"); ap.add_argument("--l0-tag", help="plot-only: take the L0 curves and summary from the run with this tag (its dominant prior piece)"); ap.add_argument("--m1", type=float, help="phase [deg] of an m=1 nuisance pattern cos(phi-phi0); its amplitude is marginalised in every model (models become L0q..L2q)"); ap.add_argument("--rmax-fit", type=float, default=1e9, help="exclude separation bins with r > rmax_fit from the likelihood"); ap.add_argument("--rmin-fit", type=float, default=0.0, help="exclude separation bins with r < rmin_fit from the likelihood (variance set to 1e4, no covariance)"); ap.add_argument("--src-max", type=float, default=2.5); ap.add_argument("--plot-only", action="store_true"); ap.add_argument("--cm-nodes", type=int, default=0, help="if > 0: evaluate the projected mean-field (C_M) responses from an exact Chebyshev-Lobatto library with this many nodes in the rate log-slope instead of the 7-node linear interpolation (added 2026-10-15)"); ap.add_argument("--figname", help="output figure stem (default <g>_single_pointing_<variant>)"); ap.add_argument("--eps-prior", default="legacy", choices=("legacy", "manuscript"), help="'manuscript': normalised p(eps) ~ 1/(1+eps) through the prior transform, no epsilon weight in the likelihood (2026-10-16 fix)"); ap.add_argument("--support", default="legacy", choices=("legacy", "intrinsic"), help="with --unified-response: prediction support; 'intrinsic' evaluates every point of the intrinsic ell_*/eps prior (fix of the legacy grid truncation, 2026-10-16)"); ap.add_argument("--unified-response", action="store_true", help="evaluate C_2p,0, C_2p,N and C_NP from the 65-node Chebyshev-Lobatto, cubic-Hermite stochastic response library <g>_stochastic_response_H65.npz with per-sample kernels (no slope or (ell, eps, ell_src) grid interpolation; added 2026-10-16)")
 a = ap.parse_args(); g = a.name.lower(); out = ROOT / "outputs" / a.name / "ktz" / a.variant
 pm = dict(np.load(out / f"{g}_pixel_map.npz")); morph = json.loads((out / f"{g}_morphology.json").read_text())
@@ -79,6 +81,13 @@ if a.unified_response:   # unified converged stochastic responses (2026-10-16); 
 r = diag["r_kpc"]; obs = diag["xi_centered"]; err = np.sqrt(np.diag(np.load(out / f"{g}_fit_covariance.npz")["covariance"]))   # plotting: unmasked errors
 NAMES = ["ell_star", "epsilon", "beta_src", "eta", "kappa", "t_star", "sigma", "A_src", "ell_src"]
 sfx = a.tag
+physical_evidence = (a.evidence_prior or ("physical" if a.eps_prior == "manuscript" else "box")) == "physical"
+if physical_evidence and a.eps_prior != "manuscript":
+    raise ValueError("Conditional physical evidence requires the manuscript epsilon prior")
+if physical_evidence:
+    sfx += "_physical"
+    if a.l0_tag:
+        raise ValueError("Do not compare a dominant-piece L0 evidence with a global physical prior; use the combined split summary")
 npz = out / f"{g}_paper_nested{sfx}.npz"; js = out / f"{g}_paper_nested{sfx}.json"
 
 if not a.plot_only:
@@ -100,6 +109,9 @@ if not a.plot_only:
                     map_params={k: float(v) for k, v in zip(NAMES, np.asarray(model.derived(xmap[None, :7])).ravel())}, map_inv_h_R=float(-xmap[4]),
                     shoulder=float(np.median(pred[:, (r >= .6) & (r <= 2.5)].mean(1))), tail=float(np.median(pred[:, (r >= 3) & (r <= 4.5)].mean(1))),
                     P_ell_src_gt_0p6=float(np.mean(der[:, 8] > 0.6)) if 6 in nm.active else None, P_ell_src_gt_ell_star=float(np.mean(der[:, 8] > der[:, 0])) if 6 in nm.active else None)
+        if physical_evidence:
+            mass = retained_prior_mass(inputs_from_model(model), name)
+            summ = condition_summary(summ, mass)
         res_all[name] = summ
         arrays[f"{name}_pred_p16"], arrays[f"{name}_pred_p50"], arrays[f"{name}_pred_p84"] = np.percentile(pred, [16, 50, 84], 0)
         arrays[f"{name}_pred_map"] = pmap[0]; arrays[f"{name}_comp_p50"] = np.median(comps, 0); arrays[f"{name}_samples"] = X; arrays[f"{name}_derived"] = der; arrays[f"{name}_logl"] = np.asarray([0.0])

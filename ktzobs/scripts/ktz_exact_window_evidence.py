@@ -34,7 +34,11 @@ def u_from_eps(eps, emin=EPS_MIN, emax=EPS_MAX):
 class NestedModel:
     """eps_prior="legacy": uniform in logit(eps) with the likelihood multiplied by 2/(1+eps) (published runs; reproduced for audit).
     eps_prior="manuscript" (2026-10-16 fix): eps drawn by the inverse CDF of the normalised p(eps) = (1+eps)^-1/ln[(1+eps_max)/(1+eps_min)],
-    and no epsilon weight in the likelihood (the prior enters once, through the prior transform)."""
+    and no epsilon weight in the likelihood (the prior enters once, through the prior transform).
+    The transform is the independent coordinate-box base measure. Physical cuts
+    remain zero likelihood here; final manuscript evidences must additionally
+    use physical_prior.condition_summary or condition_split_summary to condition
+    and normalise that joint measure. This leaves the posterior unchanged."""
     def __init__(self, model, name, eps_prior="legacy"):
         assert eps_prior in ("legacy", "manuscript"); self.eps_prior = eps_prior
         if eps_prior == "manuscript":
