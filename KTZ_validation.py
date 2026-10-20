@@ -416,7 +416,7 @@ th_sec = to_arrays([xi3_theory(lo, hi, True) for lo, hi in zip(r_bins[:-1][smask
 th_sec_0 = xi3_theory(0.0, 0.0, True)
 print(f'xi3/sector theory {time.time()-t0:.0f}s', flush=True)
 
-# %% Block 7: field figure (simulation / full KTZ mean / residual)
+# %% Block 7: field figure (simulation / subtracted axisymmetric mean / fluctuation used for xi)
 def full_mean_field(Xg, Yg):
     """Beam-smoothed ensemble mean mu = mu_bar + mu_mod in the local-WKBJ approximation."""
     vr = np.hypot(Xg, Yg); ph = np.arctan2(Yg, Xg)
@@ -431,16 +431,21 @@ def full_mean_field(Xg, Yg):
 
 mu_full = full_mean_field(X, Y)
 Z_plot = np.where(disk_mask, Z, np.nan)
-stoch = Z_plot - mu_full
+stoch = Z_plot - mu_full  # Preserve the published stochastic-field diagnostics below.
+dX_ax = Z_res  # Block 4: the fluctuation passed to the pair estimator.
+ana = np.isfinite(dX_ax) & (R_grid >= analysis_R_in) & (R_grid <= analysis_R_out)
 fig, axes = plt.subplots(1, 3, figsize=(15, 4.8))
 vmin, vmax = np.nanpercentile(Z_plot, [1, 99])
 for ax, field, lab, title in [(axes[0], Z_plot, r'$\Sigma_X$', 'Simulation'),
-                             (axes[1], mu_full, r'$\mu=\bar\mu+\mu_{\rm mod}$', 'Full KTZ ensemble mean')]:
+                             (axes[1], Z_bg, r'$\bar\mu$', 'Subtracted axisymmetric mean')]:
     im = ax.pcolormesh(X, Y, field, cmap='plasma', shading='auto', vmin=vmin, vmax=vmax)
     plt.colorbar(im, ax=ax, label=lab); ax.set_title(title)
-lim = np.nanpercentile(np.abs(stoch), 99.5)
-im = axes[2].pcolormesh(X, Y, stoch, cmap='RdBu_r', shading='auto', vmin=-lim, vmax=lim)
-plt.colorbar(im, ax=axes[2], label=r'$\Sigma_X-\mu$'); axes[2].set_title('Residual (simulation $-$ KTZ mean)')
+lim = np.nanpercentile(np.abs(dX_ax[ana]), 99.5)
+im = axes[2].pcolormesh(X, Y, dX_ax, cmap='RdBu_r', shading='auto', vmin=-lim, vmax=lim)
+plt.colorbar(im, ax=axes[2], label=r'$\delta\Sigma_{X,{\rm ax}}=\Sigma_X-\bar\mu$')
+axes[2].set_title(r'Fluctuation used for $\xi$ (simulation $-\;\bar\mu$)')
+for rr in (analysis_R_in, analysis_R_out):
+    axes[2].add_patch(plt.Circle((0, 0), rr, fill=False, ls='--', lw=0.8, color='0.25'))
 for ax in axes:
     ax.set_xlim(-R_out, R_out); ax.set_ylim(-R_out, R_out); ax.set_aspect('equal'); ax.set_xlabel(r'$x\;({\rm kpc})$')
 axes[0].set_ylabel(r'$y\;({\rm kpc})$')

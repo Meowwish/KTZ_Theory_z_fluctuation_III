@@ -8,6 +8,15 @@ Generates every number and figure of Section 3 of the manuscript.
 * One clustered-source experiment (Thomas process, `f_cl = 0.5`, `sigma_cl = 0.35 kpc`, `N_ch = 20`) is used for both the scalar and 16-element cross-correlation tests; the theory includes all four terms.
 * The observation operator is a Gaussian beam with `FWHM = 2 dx` (0.40 kpc scalar, 0.10 kpc cross), followed by sampling at grid centres. No square-pixel operator is used in the numerical validation.
 * `validation/outputs/validation_metrics.json` contains all metrics quoted in the paper.
+* Figure 1 now shows the simulated field, the subtracted axisymmetric mean, and
+  the fluctuation used for the two-point statistics. Its seed-42 first field is
+  archived in `validation/outputs/fig1_realisation_fields.npz`. Redraw only this
+  figure, without generating events or running statistics, with
+  `python validation/replot_scalar_fields.py --output /tmp/figure1.png`.
+  Matplotlib 3.10.9 reproduces the published PNG pixel for pixel. Block 7 in
+  both notebook and script uses the same plot; its original stochastic-field
+  `scalar_fields` diagnostics are retained unchanged, rather than redefined
+  for the newly displayed fluctuation.
 * `validation/sector_cnp_phase_diagnostic.py` is the arm-sector check with midpoint-modulated `C_NP`.
 * `validation/diagnostics/` records the focused checks used to diagnose the earlier cross-correlation bias.
 
