@@ -52,6 +52,29 @@ def kinematic_pa(vgas, dx, dy, incl):
     return best[0]
 
 
+def halpha_cell_flux_factor(wcs, kpc_per_arcsec, cell_kpc, incl):
+    """Flux-area factor for summing resampled line maps (2026-10-21 fix).
+    The MAPS line fluxes are integrated fluxes per native spaxel (BUNIT 1e-20 erg/s/cm2, FLUXUNIT 'BUNIT*A').
+    sample_line() smooths with a normalised kernel and interpolates at the face-on cell centres, so a cell value is the
+    per-native-spaxel flux at that position (a surface brightness in units of one native spaxel).  The integrated flux of
+    a cell is that value times the sky area of the cell divided by the sky area of a native spaxel.  For the thin-disc
+    deprojection of build_maps() the sky area of a face-on cell of side cell_kpc is cell_kpc^2 cos(i) (Jacobian of the
+    face-on -> sky mapping); the native spaxel area is taken from the WCS (proj_plane_pixel_area, exact for these
+    rectilinear TAN grids).  Returns (factor, native spaxel area [kpc^2], cell sky area [kpc^2])."""
+    from astropy.wcs.utils import proj_plane_pixel_area
+    spaxel_kpc2 = float(proj_plane_pixel_area(wcs))*3600.0**2*kpc_per_arcsec**2
+    cell_sky_kpc2 = float(cell_kpc)**2*float(np.cos(incl))
+    return cell_sky_kpc2/spaxel_kpc2, spaxel_kpc2, cell_sky_kpc2
+
+
+def halpha_sfr(cell_flux, valid, distance_mpc, factor):
+    """SFR [Msun/yr] = 5.5e-42 L(Halpha) from the valid-cell fluxes (units 1e-20 erg/s/cm2 per native spaxel) times the
+    flux-area factor; factor = 1 reproduces the pre-2026-10-21 (unscaled) value."""
+    dist_cm = distance_mpc*1e6*3.085677581491367e18
+    lum = float(np.sum(np.asarray(cell_flux)[valid].astype(np.float64))*float(factor)*1e-20*4*np.pi*dist_cm**2)
+    return 5.5e-42*lum
+
+
 def build_maps(a, out):
     g = a.name.lower(); t0 = time.time()
     mp = ROOT / "outputs" / a.name / f"{a.name}_MAPS_muse.fits"
@@ -177,11 +200,12 @@ def build_maps(a, out):
     w = corr["ha"][valid]; r_ref = float(np.exp(np.sum(w*np.log(R[valid]))/np.sum(w)))
     redges2 = np.arange(a.rmin, a.rmax+1e-9, ANNULUS_KPC); hist, _ = np.histogram(R[valid], bins=redges2, weights=corr["ha"][valid]); areas = np.pi*(redges2[1:]**2-redges2[:-1]**2)
     sd = hist/areas; pos = sd > 0; fit = linregress(0.5*(redges2[:-1]+redges2[1:])[pos], np.log(sd[pos])); slope, slope_err = float(fit.slope), float(fit.stderr)
-    dist_cm = a.distance*1e6*3.085677581491367e18; lum = float(np.sum(corr["ha"][valid].astype(np.float64))*1e-20*4*np.pi*dist_cm**2); sfr = 5.5e-42*lum
+    area_factor, spaxel_kpc2, cell_sky_kpc2 = halpha_cell_flux_factor(wcs, kpc_per_arcsec, PIXEL_KPC, incl)
+    sfr = halpha_sfr(corr["ha"], valid, a.distance, area_factor); sfr_unscaled = halpha_sfr(corr["ha"], valid, a.distance, 1.0)
     morph = dict(galaxy=a.name, distance_mpc=a.distance, psf_arcsec=float(psf_arcsec), psf_kpc=float(psf_kpc), target_fwhm_kpc=TARGET_FWHM_KPC, effective_fwhm_kpc=float(effective_fwhm), pixel_kpc=PIXEL_KPC, pa_kinematic_deg=float(pa_kin),
                  pa_used_deg=float(np.rad2deg(pa)), inclination_deg=float(np.rad2deg(incl)), ba=a.ba, calibration=a.calib, n_cells=int(valid.sum()), n_outliers_removed=n_outliers, outlier_cut='5 x MAD sigma of the detrended residual', residual_rms_dex=float(resid[valid].std()),
                  analysis_rmin_kpc=a.rmin, analysis_rmax_kpc=a.rmax, r_ref_kpc=r_ref, mask_contrast_amplitude=contrast, mask_contrast_amplitude_error=0.0, maximum_positive_eta=eta_max,
-                 event_rate_log_slope_kpc_inv=slope, inv_h_R_halpha_kpc_inv=-slope, event_rate_log_slope_error_kpc_inv=slope_err, halpha_sfr_msun_per_yr=sfr, template_fwhm_kpc=a.template_fwhm,
+                 event_rate_log_slope_kpc_inv=slope, inv_h_R_halpha_kpc_inv=-slope, event_rate_log_slope_error_kpc_inv=slope_err, halpha_sfr_msun_per_yr=sfr, halpha_flux_area_factor=area_factor, native_spaxel_area_kpc2=spaxel_kpc2, cell_sky_area_kpc2=cell_sky_kpc2, halpha_sfr_unscaled_pre20261021_msun_per_yr=sfr_unscaled, template_fwhm_kpc=a.template_fwhm,
                  n_jackknife_blocks=int(len(blocks)), n_flux_mc=N_FLUX_MC, covariance_kind=a.cov, mock_settings=(dict(ell=a.mock_ell, eps=a.mock_eps, n=a.n_mock) if a.cov == "mock" else None), covariance_shrinkage=a.shrink, systematic_floor=a.floor, mock_noise=a.mock_noise, ratio_bias_max=(float(np.nanmax(np.abs(ratio_bias))) if a.cov == 'mock' else None), selection_bias_term="not included (single realisation)")
     np.savez_compressed(out / f"{g}_pixel_map.npz", residual_dex=resid.astype(np.float32), valid_mask=valid, x_grid_kpc=X.astype(np.float32), y_grid_kpc=Y.astype(np.float32), metallicity_error_dex=np.where(valid, z_err, np.nan).astype(np.float32),
                         metallicity_12_log_oh=np.where(valid, zmap, np.nan).astype(np.float32), arm_source_modulation=modulation.astype(np.float32), template_support=support, halpha_flux=np.where(valid, corr["ha"], np.nan).astype(np.float32), pixel_size_kpc=PIXEL_KPC, target_fwhm_kpc=TARGET_FWHM_KPC, noise_realisations=np.array(noise_maps))

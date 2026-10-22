@@ -1,0 +1,23 @@
+{
+  "release": "20261022",
+  "manuscript_sha256": "58949ec9592782552e719d975371340f921e093f8002daa5ab9eaba16fd0614f",
+  "bibliography_sha256": "6e6dbf69b769391f77f921df0aa8d4fa2fdbbcb9207ba4e83f7af43e4d8cca63",
+  "figures": {
+    "ngc2466_single_pointing.pdf": "291b5e1b6411a232560933a9679138e82189e377555320ad9aa0e630df01b297",
+    "ngc1084_single_pointing.pdf": "30e0bef00e2febad7acc28b3a9abb31a712436ba38ee950d02d8e824a8d0a9f0",
+    "validation_cross_matrices.png": "ca485409cc3e5c113816267c438b2eb25a4d0877869839f71276de911e4d0c86",
+    "validation_cross_scatter.png": "c2e42c9c0ab442d6d242d5cff4a7ce76d0cd707730e69a70594f2dcf6ae816a2",
+    "validation_scalar_fields.png": "a63c4325fe7a4feca03cd126f85787f4d767788e02d3d386106fb1f83571b0c8",
+    "validation_scalar_sector.png": "f2f44d8c005d483e68d2cfd8cdf7b39be4df6812b7144fa7714105f8d6ffbafe",
+    "validation_scalar_xi2.png": "632f23f97b3268ad0d2652b1abafd99bf61dc72c22eacec5185899da3f4574af",
+    "validation_scalar_xi3.png": "f92c555e13fd396535e0bcfe0d15d96c92df180779faff7ec18f7f675f41f2a5"
+  },
+  "numerical_validation": {
+    "KTZ_validation.py": "02790e2a249607988cf8df3921cca96aad4ef695437785cff812cfdf3789781f",
+    "KTZ_validation.ipynb": "4c791a600d9a88a21a123196dda9d1262ae355699c6cd65c348b86bdcdecdefb",
+    "validation/replot_scalar_fields.py": "5a6526f66f6d81bed125ad132c221c265b3f212b88fefd368c6a40fdf4514a07",
+    "validation/outputs/fig1_realisation_fields.npz": "76fe9609856bf5efff1b9f41e339fdc9b3bec7627b89169632300c822cb4b6a6"
+  },
+  "code_publication_scope": "AMUSING++ analysis and derived products only; no MAUVE data added or changed",
+  "refit_performed_for_release": false
+}

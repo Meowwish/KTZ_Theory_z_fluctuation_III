@@ -1,0 +1,122 @@
+{
+ "S_null": {
+  "galaxy": "NGC2466",
+  "variant": "scal_mockcov_fid0_v2_pixbeam_unif65e_fa",
+  "tagprefix": "v3",
+  "pieces": [
+   [
+    0.08,
+    0.22
+   ],
+   [
+    0.22,
+    0.35
+   ],
+   [
+    0.35,
+    0.5
+   ],
+   [
+    0.5,
+    3.2
+   ]
+  ],
+  "morphology": "/sessions/rcw-01jznrrhl69vuobingvxxvvo/mnt/u7437686--Documents--KTZ/TITANIC/fluxarea_fix_20261021_074830/macfit/data/S_pixbeam_fa/ngc2466_morphology.json"
+ },
+ "D16_null": {
+  "galaxy": "NGC2466",
+  "variant": "d16_mockcov_fid0_v2_pixbeam_unif65e_fa",
+  "tagprefix": "v3",
+  "pieces": [
+   [
+    0.08,
+    0.22
+   ],
+   [
+    0.22,
+    0.35
+   ],
+   [
+    0.35,
+    0.5
+   ],
+   [
+    0.5,
+    3.2
+   ]
+  ],
+  "morphology": "/sessions/rcw-01jznrrhl69vuobingvxxvvo/mnt/u7437686--Documents--KTZ/TITANIC/fluxarea_fix_20261021_074830/macfit/data/D16_pixbeam_fa/ngc2466_morphology.json"
+ },
+ "S_r5_null": {
+  "galaxy": "NGC2466",
+  "variant": "scal_mockcov_fid0_v2_pixbeam_unif65e_fa",
+  "tagprefix": "v3r5",
+  "pieces": [
+   [
+    0.08,
+    0.22
+   ],
+   [
+    0.22,
+    0.35
+   ],
+   [
+    0.35,
+    0.5
+   ],
+   [
+    0.5,
+    3.2
+   ]
+  ],
+  "morphology": "/sessions/rcw-01jznrrhl69vuobingvxxvvo/mnt/u7437686--Documents--KTZ/TITANIC/fluxarea_fix_20261021_074830/macfit/data/S_pixbeam_fa/ngc2466_morphology.json"
+ },
+ "N1084_D16_null": {
+  "galaxy": "NGC1084",
+  "variant": "d16_mockcov_v2_pixbeam_unif65e_fa",
+  "tagprefix": "v3",
+  "pieces": [
+   [
+    0.08,
+    0.5
+   ],
+   [
+    0.5,
+    3.2
+   ]
+  ],
+  "morphology": "/sessions/rcw-01jznrrhl69vuobingvxxvvo/mnt/u7437686--Documents--KTZ/TITANIC/fluxarea_fix_20261021_074830/macfit/data/N1084D16_pixbeam_fa/ngc1084_morphology.json"
+ },
+ "N1084_t05_null": {
+  "galaxy": "NGC1084",
+  "variant": "d16_mockcov_t05_v2_pixbeam_unif65e_fa",
+  "tagprefix": "v3",
+  "pieces": [
+   [
+    0.08,
+    0.5
+   ],
+   [
+    0.5,
+    3.2
+   ]
+  ],
+  "morphology": "/sessions/rcw-01jznrrhl69vuobingvxxvvo/mnt/u7437686--Documents--KTZ/TITANIC/fluxarea_fix_20261021_074830/macfit/data/N1084t05_pixbeam_fa/ngc1084_morphology.json"
+ },
+ "N1084_S_null": {
+  "galaxy": "NGC1084",
+  "variant": "scal_mockcov_v2_pixbeam_unif65e_fa",
+  "tagprefix": "v3",
+  "pieces": [
+   [
+    0.08,
+    0.5
+   ],
+   [
+    0.5,
+    3.2
+   ]
+  ],
+  "morphology": "/sessions/rcw-01jznrrhl69vuobingvxxvvo/mnt/u7437686--Documents--KTZ/TITANIC/fluxarea_fix_20261021_074830/macfit/data/N1084S_pixbeam_fa/ngc1084_morphology.json"
+ }
+}

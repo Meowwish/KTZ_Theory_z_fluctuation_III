@@ -1,0 +1,28 @@
+{
+ "galaxy": "ngc2466",
+ "calibration": "d16",
+ "slope_obs": 0.020034643193214973,
+ "corr_obs": 0.2971335004211129,
+ "template_rms": 1.0286529726430553,
+ "resid_rms": 0.07943458962548895,
+ "mean_field_rms_dex": 0.020608695276543538,
+ "noise_slope_std": 0.0003316828569539671,
+ "noise_kind": "line-flux MC (50 realisations)",
+ "kt18_mock": {
+  "slope_mean": 2.4858851028159837e-05,
+  "slope_std_field": 0.00348521686605438,
+  "slope_std": 0.003500964170200412,
+  "significance": 5.715506748828383,
+  "p_two_sided_empirical_field_only": 0.0,
+  "n_mocks": 2000
+ },
+ "stochastic_L2_mock": {
+  "slope_mean": -8.151954339886759e-05,
+  "slope_std_field": 0.004272045438688672,
+  "slope_std": 0.004284902069804843,
+  "significance": 4.694661023496866,
+  "p_two_sided_empirical_field_only": 0.0,
+  "n_mocks": 2000
+ },
+ "m1_control": true
+}

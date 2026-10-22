@@ -1,0 +1,822 @@
+{
+ "description": "Final stage inputs of the flux-area-fixed fits (TITANIC/fluxarea_fix_20261021_074830/macfit/data/*_fa), copied byte-for-byte; identical files stored once.",
+ "not_included": "raw FITS cubes/MAPS, window_response_all.npz, compiled/H65 response arrays, sampler runs, logs, MAUVE",
+ "beam_fields": "psf_kpc = native PSF FWHM; target_fwhm_kpc = PSF-matching target; effective_fwhm_kpc_parent = stage (beam-matched) FWHM where recorded; effective_fwhm_kpc = FWHM_eff incl. the cell term (used by the model). Values copied from each morphology; none inferred.",
+ "cases": {
+  "D16_pixbeam_fa|v3": {
+   "label": "NGC2466 D16 null (Table 3)",
+   "covariance": "null",
+   "data_dir": "D16_pixbeam_fa",
+   "rmin_fit": 0.45,
+   "rmax_fit": null,
+   "m1_phase_deg": 9.0,
+   "src_max_kpc": 4.0,
+   "transport_pieces": [
+    [
+     0.08,
+     0.22
+    ],
+    [
+     0.22,
+     0.35
+    ],
+    [
+     0.35,
+     0.5
+    ],
+    [
+     0.5,
+     3.2
+    ]
+   ],
+   "job_sets": [
+    "jobs_fa",
+    "jobs_post"
+   ],
+   "inputs": {
+    "pixel_map.npz": "inputs/D16_pixbeam_fa/ngc2466_pixel_map.npz",
+    "diagnostics.csv": "inputs/D16_pixbeam_fa/ngc2466_diagnostics.csv",
+    "fit_covariance.npz": "inputs/D16_pixbeam_fa/ngc2466_fit_covariance.npz",
+    "morphology.json": "inputs/D16_pixbeam_fa/ngc2466_morphology.json"
+   },
+   "input_sha256": {
+    "pixel_map.npz": "1a655a3f242a639a5e643f662db43b4892f35b9b72fa267d740a64ee91087b6f",
+    "diagnostics.csv": "a8e36349880f2c76112514c84737b80698c7d8468fd9dbd6ce7489eacd8dd755",
+    "fit_covariance.npz": "a64ee0193de04b6eaa076d1ccc0e5fe321451439255f985450ce20a2fa129e05",
+    "morphology.json": "524f43d1ab4fb18b9a76fe0f4a0a3930c527b4c037f5956255a526e6f9befd4d"
+   }
+  },
+  "D16_ppe_fa|v3": {
+   "label": "NGC2466 D16 EB (Table 3)",
+   "covariance": "EB",
+   "data_dir": "D16_ppe_fa",
+   "rmin_fit": 0.45,
+   "rmax_fit": null,
+   "m1_phase_deg": 9.0,
+   "src_max_kpc": 4.0,
+   "transport_pieces": [
+    [
+     0.08,
+     0.22
+    ],
+    [
+     0.22,
+     0.35
+    ],
+    [
+     0.35,
+     0.5
+    ],
+    [
+     0.5,
+     3.2
+    ]
+   ],
+   "job_sets": [
+    "jobs_eb_fa"
+   ],
+   "inputs": {
+    "pixel_map.npz": "inputs/D16_pixbeam_fa/ngc2466_pixel_map.npz",
+    "diagnostics.csv": "inputs/D16_ppe_fa/ngc2466_diagnostics.csv",
+    "fit_covariance.npz": "inputs/D16_ppe_fa/ngc2466_fit_covariance.npz",
+    "morphology.json": "inputs/D16_ppe_fa/ngc2466_morphology.json"
+   },
+   "input_sha256": {
+    "pixel_map.npz": "1a655a3f242a639a5e643f662db43b4892f35b9b72fa267d740a64ee91087b6f",
+    "diagnostics.csv": "05e9b946d4d1e865f72498710860df89d7c553dbf795768849d172b7f571542f",
+    "fit_covariance.npz": "99fca60d8de4b2df526863672816400c8e6c47835dbb3d016aca126090589109",
+    "morphology.json": "be52ea3362195bee6d17fee449086556bf4ba269feeff99f2b3e843834b4dc33"
+   }
+  },
+  "N1084D16_pixbeam_fa|v3": {
+   "label": "NGC1084 D16 null (Table 3, Fig 8)",
+   "covariance": "null",
+   "data_dir": "N1084D16_pixbeam_fa",
+   "rmin_fit": 0.12,
+   "rmax_fit": null,
+   "m1_phase_deg": -87.0,
+   "src_max_kpc": 2.5,
+   "transport_pieces": [
+    [
+     0.08,
+     0.5
+    ],
+    [
+     0.5,
+     3.2
+    ]
+   ],
+   "job_sets": [
+    "jobs_fa",
+    "jobs_post"
+   ],
+   "inputs": {
+    "pixel_map.npz": "inputs/N1084D16_pixbeam_fa/ngc1084_pixel_map.npz",
+    "diagnostics.csv": "inputs/N1084D16_pixbeam_fa/ngc1084_diagnostics.csv",
+    "fit_covariance.npz": "inputs/N1084D16_pixbeam_fa/ngc1084_fit_covariance.npz",
+    "morphology.json": "inputs/N1084D16_pixbeam_fa/ngc1084_morphology.json"
+   },
+   "input_sha256": {
+    "pixel_map.npz": "82f8e245a5ae242d1fb058d7ec2c8c28e548f1e32dd86639b250ffe07e002e4a",
+    "diagnostics.csv": "cec6ed82d73cbd20f4ed1820959c1b7885a347b313ea37b3019c116642d26ec3",
+    "fit_covariance.npz": "07423a8bd8d7d05bfb6fd4fb667d735bdf82b758c6f0d9ab1738a2962f00c215",
+    "morphology.json": "5d2d24944e885c7b6b3c67edb73812add1b9e72e070882884e840b16c8eba077"
+   }
+  },
+  "N1084D16_ppe_fa|v3": {
+   "label": "NGC1084 D16 EB (Table 3)",
+   "covariance": "EB",
+   "data_dir": "N1084D16_ppe_fa",
+   "rmin_fit": 0.12,
+   "rmax_fit": null,
+   "m1_phase_deg": -87.0,
+   "src_max_kpc": 2.5,
+   "transport_pieces": [
+    [
+     0.08,
+     0.5
+    ],
+    [
+     0.5,
+     3.2
+    ]
+   ],
+   "job_sets": [
+    "jobs_eb_fa"
+   ],
+   "inputs": {
+    "pixel_map.npz": "inputs/N1084D16_pixbeam_fa/ngc1084_pixel_map.npz",
+    "diagnostics.csv": "inputs/N1084D16_ppe_fa/ngc1084_diagnostics.csv",
+    "fit_covariance.npz": "inputs/N1084D16_ppe_fa/ngc1084_fit_covariance.npz",
+    "morphology.json": "inputs/N1084D16_ppe_fa/ngc1084_morphology.json"
+   },
+   "input_sha256": {
+    "pixel_map.npz": "82f8e245a5ae242d1fb058d7ec2c8c28e548f1e32dd86639b250ffe07e002e4a",
+    "diagnostics.csv": "251d4a722a84f08c03e9aca4ad7cc10de74f418a51aa69b3998205dfcebe5a37",
+    "fit_covariance.npz": "36052c2dd05b63c4ef66d40543eb7f599a8dd2d8473bdb6f514f733f3ce324b0",
+    "morphology.json": "06c289bc57a435771e47455916eead17c9b5f62b342c33bff0b34147bf3b8da6"
+   }
+  },
+  "N1084S_pixbeam_fa|v3": {
+   "label": "NGC1084 S null",
+   "covariance": "null",
+   "data_dir": "N1084S_pixbeam_fa",
+   "rmin_fit": 0.12,
+   "rmax_fit": null,
+   "m1_phase_deg": -71.0,
+   "src_max_kpc": 2.5,
+   "transport_pieces": [
+    [
+     0.08,
+     0.5
+    ],
+    [
+     0.5,
+     3.2
+    ]
+   ],
+   "job_sets": [
+    "jobs_fa",
+    "jobs_post"
+   ],
+   "inputs": {
+    "pixel_map.npz": "inputs/N1084S_pixbeam_fa/ngc1084_pixel_map.npz",
+    "diagnostics.csv": "inputs/N1084S_pixbeam_fa/ngc1084_diagnostics.csv",
+    "fit_covariance.npz": "inputs/N1084S_pixbeam_fa/ngc1084_fit_covariance.npz",
+    "morphology.json": "inputs/N1084S_pixbeam_fa/ngc1084_morphology.json"
+   },
+   "input_sha256": {
+    "pixel_map.npz": "49f96be0039d861d59398f0ece5e3cd3f973f705a17c94a54194c0f9a531cbe9",
+    "diagnostics.csv": "4be387dd4ad88b4bd89b6fff979a4b1d8315657cf56574c276e115a1b436189b",
+    "fit_covariance.npz": "2531a7e916243e7c0150d33a446cfa580b564ecd83905d09282f57571240601a",
+    "morphology.json": "a1843af6d1f7af36346ba4c929587662015d2eeadc00d402b2327fdb76369f2c"
+   }
+  },
+  "N1084t05_pixbeam_fa|v3": {
+   "label": "NGC1084 D16 null, 0.5-kpc template",
+   "covariance": "null",
+   "data_dir": "N1084t05_pixbeam_fa",
+   "rmin_fit": 0.12,
+   "rmax_fit": null,
+   "m1_phase_deg": -87.0,
+   "src_max_kpc": 2.5,
+   "transport_pieces": [
+    [
+     0.08,
+     0.5
+    ],
+    [
+     0.5,
+     3.2
+    ]
+   ],
+   "job_sets": [
+    "jobs_fa",
+    "jobs_post"
+   ],
+   "inputs": {
+    "pixel_map.npz": "inputs/N1084t05_pixbeam_fa/ngc1084_pixel_map.npz",
+    "diagnostics.csv": "inputs/N1084D16_pixbeam_fa/ngc1084_diagnostics.csv",
+    "fit_covariance.npz": "inputs/N1084D16_pixbeam_fa/ngc1084_fit_covariance.npz",
+    "morphology.json": "inputs/N1084t05_pixbeam_fa/ngc1084_morphology.json"
+   },
+   "input_sha256": {
+    "pixel_map.npz": "5ed024952f7aa53ac35d3cce700de92bb693f1eec09b31fe80288f5ac52edea6",
+    "diagnostics.csv": "cec6ed82d73cbd20f4ed1820959c1b7885a347b313ea37b3019c116642d26ec3",
+    "fit_covariance.npz": "07423a8bd8d7d05bfb6fd4fb667d735bdf82b758c6f0d9ab1738a2962f00c215",
+    "morphology.json": "6d909823c4d2454c149b4285ab035ffbd5bfc35eb9dc21371ac2e05df0d9ab47"
+   }
+  },
+  "S_pixbeam_fa|v3": {
+   "label": "NGC2466 S null (Table 3, Fig 7)",
+   "covariance": "null",
+   "data_dir": "S_pixbeam_fa",
+   "rmin_fit": 0.45,
+   "rmax_fit": null,
+   "m1_phase_deg": 1.0,
+   "src_max_kpc": 4.0,
+   "transport_pieces": [
+    [
+     0.08,
+     0.22
+    ],
+    [
+     0.22,
+     0.35
+    ],
+    [
+     0.35,
+     0.5
+    ],
+    [
+     0.5,
+     3.2
+    ]
+   ],
+   "job_sets": [
+    "jobs_fa",
+    "jobs_post"
+   ],
+   "inputs": {
+    "pixel_map.npz": "inputs/S_pixbeam_fa/ngc2466_pixel_map.npz",
+    "diagnostics.csv": "inputs/S_pixbeam_fa/ngc2466_diagnostics.csv",
+    "fit_covariance.npz": "inputs/S_pixbeam_fa/ngc2466_fit_covariance.npz",
+    "morphology.json": "inputs/S_pixbeam_fa/ngc2466_morphology.json"
+   },
+   "input_sha256": {
+    "pixel_map.npz": "343b08f97f329cb5ebf5585f50352df282dbb95d6499b7ed3304efa5a854ed86",
+    "diagnostics.csv": "a8039fd36c9583e678ba9f34de7905087dc482ce488f3919b6e22dbcc690c723",
+    "fit_covariance.npz": "46449a8726c54908fe21c6c984c9ea8f0a6f500a73520e66ba6b467ea20fc1ed",
+    "morphology.json": "a96a3d042b1ccefbd16298676e8a4b6c867447e7982e1a617f2f51f2e9482519"
+   }
+  },
+  "S_pixbeam_fa|v3r5": {
+   "label": "NGC2466 S null, r<=5 kpc",
+   "covariance": "null",
+   "data_dir": "S_pixbeam_fa",
+   "rmin_fit": 0.45,
+   "rmax_fit": 5.0,
+   "m1_phase_deg": 1.0,
+   "src_max_kpc": 4.0,
+   "transport_pieces": [
+    [
+     0.08,
+     0.22
+    ],
+    [
+     0.22,
+     0.35
+    ],
+    [
+     0.35,
+     0.5
+    ],
+    [
+     0.5,
+     3.2
+    ]
+   ],
+   "job_sets": [
+    "jobs_fa",
+    "jobs_post"
+   ],
+   "inputs": {
+    "pixel_map.npz": "inputs/S_pixbeam_fa/ngc2466_pixel_map.npz",
+    "diagnostics.csv": "inputs/S_pixbeam_fa/ngc2466_diagnostics.csv",
+    "fit_covariance.npz": "inputs/S_pixbeam_fa/ngc2466_fit_covariance.npz",
+    "morphology.json": "inputs/S_pixbeam_fa/ngc2466_morphology.json"
+   },
+   "input_sha256": {
+    "pixel_map.npz": "343b08f97f329cb5ebf5585f50352df282dbb95d6499b7ed3304efa5a854ed86",
+    "diagnostics.csv": "a8039fd36c9583e678ba9f34de7905087dc482ce488f3919b6e22dbcc690c723",
+    "fit_covariance.npz": "46449a8726c54908fe21c6c984c9ea8f0a6f500a73520e66ba6b467ea20fc1ed",
+    "morphology.json": "a96a3d042b1ccefbd16298676e8a4b6c867447e7982e1a617f2f51f2e9482519"
+   }
+  },
+  "S_ppe_fa|v3": {
+   "label": "NGC2466 S EB (Table 3)",
+   "covariance": "EB",
+   "data_dir": "S_ppe_fa",
+   "rmin_fit": 0.45,
+   "rmax_fit": null,
+   "m1_phase_deg": 1.0,
+   "src_max_kpc": 4.0,
+   "transport_pieces": [
+    [
+     0.08,
+     0.22
+    ],
+    [
+     0.22,
+     0.35
+    ],
+    [
+     0.35,
+     0.5
+    ],
+    [
+     0.5,
+     3.2
+    ]
+   ],
+   "job_sets": [
+    "jobs_eb_fa"
+   ],
+   "inputs": {
+    "pixel_map.npz": "inputs/S_pixbeam_fa/ngc2466_pixel_map.npz",
+    "diagnostics.csv": "inputs/S_ppe_fa/ngc2466_diagnostics.csv",
+    "fit_covariance.npz": "inputs/S_ppe_fa/ngc2466_fit_covariance.npz",
+    "morphology.json": "inputs/S_ppe_fa/ngc2466_morphology.json"
+   },
+   "input_sha256": {
+    "pixel_map.npz": "343b08f97f329cb5ebf5585f50352df282dbb95d6499b7ed3304efa5a854ed86",
+    "diagnostics.csv": "56ace8a7b1b1e99c0eb8b33a4c78cf1c4351c68b14915110cd2ee2db53eaa94e",
+    "fit_covariance.npz": "d5254ba5a50db144e541e1f2fb6022a4fdc2b2e6b3fed6d723e4cfaeab54cd76",
+    "morphology.json": "ca6aded704be056603181e1f561384f31fe728597325a68eb0fbc4dbcb92c127"
+   }
+  },
+  "S_ppe_r5_fa|v3r5": {
+   "label": "NGC2466 S EB, r<=5 kpc",
+   "covariance": "EB",
+   "data_dir": "S_ppe_fa",
+   "rmin_fit": 0.45,
+   "rmax_fit": 5.0,
+   "m1_phase_deg": 1.0,
+   "src_max_kpc": 4.0,
+   "transport_pieces": [
+    [
+     0.08,
+     0.22
+    ],
+    [
+     0.22,
+     0.35
+    ],
+    [
+     0.35,
+     0.5
+    ],
+    [
+     0.5,
+     3.2
+    ]
+   ],
+   "job_sets": [
+    "jobs_eb_fa"
+   ],
+   "inputs": {
+    "pixel_map.npz": "inputs/S_pixbeam_fa/ngc2466_pixel_map.npz",
+    "diagnostics.csv": "inputs/S_ppe_fa/ngc2466_diagnostics.csv",
+    "fit_covariance.npz": "inputs/S_ppe_fa/ngc2466_fit_covariance.npz",
+    "morphology.json": "inputs/S_ppe_fa/ngc2466_morphology.json"
+   },
+   "input_sha256": {
+    "pixel_map.npz": "343b08f97f329cb5ebf5585f50352df282dbb95d6499b7ed3304efa5a854ed86",
+    "diagnostics.csv": "56ace8a7b1b1e99c0eb8b33a4c78cf1c4351c68b14915110cd2ee2db53eaa94e",
+    "fit_covariance.npz": "d5254ba5a50db144e541e1f2fb6022a4fdc2b2e6b3fed6d723e4cfaeab54cd76",
+    "morphology.json": "ca6aded704be056603181e1f561384f31fe728597325a68eb0fbc4dbcb92c127"
+   }
+  }
+ },
+ "files": {
+  "D16_pixbeam_fa/ngc2466_pixel_map.npz": {
+   "sha256": "1a655a3f242a639a5e643f662db43b4892f35b9b72fa267d740a64ee91087b6f",
+   "stored_as": "inputs/D16_pixbeam_fa/ngc2466_pixel_map.npz",
+   "shared": false,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/D16_pixbeam_fa/ngc2466_pixel_map.npz",
+   "source_is_symlink": false,
+   "bytes": 2804090
+  },
+  "D16_pixbeam_fa/ngc2466_diagnostics.csv": {
+   "sha256": "a8e36349880f2c76112514c84737b80698c7d8468fd9dbd6ce7489eacd8dd755",
+   "stored_as": "inputs/D16_pixbeam_fa/ngc2466_diagnostics.csv",
+   "shared": false,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/D16_pixbeam_fa/ngc2466_diagnostics.csv",
+   "source_is_symlink": false,
+   "bytes": 13375
+  },
+  "D16_pixbeam_fa/ngc2466_fit_covariance.npz": {
+   "sha256": "a64ee0193de04b6eaa076d1ccc0e5fe321451439255f985450ce20a2fa129e05",
+   "stored_as": "inputs/D16_pixbeam_fa/ngc2466_fit_covariance.npz",
+   "shared": false,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/D16_pixbeam_fa/ngc2466_fit_covariance.npz",
+   "source_is_symlink": false,
+   "bytes": 112521
+  },
+  "D16_pixbeam_fa/ngc2466_morphology.json": {
+   "sha256": "524f43d1ab4fb18b9a76fe0f4a0a3930c527b4c037f5956255a526e6f9befd4d",
+   "stored_as": "inputs/D16_pixbeam_fa/ngc2466_morphology.json",
+   "shared": false,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/D16_pixbeam_fa/ngc2466_morphology.json",
+   "source_is_symlink": false,
+   "bytes": 1689
+  },
+  "D16_ppe_fa/ngc2466_pixel_map.npz": {
+   "sha256": "1a655a3f242a639a5e643f662db43b4892f35b9b72fa267d740a64ee91087b6f",
+   "stored_as": "inputs/D16_pixbeam_fa/ngc2466_pixel_map.npz",
+   "shared": true,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/D16_ppe_fa/ngc2466_pixel_map.npz",
+   "source_is_symlink": false,
+   "bytes": 2804090
+  },
+  "D16_ppe_fa/ngc2466_diagnostics.csv": {
+   "sha256": "05e9b946d4d1e865f72498710860df89d7c553dbf795768849d172b7f571542f",
+   "stored_as": "inputs/D16_ppe_fa/ngc2466_diagnostics.csv",
+   "shared": false,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/D16_ppe_fa/ngc2466_diagnostics.csv",
+   "source_is_symlink": false,
+   "bytes": 13375
+  },
+  "D16_ppe_fa/ngc2466_fit_covariance.npz": {
+   "sha256": "99fca60d8de4b2df526863672816400c8e6c47835dbb3d016aca126090589109",
+   "stored_as": "inputs/D16_ppe_fa/ngc2466_fit_covariance.npz",
+   "shared": false,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/D16_ppe_fa/ngc2466_fit_covariance.npz",
+   "source_is_symlink": false,
+   "bytes": 112228
+  },
+  "D16_ppe_fa/ngc2466_morphology.json": {
+   "sha256": "be52ea3362195bee6d17fee449086556bf4ba269feeff99f2b3e843834b4dc33",
+   "stored_as": "inputs/D16_ppe_fa/ngc2466_morphology.json",
+   "shared": false,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/D16_ppe_fa/ngc2466_morphology.json",
+   "source_is_symlink": false,
+   "bytes": 1688
+  },
+  "N1084D16_pixbeam_fa/ngc1084_pixel_map.npz": {
+   "sha256": "82f8e245a5ae242d1fb058d7ec2c8c28e548f1e32dd86639b250ffe07e002e4a",
+   "stored_as": "inputs/N1084D16_pixbeam_fa/ngc1084_pixel_map.npz",
+   "shared": false,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/N1084D16_pixbeam_fa/ngc1084_pixel_map.npz",
+   "source_is_symlink": false,
+   "bytes": 2021145
+  },
+  "N1084D16_pixbeam_fa/ngc1084_diagnostics.csv": {
+   "sha256": "cec6ed82d73cbd20f4ed1820959c1b7885a347b313ea37b3019c116642d26ec3",
+   "stored_as": "inputs/N1084D16_pixbeam_fa/ngc1084_diagnostics.csv",
+   "shared": false,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/N1084D16_pixbeam_fa/ngc1084_diagnostics.csv",
+   "source_is_symlink": false,
+   "bytes": 16845
+  },
+  "N1084D16_pixbeam_fa/ngc1084_fit_covariance.npz": {
+   "sha256": "07423a8bd8d7d05bfb6fd4fb667d735bdf82b758c6f0d9ab1738a2962f00c215",
+   "stored_as": "inputs/N1084D16_pixbeam_fa/ngc1084_fit_covariance.npz",
+   "shared": false,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/N1084D16_pixbeam_fa/ngc1084_fit_covariance.npz",
+   "source_is_symlink": false,
+   "bytes": 192926
+  },
+  "N1084D16_pixbeam_fa/ngc1084_morphology.json": {
+   "sha256": "5d2d24944e885c7b6b3c67edb73812add1b9e72e070882884e840b16c8eba077",
+   "stored_as": "inputs/N1084D16_pixbeam_fa/ngc1084_morphology.json",
+   "shared": false,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/N1084D16_pixbeam_fa/ngc1084_morphology.json",
+   "source_is_symlink": false,
+   "bytes": 1607
+  },
+  "N1084D16_ppe_fa/ngc1084_pixel_map.npz": {
+   "sha256": "82f8e245a5ae242d1fb058d7ec2c8c28e548f1e32dd86639b250ffe07e002e4a",
+   "stored_as": "inputs/N1084D16_pixbeam_fa/ngc1084_pixel_map.npz",
+   "shared": true,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/N1084D16_ppe_fa/ngc1084_pixel_map.npz",
+   "source_is_symlink": false,
+   "bytes": 2021145
+  },
+  "N1084D16_ppe_fa/ngc1084_diagnostics.csv": {
+   "sha256": "251d4a722a84f08c03e9aca4ad7cc10de74f418a51aa69b3998205dfcebe5a37",
+   "stored_as": "inputs/N1084D16_ppe_fa/ngc1084_diagnostics.csv",
+   "shared": false,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/N1084D16_ppe_fa/ngc1084_diagnostics.csv",
+   "source_is_symlink": false,
+   "bytes": 16845
+  },
+  "N1084D16_ppe_fa/ngc1084_fit_covariance.npz": {
+   "sha256": "36052c2dd05b63c4ef66d40543eb7f599a8dd2d8473bdb6f514f733f3ce324b0",
+   "stored_as": "inputs/N1084D16_ppe_fa/ngc1084_fit_covariance.npz",
+   "shared": false,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/N1084D16_ppe_fa/ngc1084_fit_covariance.npz",
+   "source_is_symlink": false,
+   "bytes": 192529
+  },
+  "N1084D16_ppe_fa/ngc1084_morphology.json": {
+   "sha256": "06c289bc57a435771e47455916eead17c9b5f62b342c33bff0b34147bf3b8da6",
+   "stored_as": "inputs/N1084D16_ppe_fa/ngc1084_morphology.json",
+   "shared": false,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/N1084D16_ppe_fa/ngc1084_morphology.json",
+   "source_is_symlink": false,
+   "bytes": 1677
+  },
+  "N1084S_pixbeam_fa/ngc1084_pixel_map.npz": {
+   "sha256": "49f96be0039d861d59398f0ece5e3cd3f973f705a17c94a54194c0f9a531cbe9",
+   "stored_as": "inputs/N1084S_pixbeam_fa/ngc1084_pixel_map.npz",
+   "shared": false,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/N1084S_pixbeam_fa/ngc1084_pixel_map.npz",
+   "source_is_symlink": false,
+   "bytes": 1975503
+  },
+  "N1084S_pixbeam_fa/ngc1084_diagnostics.csv": {
+   "sha256": "4be387dd4ad88b4bd89b6fff979a4b1d8315657cf56574c276e115a1b436189b",
+   "stored_as": "inputs/N1084S_pixbeam_fa/ngc1084_diagnostics.csv",
+   "shared": false,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/N1084S_pixbeam_fa/ngc1084_diagnostics.csv",
+   "source_is_symlink": false,
+   "bytes": 16827
+  },
+  "N1084S_pixbeam_fa/ngc1084_fit_covariance.npz": {
+   "sha256": "2531a7e916243e7c0150d33a446cfa580b564ecd83905d09282f57571240601a",
+   "stored_as": "inputs/N1084S_pixbeam_fa/ngc1084_fit_covariance.npz",
+   "shared": false,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/N1084S_pixbeam_fa/ngc1084_fit_covariance.npz",
+   "source_is_symlink": false,
+   "bytes": 192961
+  },
+  "N1084S_pixbeam_fa/ngc1084_morphology.json": {
+   "sha256": "a1843af6d1f7af36346ba4c929587662015d2eeadc00d402b2327fdb76369f2c",
+   "stored_as": "inputs/N1084S_pixbeam_fa/ngc1084_morphology.json",
+   "shared": false,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/N1084S_pixbeam_fa/ngc1084_morphology.json",
+   "source_is_symlink": false,
+   "bytes": 1677
+  },
+  "N1084t05_pixbeam_fa/ngc1084_pixel_map.npz": {
+   "sha256": "5ed024952f7aa53ac35d3cce700de92bb693f1eec09b31fe80288f5ac52edea6",
+   "stored_as": "inputs/N1084t05_pixbeam_fa/ngc1084_pixel_map.npz",
+   "shared": false,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/N1084t05_pixbeam_fa/ngc1084_pixel_map.npz",
+   "source_is_symlink": false,
+   "bytes": 2016951
+  },
+  "N1084t05_pixbeam_fa/ngc1084_diagnostics.csv": {
+   "sha256": "cec6ed82d73cbd20f4ed1820959c1b7885a347b313ea37b3019c116642d26ec3",
+   "stored_as": "inputs/N1084D16_pixbeam_fa/ngc1084_diagnostics.csv",
+   "shared": true,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/N1084t05_pixbeam_fa/ngc1084_diagnostics.csv",
+   "source_is_symlink": false,
+   "bytes": 16845
+  },
+  "N1084t05_pixbeam_fa/ngc1084_fit_covariance.npz": {
+   "sha256": "07423a8bd8d7d05bfb6fd4fb667d735bdf82b758c6f0d9ab1738a2962f00c215",
+   "stored_as": "inputs/N1084D16_pixbeam_fa/ngc1084_fit_covariance.npz",
+   "shared": true,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/N1084t05_pixbeam_fa/ngc1084_fit_covariance.npz",
+   "source_is_symlink": false,
+   "bytes": 192926
+  },
+  "N1084t05_pixbeam_fa/ngc1084_morphology.json": {
+   "sha256": "6d909823c4d2454c149b4285ab035ffbd5bfc35eb9dc21371ac2e05df0d9ab47",
+   "stored_as": "inputs/N1084t05_pixbeam_fa/ngc1084_morphology.json",
+   "shared": false,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/N1084t05_pixbeam_fa/ngc1084_morphology.json",
+   "source_is_symlink": false,
+   "bytes": 1678
+  },
+  "S_pixbeam_fa/ngc2466_pixel_map.npz": {
+   "sha256": "343b08f97f329cb5ebf5585f50352df282dbb95d6499b7ed3304efa5a854ed86",
+   "stored_as": "inputs/S_pixbeam_fa/ngc2466_pixel_map.npz",
+   "shared": false,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/S_pixbeam_fa/ngc2466_pixel_map.npz",
+   "source_is_symlink": false,
+   "bytes": 1078864
+  },
+  "S_pixbeam_fa/ngc2466_diagnostics.csv": {
+   "sha256": "a8039fd36c9583e678ba9f34de7905087dc482ce488f3919b6e22dbcc690c723",
+   "stored_as": "inputs/S_pixbeam_fa/ngc2466_diagnostics.csv",
+   "shared": false,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/S_pixbeam_fa/ngc2466_diagnostics.csv",
+   "source_is_symlink": false,
+   "bytes": 13380
+  },
+  "S_pixbeam_fa/ngc2466_fit_covariance.npz": {
+   "sha256": "46449a8726c54908fe21c6c984c9ea8f0a6f500a73520e66ba6b467ea20fc1ed",
+   "stored_as": "inputs/S_pixbeam_fa/ngc2466_fit_covariance.npz",
+   "shared": false,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/S_pixbeam_fa/ngc2466_fit_covariance.npz",
+   "source_is_symlink": false,
+   "bytes": 113243
+  },
+  "S_pixbeam_fa/ngc2466_morphology.json": {
+   "sha256": "a96a3d042b1ccefbd16298676e8a4b6c867447e7982e1a617f2f51f2e9482519",
+   "stored_as": "inputs/S_pixbeam_fa/ngc2466_morphology.json",
+   "shared": false,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/S_pixbeam_fa/ngc2466_morphology.json",
+   "source_is_symlink": false,
+   "bytes": 1671
+  },
+  "S_ppe_fa/ngc2466_pixel_map.npz": {
+   "sha256": "343b08f97f329cb5ebf5585f50352df282dbb95d6499b7ed3304efa5a854ed86",
+   "stored_as": "inputs/S_pixbeam_fa/ngc2466_pixel_map.npz",
+   "shared": true,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/S_ppe_fa/ngc2466_pixel_map.npz",
+   "source_is_symlink": false,
+   "bytes": 1078864
+  },
+  "S_ppe_fa/ngc2466_diagnostics.csv": {
+   "sha256": "56ace8a7b1b1e99c0eb8b33a4c78cf1c4351c68b14915110cd2ee2db53eaa94e",
+   "stored_as": "inputs/S_ppe_fa/ngc2466_diagnostics.csv",
+   "shared": false,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/S_ppe_fa/ngc2466_diagnostics.csv",
+   "source_is_symlink": false,
+   "bytes": 13380
+  },
+  "S_ppe_fa/ngc2466_fit_covariance.npz": {
+   "sha256": "d5254ba5a50db144e541e1f2fb6022a4fdc2b2e6b3fed6d723e4cfaeab54cd76",
+   "stored_as": "inputs/S_ppe_fa/ngc2466_fit_covariance.npz",
+   "shared": false,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/S_ppe_fa/ngc2466_fit_covariance.npz",
+   "source_is_symlink": false,
+   "bytes": 112636
+  },
+  "S_ppe_fa/ngc2466_morphology.json": {
+   "sha256": "ca6aded704be056603181e1f561384f31fe728597325a68eb0fbc4dbcb92c127",
+   "stored_as": "inputs/S_ppe_fa/ngc2466_morphology.json",
+   "shared": false,
+   "source": "TITANIC/fluxarea_fix_20261021_074830/macfit/data/S_ppe_fa/ngc2466_morphology.json",
+   "source_is_symlink": false,
+   "bytes": 1671
+  }
+ },
+ "morphology_summary": {
+  "D16_pixbeam_fa": {
+   "galaxy": "NGC2466",
+   "calibration": "d16",
+   "psf_arcsec": 1.252,
+   "psf_kpc": 0.4479562058168646,
+   "target_fwhm_kpc": 0.12,
+   "effective_fwhm_kpc_parent": 0.4479562058168646,
+   "effective_fwhm_kpc": 0.455321383563128,
+   "pixel_kpc": 0.12,
+   "halpha_sfr_msun_per_yr": 1.780985780785808,
+   "halpha_sfr_unscaled_pre20261021_msun_per_yr": 0.6672682377692571,
+   "halpha_flux_area_factor": 2.6690702179078944,
+   "n_cells": 13968,
+   "r_ref_kpc": 4.750719434935351,
+   "analysis_rmin_kpc": 1.0,
+   "analysis_rmax_kpc": 10.0,
+   "event_rate_log_slope_kpc_inv": -0.23553738005352234,
+   "event_rate_log_slope_error_kpc_inv": 0.013229364466955803,
+   "maximum_positive_eta": 1.0002913662846624
+  },
+  "D16_ppe_fa": {
+   "galaxy": "NGC2466",
+   "calibration": "d16",
+   "psf_arcsec": 1.252,
+   "psf_kpc": 0.4479562058168646,
+   "target_fwhm_kpc": 0.12,
+   "effective_fwhm_kpc_parent": 0.4479562058168646,
+   "effective_fwhm_kpc": 0.455321383563128,
+   "pixel_kpc": 0.12,
+   "halpha_sfr_msun_per_yr": 1.780985780785808,
+   "halpha_sfr_unscaled_pre20261021_msun_per_yr": 0.6672682377692571,
+   "halpha_flux_area_factor": 2.6690702179078944,
+   "n_cells": 13968,
+   "r_ref_kpc": 4.750719434935351,
+   "analysis_rmin_kpc": 1.0,
+   "analysis_rmax_kpc": 10.0,
+   "event_rate_log_slope_kpc_inv": -0.23553738005352234,
+   "event_rate_log_slope_error_kpc_inv": 0.013229364466955803,
+   "maximum_positive_eta": 1.0002913662846624
+  },
+  "N1084D16_pixbeam_fa": {
+   "galaxy": "NGC1084",
+   "calibration": "d16",
+   "psf_arcsec": 0.715,
+   "psf_kpc": 0.06828843105268369,
+   "target_fwhm_kpc": 0.12,
+   "effective_fwhm_kpc_parent": null,
+   "effective_fwhm_kpc": 0.12674207365078158,
+   "pixel_kpc": 0.06,
+   "halpha_sfr_msun_per_yr": 1.0210041562905094,
+   "halpha_sfr_unscaled_pre20261021_msun_per_yr": 0.11290736823515697,
+   "halpha_flux_area_factor": 9.042847887163758,
+   "n_cells": 10034,
+   "r_ref_kpc": 1.9967303440484692,
+   "analysis_rmin_kpc": 0.3,
+   "analysis_rmax_kpc": 3.9,
+   "event_rate_log_slope_kpc_inv": -0.7816680318892006,
+   "event_rate_log_slope_error_kpc_inv": 0.20313919906320327,
+   "maximum_positive_eta": 1.208973759900191
+  },
+  "N1084D16_ppe_fa": {
+   "galaxy": "NGC1084",
+   "calibration": "d16",
+   "psf_arcsec": 0.715,
+   "psf_kpc": 0.06828843105268369,
+   "target_fwhm_kpc": 0.12,
+   "effective_fwhm_kpc_parent": 0.12,
+   "effective_fwhm_kpc": 0.12674068013072992,
+   "pixel_kpc": 0.06,
+   "halpha_sfr_msun_per_yr": 1.0210041562905094,
+   "halpha_sfr_unscaled_pre20261021_msun_per_yr": 0.11290736823515697,
+   "halpha_flux_area_factor": 9.042847887163758,
+   "n_cells": 10034,
+   "r_ref_kpc": 1.9967303440484692,
+   "analysis_rmin_kpc": 0.3,
+   "analysis_rmax_kpc": 3.9,
+   "event_rate_log_slope_kpc_inv": -0.7816680318892006,
+   "event_rate_log_slope_error_kpc_inv": 0.20313919906320327,
+   "maximum_positive_eta": 1.208973759900191
+  },
+  "N1084S_pixbeam_fa": {
+   "galaxy": "NGC1084",
+   "calibration": "scal",
+   "psf_arcsec": 0.715,
+   "psf_kpc": 0.06828843105268369,
+   "target_fwhm_kpc": 0.12,
+   "effective_fwhm_kpc_parent": 0.12,
+   "effective_fwhm_kpc": 0.12674068013072992,
+   "pixel_kpc": 0.06,
+   "halpha_sfr_msun_per_yr": 2.487028713610951,
+   "halpha_sfr_unscaled_pre20261021_msun_per_yr": 0.275027153463597,
+   "halpha_flux_area_factor": 9.042847887163758,
+   "n_cells": 10035,
+   "r_ref_kpc": 1.9622785748798037,
+   "analysis_rmin_kpc": 0.3,
+   "analysis_rmax_kpc": 3.9,
+   "event_rate_log_slope_kpc_inv": -0.8644691310567394,
+   "event_rate_log_slope_error_kpc_inv": 0.217688747267645,
+   "maximum_positive_eta": 1.1344811330290172
+  },
+  "N1084t05_pixbeam_fa": {
+   "galaxy": "NGC1084",
+   "calibration": "d16",
+   "psf_arcsec": 0.715,
+   "psf_kpc": 0.06828843105268369,
+   "target_fwhm_kpc": 0.12,
+   "effective_fwhm_kpc_parent": 0.12,
+   "effective_fwhm_kpc": 0.12674068013072992,
+   "pixel_kpc": 0.06,
+   "halpha_sfr_msun_per_yr": 1.0210041562905094,
+   "halpha_sfr_unscaled_pre20261021_msun_per_yr": 0.11290736823515697,
+   "halpha_flux_area_factor": 9.042847887163758,
+   "n_cells": 10034,
+   "r_ref_kpc": 1.9967303440484692,
+   "analysis_rmin_kpc": 0.3,
+   "analysis_rmax_kpc": 3.9,
+   "event_rate_log_slope_kpc_inv": -0.7816680318892006,
+   "event_rate_log_slope_error_kpc_inv": 0.20313919906320327,
+   "maximum_positive_eta": 1.157358093877527
+  },
+  "S_pixbeam_fa": {
+   "galaxy": "NGC2466",
+   "calibration": "scal",
+   "psf_arcsec": 1.252,
+   "psf_kpc": 0.4479562058168646,
+   "target_fwhm_kpc": 0.12,
+   "effective_fwhm_kpc_parent": 0.4479562058168646,
+   "effective_fwhm_kpc": 0.455321383563128,
+   "pixel_kpc": 0.12,
+   "halpha_sfr_msun_per_yr": 2.416682146792027,
+   "halpha_sfr_unscaled_pre20261021_msun_per_yr": 0.9054397035257852,
+   "halpha_flux_area_factor": 2.6690702179078944,
+   "n_cells": 4806,
+   "r_ref_kpc": 5.522647322269503,
+   "analysis_rmin_kpc": 1.0,
+   "analysis_rmax_kpc": 10.0,
+   "event_rate_log_slope_kpc_inv": -0.07498058403378802,
+   "event_rate_log_slope_error_kpc_inv": 0.04552751974504951,
+   "maximum_positive_eta": 1.0
+  },
+  "S_ppe_fa": {
+   "galaxy": "NGC2466",
+   "calibration": "scal",
+   "psf_arcsec": 1.252,
+   "psf_kpc": 0.4479562058168646,
+   "target_fwhm_kpc": 0.12,
+   "effective_fwhm_kpc_parent": 0.4479562058168646,
+   "effective_fwhm_kpc": 0.455321383563128,
+   "pixel_kpc": 0.12,
+   "halpha_sfr_msun_per_yr": 2.416682146792027,
+   "halpha_sfr_unscaled_pre20261021_msun_per_yr": 0.9054397035257852,
+   "halpha_flux_area_factor": 2.6690702179078944,
+   "n_cells": 4806,
+   "r_ref_kpc": 5.522647322269503,
+   "analysis_rmin_kpc": 1.0,
+   "analysis_rmax_kpc": 10.0,
+   "event_rate_log_slope_kpc_inv": -0.07498058403378802,
+   "event_rate_log_slope_error_kpc_inv": 0.04552751974504951,
+   "maximum_positive_eta": 1.0
+  }
+ },
+ "missing": []
+}

@@ -2,7 +2,9 @@
 L0 (KT18) / L1 / L1n / L2 hierarchy with full parameter summaries and posterior-predictive curves, plus the
 journal figure figs/ngc1084_single_pointing.pdf and the LaTeX table rows.
 
-    python scripts/paper_single_pointing.py [--name NGC1084 --variant d16_mockcov --nlive 400]
+Current manuscript runs: use amusing/scripts/run_final_piece.py, which explicitly
+selects the corrected area inputs, intrinsic support, unified response and manuscript
+epsilon/physical priors. This low-level worker retains legacy options for audit.
 Writes outputs/<name>/ktz/<variant>/<g>_paper_nested.npz / .json and figs/ngc1084_single_pointing.{pdf,png}.
 """
 from __future__ import annotations
@@ -128,6 +130,8 @@ if a.l0_tag:   # L0 from its own dominant prior piece
 # ---------------- figure ----------------
 plt.rcParams.update({"font.size": 8.5, "axes.labelsize": 9, "axes.titlesize": 9, "legend.fontsize": 7.2, "xtick.labelsize": 8, "ytick.labelsize": 8, "pdf.fonttype": 42})
 C_KT18, C_KTZ, C_NP, C_M, C_2P = "#1f77b4", "#7b3294", "#9467bd", "#e6550d", "#1f77b4"
+PLOT_YLIM = (-0.17, 0.45)
+excluded_visible = bool(np.any(excl & (obs >= PLOT_YLIM[0]) & (obs <= PLOT_YLIM[1])))
 fig, axes = plt.subplots(1, 3, figsize=(9.8, 3.3), constrained_layout=True, gridspec_kw=dict(width_ratios=[1.0, 1.25, 1.25]))
 ax = axes[0]; X, Y, valid = pm["x_grid_kpc"], pm["y_grid_kpc"], pm["valid_mask"]; res_map = np.where(valid, pm["residual_dex"], np.nan)
 dx = float(pm["pixel_size_kpc"]); ext = [X.min()-dx/2, X.max()+dx/2, Y.min()-dx/2, Y.max()+dx/2]
@@ -138,20 +142,20 @@ for rr in (morph["analysis_rmin_kpc"], morph["analysis_rmax_kpc"]): ax.add_patch
 ax.set(xlabel="$x$ [kpc]", ylabel="$y$ [kpc]", aspect="equal", xlim=(-1.08*morph["analysis_rmax_kpc"], 1.08*morph["analysis_rmax_kpc"]), ylim=(-1.08*morph["analysis_rmax_kpc"], 1.08*morph["analysis_rmax_kpc"]), title=f"{a.name}: abundance residual ({'D16' if morph['calibration']=='d16' else 'S'})")
 cb = fig.colorbar(im, ax=ax, fraction=0.046, pad=0.03); cb.set_label(r"$\delta\,[12+\log({\rm O/H})]$ [dex]")
 ax = axes[1]
-ax.errorbar(r[~excl], obs[~excl], err[~excl], fmt="o", ms=2.6, color="k", lw=0.7, label="observed", zorder=5); ax.errorbar(r[excl], obs[excl], err[excl], fmt="o", ms=2.6, mfc="w", color="k", lw=0.7, label="excluded (sub-beam)" if excl.any() else None, zorder=5)
+ax.errorbar(r[~excl], obs[~excl], err[~excl], fmt="o", ms=2.6, color="k", lw=0.7, label="observed", zorder=5); ax.errorbar(r[excl], obs[excl], err[excl], fmt="o", ms=2.6, mfc="w", color="k", lw=0.7, label="excluded (sub-beam)" if excluded_visible else None, zorder=5)
 ax.fill_between(r, A["L0_pred_p16"], A["L0_pred_p84"], color=C_KT18, alpha=0.2, lw=0)
 ax.plot(r, A["L0_pred_p50"], color=C_KT18, lw=1.5, label=f"L0: projected $C_{{{{\\rm 2p}},0}}$, $\\ell_\\ast={S['L0']['params']['ell_star'][1]:.2f}$ kpc")
 ax.fill_between(r, A["L2_pred_p16"], A["L2_pred_p84"], color=C_KTZ, alpha=0.25, lw=0)
 ax.plot(r, A["L2_pred_p50"], color=C_KTZ, lw=1.8, label=f"L2: complete, $\\ell_\\ast={S['L2']['params']['ell_star'][1]:.2f}$ kpc")
 ax.plot(r, A["L1n_pred_p50"], color=C_NP, lw=1.2, ls="--", label="L1n: $C_{{\\rm 2p},0}+C_{\\rm NP}$")
 ax.plot(r, A["L1_pred_p50"], color=C_M, lw=1.2, ls=":", label="L1: $C_{{\\rm 2p},0}+C_{{\\rm 2p},N}+C_{\\rm M}$")
-ax.axhline(0, color="0.5", lw=0.6); ax.set(xlabel="$r$ [kpc]", ylabel=r"$\xi_{3,\rm pp}(r)$", xlim=(0, r.max()+0.1), ylim=(-0.17, 0.45), title="finite-window statistic, nested models")
+ax.axhline(0, color="0.5", lw=0.6); ax.set(xlabel="$r$ [kpc]", ylabel=r"$\xi_{3,\rm pp}(r)$", xlim=(0, r.max()+0.1), ylim=PLOT_YLIM, title="finite-window statistic, nested models")
 ax.legend(frameon=False, loc="upper right", fontsize=6.8)
 ax = axes[2]; cm = A["L2_comp_p50"]
 for i, (lab, col, ls) in enumerate([(r"$C_{{\rm 2p},0}$ (same event, unmodulated)", C_2P, "-"), (r"$C_{{\rm 2p},N}$ (same event, H$\alpha$-modulated)", "#2ca02c", "-"), (r"$C_{\rm M}$ (unremoved mean field)", C_M, "-"), (r"$C_{\rm NP}$ (isotropic distinct-event term)", C_NP, "-")]):
     ax.plot(r, cm[i], color=col, lw=1.4, ls=ls, label=lab)
 ax.plot(r, A["L2_pred_p50"], color=C_KTZ, lw=1.8, label="sum (L2)"); ax.errorbar(r[~excl], obs[~excl], err[~excl], fmt="o", ms=2, color="k", lw=0.5, alpha=0.6); ax.errorbar(r[excl], obs[excl], err[excl], fmt="o", ms=2, mfc="w", color="k", lw=0.5, alpha=0.6)
-ax.axhline(0, color="0.5", lw=0.6); ax.set(xlabel="$r$ [kpc]", ylabel="contribution to $\\xi_{3,\\rm pp}$", xlim=(0, r.max()+0.1), ylim=(-0.17, 0.45), title="complete KTZ (L2): components")
+ax.axhline(0, color="0.5", lw=0.6); ax.set(xlabel="$r$ [kpc]", ylabel="contribution to $\\xi_{3,\\rm pp}$", xlim=(0, r.max()+0.1), ylim=PLOT_YLIM, title="complete KTZ (L2): components")
 ax.legend(frameon=False, loc="upper right", fontsize=6.8)
 stem = a.figname or f"{g}_single_pointing_{a.variant}"
 for p in ("pdf", "png"): fig.savefig(ROOT / "figs" / f"{stem}.{p}", dpi=150)
