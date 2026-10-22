@@ -7,8 +7,14 @@ intrinsic transport support and the normalized manuscript/physical priors.
 It supersedes the older observational summaries, not the numerical-validation
 experiment. No fit was rerun to make the release.
 
+The [22 October readability update](amusing/release_20261022/READABILITY_UPDATE.md)
+synchronizes the latest Overleaf manuscript hash, Figure 5 axis notation and
+Figures 7/8 legends. The numerical arrays, posterior summaries and Table 3 are
+unchanged. The manuscript text remains on Overleaf, following the existing
+publication scope of this repository.
+
 - Numerical validation: `KTZ_validation.ipynb` and `KTZ_validation.py`;
-  [execution and Figure 1 redraw instructions](validation/README.md).
+  [execution and Figures 1/5 redraw instructions](validation/README.md).
 - Observations: ordinary Python scripts, not notebooks;
   [current workflow](amusing/README.md).
 - Current evidence table: `amusing/metadata/table3_numbers.json`.

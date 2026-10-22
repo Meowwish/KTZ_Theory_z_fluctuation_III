@@ -2,6 +2,10 @@
 
 Generates every number and figure of Section 3 of the manuscript.
 
+The 22 October readability revision changes only the Figure 5 axis labels in
+the script and notebook. Existing executed scientific outputs are retained;
+the simulation was not rerun for this label-only update.
+
 * `KTZ_validation.ipynb` — executed notebook (clean kernel, 0 errors, runtime 994 s on 2 cores).
   It is built from `KTZ_validation.py` (`# %%` cells) with
   `python3 validation/py2nb.py KTZ_validation.py KTZ_validation.ipynb`.
@@ -19,6 +23,19 @@ Generates every number and figure of Section 3 of the manuscript.
   for the newly displayed fluctuation.
 * `validation/sector_cnp_phase_diagnostic.py` is the arm-sector check with midpoint-modulated `C_NP`.
 * `validation/diagnostics/` records the focused checks used to diagnose the earlier cross-correlation bias.
+
+Redraw Figure 5 alone from `validation/outputs/cross_results.npz`:
+
+```bash
+python validation/replot_cross_scatter.py --outdir /tmp/ktz-figures --dump /tmp/figure5-fingerprints.json
+```
+
+This reads the original deterministic yield tables to preserve the source-channel
+groups and executes only the scatter-plot block of `KTZ_validation.py`. It does
+not generate events, recompute covariance matrices or run a fit. The axes denote
+the full-window coefficients `Xi_AB,Omega` with `sim` and `KTZ` superscripts;
+covariance matrices are averaged before normalization. NumPy, Matplotlib and
+Astropy are required; Matplotlib 3.10.9 was used for the published redraw.
 
 The KTZ same-event prediction uses the direct two-dimensional Gaussian drift average and its logarithmic age integral. The reference labelled KT25 uses the published Dawson/inverse-hyperbolic-sine form. The uniform KTZ-limit curve is stored separately.
 

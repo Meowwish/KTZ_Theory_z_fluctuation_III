@@ -1,5 +1,32 @@
 # Release verification, 22 October 2026
 
+## Readability and plotting-label synchronization
+
+The current `metadata/manuscript_state.json` records the latest Overleaf text.
+The corresponding Figure 5 axes use full-window `Xi_AB,Omega` notation, and
+Figures 7/8 use `L2 total` instead of `sum (L2)`, with slightly larger legends.
+Python and notebook plotting-source labels agree. Plot-only redraws preserve
+every scientific curve, errorbar, band, map and contour array; the archived
+numerical products and all Table 3 values are unchanged.
+
+The manuscript's 133 display-equation environments and Table 3 data were
+compared byte-for-byte before and after the readability revision. Its 158 labels,
+333 references and 50 citation keys resolve. The downloaded Overleaf project
+matches local source, bibliography and all three replaced figure files. The
+31-page document compiles independently and on Overleaf without errors,
+undefined references/citations, missing figures or overfull boxes; two inherited
+font-warning messages remain. Text changes retain Reviewing history.
+
+The repository publishes a version hash and a change summary, not the manuscript
+source or PDF. No raw or proprietary data are added. The scientific release
+checks below are rerun against the updated manifest without running fits.
+
+## Original scientific-release checks
+
+The following records the earlier flux-area release. Its statements about
+unchanged plotting code and the exact prior artwork refer to that release,
+before the label-only synchronization described above.
+
 No sampler, simulation or large response calculation was run for this release.
 It publishes the previously accepted flux-area-corrected results and makes the
 current inputs, products and explicit reproduction entrypoints available together.

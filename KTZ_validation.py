@@ -868,7 +868,7 @@ ax.scatter(s_, tn_, s=9, facecolors='none', edgecolors='0.45', lw=0.6, label=r'K
 lo_, hi_ = min(0, s_.min(), t_.min(), tn_.min()), max(1, s_.max(), t_.max())
 ax.plot([lo_, hi_], [lo_, hi_], 'k--', lw=1.2, label='1:1')
 ax.set_xlim(lo_ - 0.03, hi_ + 0.03); ax.set_ylim(lo_ - 0.03, hi_ + 0.03); ax.set_aspect('equal', adjustable='box')
-ax.set_xlabel(r'Simulation $\langle\Xi_{AB}\rangle$'); ax.set_ylabel(r'KTZ prediction $\Xi_{AB}$')
+ax.set_xlabel(r'Simulation $\Xi^{\rm sim}_{AB,\Omega}$'); ax.set_ylabel(r'KTZ prediction $\Xi^{\rm KTZ}_{AB,\Omega}$')
 ax.grid(alpha=0.25); ax.legend(fontsize=7.5, loc='lower right')
 fig.savefig(figure_path('cross_scatter'), dpi=160, bbox_inches='tight'); plt.close(fig)
 
