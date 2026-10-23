@@ -1,11 +1,40 @@
-# Readability synchronization, 22 October 2026
+# Manuscript version record
 
-Current Overleaf manuscript SHA-256:
+## Current manuscript binding and plot cleanup, 23 October 2026
+
+Manuscript SHA-256:
+`4dcb2e23e5d84a80e773ea3cef86f8b56a33210d9049e5d50f06b847081fb53d`.
+Bibliography SHA-256:
+`aa539d5a9b0747100e62bd75802b4f509924c02685eee6e1a3af9ec717d037b7`.
+
+The independent-review corrections fix the introduction to the variables and
+covariance amplitude, round the NGC 2466 S L2 association-length upper uncertainty to
+0.6 kpc from the archived posterior quantiles, and use the general template-mode
+notation nu_k = k Delta x instead of the spiral-specific nu_n. No new numerical
+diagnostic or sensitivity claim is added. The local source compiled successfully
+with the desktop editor's compiler.
+
+The subsequent display-only cleanup removes `(published)` from the third
+Figure 4 panel title and the grey no-C_AB,NP comparison points and legend entry
+from Figure 5. Its caption no longer describes the removed points. Both figures
+were redrawn from archived arrays with Matplotlib 3.10.9; control redraws match
+the preceding figures pixel for pixel, and retained matrix values, colour scales,
+scatter coordinates, error bars and source-channel assignments are unchanged.
+The script and notebook plotting cells match. No fit or simulation was rerun,
+and no scientific array or quoted validation metric was edited.
+
+GitHub publication is tracked by repository commits. This record does not
+assert that Overleaf is synchronized. The 22 October record below is retained
+as historical provenance, including its source hash and compilation statement.
+
+## Historical readability synchronization, 22 October 2026
+
+Overleaf manuscript SHA-256 recorded on that date:
 `4a4dfb14d664a0e548222b955b1d355d9cc7bdb67f9d1162afda9fd152b70392`.
 The manuscript source and PDF remain on Overleaf; this repository retains its
 existing scope of scientific code, derived products and version records.
 
-## Text and notation
+### Text and notation
 
 The text distinguishes disc inclination from spiral pitch angle, residual
 second moments from connected covariances, and a parent complex from the
@@ -21,7 +50,7 @@ generation, and calls the regression significance a moment-based
 Gaussian-equivalent local score. These are descriptions of existing calculations,
 not changes to them.
 
-## Plotting
+### Plotting
 
 - Figure 5 labels the full-window coefficients with `sim` and `KTZ` superscripts
   and an `Omega` subscript. It no longer puts averaging brackets around an

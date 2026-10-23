@@ -6,9 +6,11 @@ change any accepted scientific result. The two reference fields are selected
 illustrations, not a population sample. The numerical validation is still
 reproduced by the root `KTZ_validation.ipynb`.
 
-The [readability update](READABILITY_UPDATE.md) binds these unchanged scientific
-products to the latest Overleaf text and updates the plotting labels in Figures
-5, 7 and 8. It introduces no new fit, covariance, posterior or evidence result.
+The [manuscript version record](READABILITY_UPDATE.md) binds these unchanged
+scientific products to the current manuscript and retains the history of the
+display-only updates in Figures 4, 5, 7 and 8. It introduces no new fit,
+covariance, posterior or evidence result; the record distinguishes local updates
+from remote synchronization.
 
 ## Current products, not historical defaults
 

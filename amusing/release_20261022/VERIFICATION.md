@@ -1,8 +1,28 @@
-# Release verification, 22 October 2026
+# Release verification
 
-## Readability and plotting-label synchronization
+## Manuscript binding and plot-only cleanup, 23 October 2026
 
-The current `metadata/manuscript_state.json` records the latest Overleaf text.
+The current `metadata/manuscript_state.json` records the checked manuscript
+revision and its bibliography, figures and numerical-validation code hashes.
+Three verified text corrections fix a misplaced introduction, the NGC 2466 S
+L2 association-length upper uncertainty (+0.6 kpc from archived quantiles), and
+the general template-mode notation. No new diagnostic or scientific claim was
+added. The subsequent Figure 4/5 cleanup changes only the third matrix-panel
+title and removes the no-C_AB,NP scatter comparison and its caption clause.
+
+Both figures were redrawn from `cross_results.npz`, without entering simulation
+or covariance-calculation blocks. Matplotlib 3.10.9 control redraws match the
+preceding images pixel for pixel. Fingerprints of retained matrix values,
+colour scales, scatter coordinates, error bars, channel groups, axis limits and
+the 1:1 line agree before and after; the no-CNP numerical results and all quoted
+validation metrics are retained. Python and notebook plotting cells agree.
+The final saved manuscript compiled successfully in the desktop editor.
+These checks do not claim a new Overleaf compilation or synchronization.
+
+## Historical readability and plotting-label synchronization, 22 October 2026
+
+The following records the 22 October Overleaf revision, whose source hash was
+`4a4dfb14d664a0e548222b955b1d355d9cc7bdb67f9d1162afda9fd152b70392`.
 The corresponding Figure 5 axes use full-window `Xi_AB,Omega` notation, and
 Figures 7/8 use `L2 total` instead of `sum (L2)`, with slightly larger legends.
 Python and notebook plotting-source labels agree. Plot-only redraws preserve
@@ -62,8 +82,8 @@ current inputs, products and explicit reproduction entrypoints available togethe
 - Python syntax and all five explicit current fit-command configurations pass.
   Input-copy tests pass checksum, repeat-copy idempotence and overwrite refusal.
   These checks do not claim that a fresh end-to-end fit was executed.
-- Overleaf source was read back in full and exactly matches the manuscript SHA
-  in `metadata/manuscript_state.json`. Only four local wording replacements in
+- Overleaf source was read back in full and exactly matched the manuscript SHA
+  recorded for that historical release. Only four local wording replacements in
   two paragraphs were made in Reviewing mode: the map-specific pair counts and
   the actual scope of the original direct-pair tests. The Abstract,
   Acknowledgements, numerical results and other scientific content are unchanged.

@@ -844,7 +844,7 @@ fig, axes = plt.subplots(1, 3, figsize=(13.2, 4.25), constrained_layout=True)
 for ax, (M, title, cmap, norm_) in zip(axes, [
         (kt_sub, r'Published KT25 (uniform): $\Xi_{AB}$', 'viridis', None),
         (th_sub, r'Full KTZ (beam-matched): $\Xi_{AB}$', 'viridis', None),
-        (diff, r'$\Delta\Xi_{AB}={\rm KTZ}-{\rm KT25\ (published)}$', 'RdBu_r', TwoSlopeNorm(vmin=-lim, vcenter=0, vmax=lim))]):
+        (diff, r'$\Delta\Xi_{AB}={\rm KTZ}-{\rm KT25}$', 'RdBu_r', TwoSlopeNorm(vmin=-lim, vcenter=0, vmax=lim))]):
     im = ax.imshow(M, origin='lower', cmap=cmap, vmin=None if norm_ else 0, vmax=None if norm_ else 1, norm=norm_)
     ax.set_xticks(range(16)); ax.set_yticks(range(16)); ax.set_xticklabels(cross_elements, rotation=90); ax.set_yticklabels(cross_elements)
     ax.set_title(title, fontsize=11); fig.colorbar(im, ax=ax, fraction=0.046, pad=0.03)
@@ -864,7 +864,6 @@ for lab in ['CCSN', 'AGB', 'TNSN', 'Mixed source']:
         continue
     ax.errorbar(s_[s], t_[s], xerr=se_[s], fmt='none', ecolor=cols[lab], elinewidth=0.8, alpha=0.25, zorder=1)
     ax.scatter(s_[s], t_[s], s=25, color=cols[lab], alpha=0.8, edgecolors='none', label=f'{lab} ({s.sum()})', zorder=2)
-ax.scatter(s_, tn_, s=9, facecolors='none', edgecolors='0.45', lw=0.6, label=r'KTZ without $C_{AB,{\rm NP}}$', zorder=1.5)
 lo_, hi_ = min(0, s_.min(), t_.min(), tn_.min()), max(1, s_.max(), t_.max())
 ax.plot([lo_, hi_], [lo_, hi_], 'k--', lw=1.2, label='1:1')
 ax.set_xlim(lo_ - 0.03, hi_ + 0.03); ax.set_ylim(lo_ - 0.03, hi_ + 0.03); ax.set_aspect('equal', adjustable='box')

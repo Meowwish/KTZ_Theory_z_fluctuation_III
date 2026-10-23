@@ -2,9 +2,10 @@
 
 Generates every number and figure of Section 3 of the manuscript.
 
-The 22 October readability revision changes only the Figure 5 axis labels in
-the script and notebook. Existing executed scientific outputs are retained;
-the simulation was not rerun for this label-only update.
+The 23 October plot-only cleanup removes `(published)` from the third Figure 4
+panel title and removes the grey no-`C_AB,NP` comparison points and legend entry
+from Figure 5. The script and notebook plotting cells agree; archived numerical
+results and quoted comparison metrics are unchanged. The simulation was not rerun.
 
 * `KTZ_validation.ipynb` — executed notebook (clean kernel, 0 errors, runtime 994 s on 2 cores).
   It is built from `KTZ_validation.py` (`# %%` cells) with
@@ -24,14 +25,15 @@ the simulation was not rerun for this label-only update.
 * `validation/sector_cnp_phase_diagnostic.py` is the arm-sector check with midpoint-modulated `C_NP`.
 * `validation/diagnostics/` records the focused checks used to diagnose the earlier cross-correlation bias.
 
-Redraw Figure 5 alone from `validation/outputs/cross_results.npz`:
+Redraw Figures 4 and 5 from `validation/outputs/cross_results.npz`:
 
 ```bash
-python validation/replot_cross_scatter.py --outdir /tmp/ktz-figures --dump /tmp/figure5-fingerprints.json
+python validation/replot_cross_scatter.py --matrices --outdir /tmp/ktz-figures --dump /tmp/cross-figure-fingerprints.json
 ```
 
 This reads the original deterministic yield tables to preserve the source-channel
-groups and executes only the scatter-plot block of `KTZ_validation.py`. It does
+groups and executes only the matrix/scatter plotting blocks of `KTZ_validation.py`.
+Omit `--matrices` to redraw Figure 5 alone. It does
 not generate events, recompute covariance matrices or run a fit. The axes denote
 the full-window coefficients `Xi_AB,Omega` with `sim` and `KTZ` superscripts;
 covariance matrices are averaged before normalization. NumPy, Matplotlib and
