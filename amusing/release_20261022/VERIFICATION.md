@@ -1,6 +1,26 @@
 # Release verification
 
-## Manuscript binding and plot-only cleanup, 23 October 2026
+## Readability synthesis, 24 October 2026
+
+The final source compiled successfully in the built-in desktop editor. All 124
+displayed equation blocks are byte-identical to the preceding manuscript, as
+are all tabular blocks except the Table 1 symbol entry. Table 3 remains at one
+decimal. All original labels remain; two labels locate the relocated Appendix A
+checks. Internal references resolve and the 50 citation keys are unchanged.
+
+The cell-response applicability criteria, exact-cell comparison and covariance
+diagnostics were moved without changing their numerical text. The newly stated
+mean-filter relation is restricted to zero delay, equal injection width and
+common diffusion coefficient/time horizon; it follows by changing the source-age
+variable. Independent quadratures agree to within 6e-17 in the tested examples.
+This is a definition check, not a new fit or physical validation.
+
+All 8 figure files and 4 numerical-validation file hashes are unchanged. The
+reported scientific results, priors, covariances, masks and figures are retained.
+No unverified template-filtering percentage is introduced. No Overleaf update,
+project cleanup, simulation or fit is part of this revision.
+
+## Historical manuscript binding and plot-only cleanup, 23 October 2026
 
 The current `metadata/manuscript_state.json` records the checked manuscript
 revision and its bibliography, figures and numerical-validation code hashes.

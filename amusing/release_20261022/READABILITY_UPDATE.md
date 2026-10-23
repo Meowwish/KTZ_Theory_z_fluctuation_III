@@ -1,6 +1,31 @@
 # Manuscript version record
 
-## Current manuscript binding and plot cleanup, 23 October 2026
+## Current manuscript binding, 24 October 2026
+
+Manuscript SHA-256:
+`8d3a4e8d34ce4826fd9b5e600a59d0d14465609fa0730293a35f569fbf08695d`.
+
+The text now previews the two illustrative results in the Introduction and the
+four-term decomposition at the start of the Model section. Font conventions,
+the unmodulated kernel in Table 1, the conditional relation between the mean
+filters, and the L1n naming rule are explicit. Repeated explanations of the
+smooth-template approximation and covariance limits now refer to their full
+definitions. Necessary scope statements remain with the results.
+
+Technical cell-response checks, covariance standard deviations and effective-bin
+counts have moved to labelled parts of Appendix A without changing their values.
+Figures 7/8 start with the interpretation of the displayed model, and the
+application synthesis distinguishes the morphology and covariance-shape tests.
+The C_NP sensitivity sentence links to the Thomas construction and midpoint test.
+No unverified filtering percentages were added.
+
+All 124 displayed equation blocks, Table 3 values, numerical products, figures,
+validation code and bibliography are unchanged. The only changed symbol-table
+entry adds the existing dimensionless kernel; only Figures 7/8 captions change.
+The source compiled successfully in the built-in editor. No fit or simulation
+was run. This version record does not assert Overleaf synchronization.
+
+## Historical manuscript binding and plot cleanup, 23 October 2026
 
 Manuscript SHA-256:
 `4dcb2e23e5d84a80e773ea3cef86f8b56a33210d9049e5d50f06b847081fb53d`.
