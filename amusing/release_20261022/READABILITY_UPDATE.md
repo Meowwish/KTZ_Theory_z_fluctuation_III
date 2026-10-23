@@ -1,6 +1,30 @@
 # Manuscript version record
 
-## Current manuscript binding, 24 October 2026
+## Current manuscript binding: final reader edits, 24 October 2026
+
+Manuscript SHA-256:
+`d6fda68da7945ade3ec19befaa77e7aab1e8e1d55648f948669058c827bd0286`.
+
+The free-parameter table now sits in the practical fitting prescription rather
+than the Discussion, with its contents and the existing table numbers retained.
+The opening NGC 2466 result paragraph is split into the primary result,
+covariance/separation-cut sensitivity, and interpretation. The adjacent duplicate
+distinction between map variance shares and a correlation-bin share is removed;
+the complete explanation remains with the bin-share result.
+
+Figure 7's caption is organised into panel descriptions, conditional plotting
+choices, and decomposition qualifications. It retains all scientific content,
+including the distinction between conditional curves and combined-interval
+summaries, and between the total median and component medians. Its short caption
+keeps the multi-paragraph caption compatible with the document's reference tools.
+
+All 126 displayed mathematical environments (including the two eqnarray blocks),
+all 5 table environments and all 6 tabular blocks are unchanged in content.
+Numerical products, figures, code, priors and scientific results are unchanged.
+The saved source compiled successfully in the built-in editor. No fit or
+simulation was run; this record does not assert Overleaf synchronization.
+
+## Historical manuscript binding: readability synthesis, 24 October 2026
 
 Manuscript SHA-256:
 `8d3a4e8d34ce4826fd9b5e600a59d0d14465609fa0730293a35f569fbf08695d`.

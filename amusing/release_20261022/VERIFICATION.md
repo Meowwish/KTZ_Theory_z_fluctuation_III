@@ -1,6 +1,26 @@
 # Release verification
 
-## Readability synthesis, 24 October 2026
+## Final reader edits, 24 October 2026
+
+The saved source compiled successfully in the built-in desktop editor after
+adding a short caption for reference metadata alongside the multi-paragraph
+Figure 7 caption. The free-parameter table moved intact into Section 4.3, after
+the evidence table; both table numbers remain unchanged. The NGC 2466 opening
+result text was split without changing its words, and one adjacent redundant
+map-variance versus bin-share sentence was removed.
+
+All 126 displayed mathematical environments (124 equation/align blocks plus
+2 eqnarray blocks), all 5 table environments and all 6 tabular blocks are
+byte-identical in content. Seven of eight figure environments are unchanged;
+only Figure 7's caption was reorganised. All eight figure files, all four
+numerical-validation files and the bibliography retain their previous hashes.
+All 179 labels and 50 citation keys remain; internal references resolve.
+The Abstract and Acknowledgements are unchanged. Outside the moved table,
+Figure 7 caption and removed duplicate sentence, the source is identical after
+whitespace normalisation. No scientific calculation or Overleaf operation is
+part of this update.
+
+## Historical readability synthesis, 24 October 2026
 
 The final source compiled successfully in the built-in desktop editor. All 124
 displayed equation blocks are byte-identical to the preceding manuscript, as

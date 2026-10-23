@@ -1,7 +1,7 @@
 {
   "release": "20261022",
-  "manuscript_sha256": "8d3a4e8d34ce4826fd9b5e600a59d0d14465609fa0730293a35f569fbf08695d",
-  "manuscript_revision": "2026-10-24 readability synthesis, diagnostic relocation and notation clarification; equations, figures, code and scientific results unchanged",
+  "manuscript_sha256": "d6fda68da7945ade3ec19befaa77e7aab1e8e1d55648f948669058c827bd0286",
+  "manuscript_revision": "2026-10-24 final reader edits: parameter table relocation, result/caption organisation and adjacent deduplication; equations, tables, figures, code and scientific results unchanged",
   "bibliography_sha256": "aa539d5a9b0747100e62bd75802b4f509924c02685eee6e1a3af9ec717d037b7",
   "figures": {
     "ngc2466_single_pointing.pdf": "09a46d3ef9eb3e6f4032227e749fdd41fdbf4e6901d321ed3b7c93b66a893bac",
