@@ -1,0 +1,13 @@
+{
+  "release": "20261026",
+  "manuscript_sha256": "589aa9b5520a4e79d8f3e4de2b06f2b3536ea036df286c8eed839e506477b404",
+  "source_completion": "Radial exponential continued over whole plane; unmeasured H-alpha contrast zero, not source rate zero.",
+  "primary_covariance": "fixed null; unchanged",
+  "secondary_covariance": "rebuilt stationary EB proxy",
+  "scope": "Selected-field working-likelihood comparisons, not a full generative calibration.",
+  "figures": {
+    "ngc2466_single_pointing.pdf": "8e85d4c376beb2fb48ef1820e50270264f7e32a54c3b22a2d085dea0e7a2f769",
+    "ngc1084_single_pointing.pdf": "3c3a651c6c7a0f881bf40ebd2a9272a898c026749c332e23f1d2b9c800b431cb",
+    "fitting_workflow_tikz.tex": "15caf372957e46aebc8cf5dad714ad1efc91779d71034d2c85d21c0f120fcf74"
+  }
+}

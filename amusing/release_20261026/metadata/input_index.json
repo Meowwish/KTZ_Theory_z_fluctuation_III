@@ -1,0 +1,62 @@
+{
+  "S": {
+    "galaxy": "NGC2466",
+    "input_dir": "amusing/release_20261026/inputs/S",
+    "pixel_map": "amusing/release_20261022/stage_inputs/inputs/S_pixbeam_fa/ngc2466_pixel_map.npz",
+    "covariance": "amusing/release_20261022/stage_inputs/inputs/S_pixbeam_fa/ngc2466_fit_covariance.npz"
+  },
+  "S_r5": {
+    "galaxy": "NGC2466",
+    "input_dir": "amusing/release_20261026/inputs/S_r5",
+    "pixel_map": "amusing/release_20261022/stage_inputs/inputs/S_pixbeam_fa/ngc2466_pixel_map.npz",
+    "covariance": "amusing/release_20261022/stage_inputs/inputs/S_pixbeam_fa/ngc2466_fit_covariance.npz"
+  },
+  "D16": {
+    "galaxy": "NGC2466",
+    "input_dir": "amusing/release_20261026/inputs/D16",
+    "pixel_map": "amusing/release_20261022/stage_inputs/inputs/D16_pixbeam_fa/ngc2466_pixel_map.npz",
+    "covariance": "amusing/release_20261022/stage_inputs/inputs/D16_pixbeam_fa/ngc2466_fit_covariance.npz"
+  },
+  "N1084D16": {
+    "galaxy": "NGC1084",
+    "input_dir": "amusing/release_20261026/inputs/N1084D16",
+    "pixel_map": "amusing/release_20261022/stage_inputs/inputs/N1084D16_pixbeam_fa/ngc1084_pixel_map.npz",
+    "covariance": "amusing/release_20261022/stage_inputs/inputs/N1084D16_pixbeam_fa/ngc1084_fit_covariance.npz"
+  },
+  "N1084S": {
+    "galaxy": "NGC1084",
+    "input_dir": "amusing/release_20261026/inputs/N1084S",
+    "pixel_map": "amusing/release_20261022/stage_inputs/inputs/N1084S_pixbeam_fa/ngc1084_pixel_map.npz",
+    "covariance": "amusing/release_20261022/stage_inputs/inputs/N1084S_pixbeam_fa/ngc1084_fit_covariance.npz"
+  },
+  "N1084t05": {
+    "galaxy": "NGC1084",
+    "input_dir": "amusing/release_20261026/inputs/N1084t05",
+    "pixel_map": "amusing/release_20261022/stage_inputs/inputs/N1084t05_pixbeam_fa/ngc1084_pixel_map.npz",
+    "covariance": "amusing/release_20261022/stage_inputs/inputs/N1084D16_pixbeam_fa/ngc1084_fit_covariance.npz"
+  },
+  "S_EB2": {
+    "galaxy": "NGC2466",
+    "input_dir": "amusing/release_20261026/inputs/S_EB2",
+    "pixel_map": "amusing/release_20261022/stage_inputs/inputs/S_pixbeam_fa/ngc2466_pixel_map.npz",
+    "covariance": "amusing/release_20261026/inputs/S_EB2/ngc2466_fit_covariance.npz"
+  },
+  "S_r5_EB2": {
+    "galaxy": "NGC2466",
+    "input_dir": "amusing/release_20261026/inputs/S_r5_EB2",
+    "pixel_map": "amusing/release_20261022/stage_inputs/inputs/S_pixbeam_fa/ngc2466_pixel_map.npz",
+    "covariance": "amusing/release_20261026/inputs/S_r5_EB2/ngc2466_fit_covariance.npz"
+  },
+  "D16_EB2": {
+    "galaxy": "NGC2466",
+    "input_dir": "amusing/release_20261026/inputs/D16_EB2",
+    "pixel_map": "amusing/release_20261022/stage_inputs/inputs/D16_pixbeam_fa/ngc2466_pixel_map.npz",
+    "covariance": "amusing/release_20261026/inputs/D16_EB2/ngc2466_fit_covariance.npz"
+  },
+  "N1084D16_EB2": {
+    "galaxy": "NGC1084",
+    "input_dir": "amusing/release_20261026/inputs/N1084D16_EB2",
+    "pixel_map": "amusing/release_20261022/stage_inputs/inputs/N1084D16_pixbeam_fa/ngc1084_pixel_map.npz",
+    "covariance": "amusing/release_20261026/inputs/N1084D16_EB2/ngc1084_fit_covariance.npz"
+  }
+}

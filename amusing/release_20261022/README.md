@@ -1,4 +1,8 @@
-# Current observational release: 22 October 2026
+# Archived observational release: 22 October 2026
+
+The [26 October source-integral release](../release_20261026/README.md) supersedes
+these midpoint-rate observational fits. The description below documents this
+archive, not the current production entrypoint.
 
 This is the production version corresponding to the manuscript hash in
 `metadata/manuscript_state.json`. The release itself does not rerun a fit or

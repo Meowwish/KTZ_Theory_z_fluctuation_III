@@ -1,27 +1,26 @@
 # KTZ Paper III: validation and observational applications
 
-The current manuscript products are indexed in
-[`amusing/release_20261022/README.md`](amusing/release_20261022/README.md).
-That release incorporates the integrated H-alpha flux-area correction, the full
-intrinsic transport support and the normalized manuscript/physical priors.
-It supersedes the older observational summaries, not the numerical-validation
-experiment. No fit was rerun to make the release.
-
-The [22 October readability update](amusing/release_20261022/READABILITY_UPDATE.md)
-synchronizes the latest Overleaf manuscript hash, Figure 5 axis notation and
-Figures 7/8 legends. The numerical arrays, posterior summaries and Table 3 are
-unchanged. The manuscript text remains on Overleaf, following the existing
-publication scope of this repository.
+The current observational release is [26 October 2026](amusing/release_20261026/README.md).
+It uses source-position-dependent covariance integrals and transported template
+responses, with recomputed null/EB fits and Figures 7/8. The primary covariance
+is the unchanged fixed null reference; the rebuilt stationary EB covariance is
+an empirical sensitivity check. Model comparisons remain conditional on those
+working likelihoods and the stated source-completion assumption.
 
 - Numerical validation: `KTZ_validation.ipynb` and `KTZ_validation.py`;
   [execution and Figures 1/5 redraw instructions](validation/README.md).
-- Observations: ordinary Python scripts, not notebooks;
-  [current workflow](amusing/README.md).
+  This experiment is unchanged.
+- Observational production code: [source-integral entrypoints](amusing/source_integral/),
+  ordinary Python scripts rather than notebooks.
 - Current evidence table: `amusing/metadata/table3_numbers.json`.
+- Current per-interval posteriors, prepared-input index, convergence records and
+  figure inputs: `amusing/release_20261026/`.
 - Figures 7/8: `figs/ngc2466_single_pointing.pdf` and
-  `figs/ngc1084_single_pointing.pdf`; they can be redrawn from the released arrays
-  without running a model or sampler.
+  `figs/ngc1084_single_pointing.pdf`; redraw from the released arrays without
+  fitting a model.
 
-Historical files remain for provenance and must not be mistaken for current
-manuscript inputs. In particular, the old `run_v3*` and `run_v4*` scripts are not
-the current release entrypoint. This update does not add or modify MAUVE data.
+The full manuscript remains in the existing private manuscript repository.
+Its hash is recorded in `amusing/release_20261026/metadata/manuscript_state.json`.
+Older releases and production workers are retained for provenance and do not
+produce the current source-integral results. No raw cubes or MAUVE products are
+added by this release.

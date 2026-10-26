@@ -1,0 +1,27 @@
+{
+  "S_EB2": {
+    "galaxy": "NGC2466",
+    "variant": "scal_mockcov_fid2_v4e_pixbeam_unif65e_fa_si1026",
+    "dir": "amusing/release_20261026/outputs/S_EB2",
+    "tagprefix": "v3",
+    "pieces": [
+      [
+        0.08,
+        0.22
+      ],
+      [
+        0.22,
+        0.35
+      ],
+      [
+        0.35,
+        0.5
+      ],
+      [
+        0.5,
+        3.2
+      ]
+    ],
+    "morphology": "amusing/release_20261026/inputs/S_EB2/ngc2466_morphology.json"
+  }
+}

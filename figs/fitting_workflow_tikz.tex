@@ -1,0 +1,73 @@
+% fitting_workflow_tikz.tex (v3.1: band titles between the data and model rows) -- native TikZ overview of the fitting prescription (fig:fitting_workflow)%
+% Requires: \usepackage{tikz}, \usetikzlibrary{arrows.meta,calc}%
+% 12 boxes; main text 8 pt, short arrow labels and band titles 7 pt; no \resizebox.%
+% Colours: Okabe--Ito (colour-blind safe); data and model lines also differ by position and wording.%
+\providecommand{\ktzwfmain}{\fontsize{8}{9.4}\selectfont}%
+\providecommand{\ktzwfnote}{\fontsize{7}{8.2}\selectfont}%
+\definecolor{ktzwfBlue}{HTML}{0072B2}%
+\definecolor{ktzwfOrange}{HTML}{E69F00}%
+\definecolor{ktzwfGreen}{HTML}{009E73}%
+\definecolor{ktzwfPurple}{HTML}{CC79A7}%
+\begin{tikzpicture}[
+    font=\ktzwfmain, >={Stealth[length=4.5pt,width=3.6pt]},
+    every node/.append style={execute at begin node={\thickmuskip=5mu\medmuskip=4mu}},
+    box/.style={draw, rounded corners=2pt, align=center, inner sep=3pt, minimum height=1.05cm, line width=0.7pt},
+    data/.style={box, draw=ktzwfBlue, fill=ktzwfBlue!8},
+    model/.style={box, draw=ktzwfGreen!85!black, fill=ktzwfGreen!8},
+    ha/.style={box, draw=ktzwfOrange!90!black, fill=ktzwfOrange!14, densely dashed},
+    cov/.style={box, draw=ktzwfPurple!85!black, fill=ktzwfPurple!10, dash pattern=on 3pt off 1pt on 0.6pt off 1pt},
+    inf/.style={box, draw=black!75, fill=black!7},
+    flow/.style={->, line width=0.8pt, draw=black!80},
+    lab/.style={font=\ktzwfnote, inner sep=1pt, align=left},
+  ]
+  % column centres (cm) and box text widths
+  \def\kwfxa{1.55}\def\kwfxb{4.75}\def\kwfxc{8.00}\def\kwfxd{11.40}\def\kwfxe{15.05}
+  \def\kwfwa{2.8cm}\def\kwfwb{2.6cm}\def\kwfwc{2.6cm}\def\kwfwd{2.85cm}\def\kwfwe{2.9cm}
+  \def\kwfyD{0}\def\kwfyM{-2.40}\def\kwfyBu{-4.45}\def\kwfyBl{-5.45}
+
+  % ---- shared-operator bands (data and model rows) ----
+  \fill[black!8, rounded corners=3pt] (\kwfxc-1.52,\kwfyM-0.80) rectangle (\kwfxc+1.52,\kwfyD+0.78);
+  \fill[black!8, rounded corners=3pt] (\kwfxd-1.65,\kwfyM-0.80) rectangle (\kwfxd+1.65,\kwfyD+0.78);
+  \node[font=\ktzwfnote\bfseries, text=black!75, anchor=center, align=center] at (\kwfxc,{(\kwfyD+\kwfyM)/2+0.08}) {same mask,\\ same $\mathbf P$};
+  \node[font=\ktzwfnote\bfseries, text=black!75, anchor=center, align=center] at (\kwfxd,{(\kwfyD+\kwfyM)/2+0.08}) {same pairs ${\cal P}_b$ (discrete $W_\Omega$),\\ same normalisation};
+
+  % ---- data line ----
+  \node[data, text width=5.95cm] (D1) at ({(\kwfxa+\kwfxb)/2},\kwfyD)
+      {\textbf{Data:} line fluxes $\to$ smoothing, calibration\\ and selection on the valid-cell mask\\ $\to$ abundance map $Z$};
+  \node[data, text width=\kwfwc] (D2) at (\kwfxc,\kwfyD) {Annular-mean\\ subtraction $\mathbf P$};
+  \node[data, text width=\kwfwd] (D3) at (\kwfxd,\kwfyD) {Pair sums, then normalise $\to\widehat{\boldsymbol\xi}$};
+
+  % ---- model line ----
+  \node[model, text width=\kwfwa] (M1) at (\kwfxa,\kwfyM) {\textbf{Model} $\boldsymbol\theta$: continuous $C_{\boldsymbol\theta}$ and mean $\mu_{\boldsymbol\theta}$};
+  \node[model, text width=\kwfwb] (M2) at (\kwfxb,\kwfyM) {Beam and cell response $\boldsymbol\Psi$\\ {\ktzwfnote(transported mean; applied once)}};
+  \node[model, text width=\kwfwc] (M3) at (\kwfxc,\kwfyM) {Annular-mean\\ subtraction $\mathbf P$\\ $\to$ projected\\ second moment};
+  \node[model, text width=\kwfwd] (M4) at (\kwfxd,\kwfyM) {Same pair sums, normalise, then $s_b$, $n_b\to\boldsymbol\xi(\boldsymbol\theta)$};
+
+  % ---- inference ----
+  \node[inf, text width=\kwfwe, minimum height=3.1cm] (I) at (\kwfxe,{(\kwfyD+\kwfyM)/2})
+      {Gaussian likelihood\\ $\to$ nested sampling\\ $\to$ posteriors and evidences};
+
+  % ---- H-alpha template (auxiliary branch) ----
+  \path (\kwfxa,\kwfyBu) -- (\kwfxa,\kwfyBl) coordinate[midway] (hc);
+  \node[ha, text width=\kwfwa, minimum height=1.95cm] (H) at (hc)
+      {Measured H$\alpha$\\ morphology: fixed $g$;\\ no fitted spiral\\ geometry};
+
+  % ---- covariance branch ----
+  \node[cov, text width=5.9cm, minimum height=0.8cm] (C1) at ({(\kwfxc+\kwfxd)/2},\kwfyBu) {300 noise-free signal-field mocks};
+  \node[cov, text width=5.9cm, minimum height=0.8cm] (C2) at ({(\kwfxc+\kwfxd)/2},\kwfyBl) {200 flux draws, per spaxel and per line};
+  \path (\kwfxe,\kwfyBu) -- (\kwfxe,\kwfyBl) coordinate[midway] (sc);
+  \node[cov, text width=\kwfwe, minimum height=1.95cm] (S) at (sc) {Sum and shrink\\ $\to$ fixed $\boldsymbol\Sigma$};
+
+  % ---- arrows ----
+  \draw[flow] (D1) -- (D2);
+  \draw[flow] (D2) -- (D3);
+  \draw[flow] (M1) -- (M2);
+  \draw[flow] (M2) -- (M3);
+  \draw[flow] (M3) -- (M4);
+  \draw[flow] (D3.east) -- (D3.east -| I.west) ;
+  \draw[flow] (M4.east) -- (M4.east -| I.west);
+  \draw[flow] (C1.east) -- (C1.east -| S.west);
+  \draw[flow] (C2.east) -- (C2.east -| S.west);
+  \draw[flow] (S.north) -- node[lab, left=3pt, align=right]{$\boldsymbol\Sigma$ not re-estimated\\ for each $\boldsymbol\theta$} (I.south);
+  \draw[flow, draw=ktzwfOrange!90!black] (H.north) -- node[lab, right=3pt]{$g$ (L1, L2 only)\\ radial profile $\to h_R$ prior\\ (all models)} (M1.south);
+\end{tikzpicture}%

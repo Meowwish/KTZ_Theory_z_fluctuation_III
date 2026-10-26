@@ -1,0 +1,27 @@
+{
+  "S": {
+    "galaxy": "NGC2466",
+    "variant": "scal_mockcov_fid0_v2_pixbeam_unif65e_fa_si1026",
+    "dir": "scal_mockcov_fid0_v2_pixbeam_unif65e_fa_si1026",
+    "tagprefix": "v3",
+    "pieces": [
+      [
+        0.08,
+        0.22
+      ],
+      [
+        0.22,
+        0.35
+      ],
+      [
+        0.35,
+        0.5
+      ],
+      [
+        0.5,
+        3.2
+      ]
+    ],
+    "morphology": "ngc2466_morphology.json"
+  }
+}

@@ -1,0 +1,674 @@
+{
+  "amusing/release_20261026/outputs/S/ngc2466_paper_nested_v3_ell0.08-0.22.json": {
+    "original_sha256": "2fba7be459345e47ef9d3fb7d1cf5cfec3ba357fbbbfd0b100f20b2b5deff011",
+    "file": "ngc2466_paper_nested_v3_ell0.08-0.22.json"
+  },
+  "amusing/release_20261026/outputs/S/ngc2466_paper_nested_v3_ell0.08-0.22.npz": {
+    "original_sha256": "9ea26fcb6404da486dc8331ccc8fce8effd4a39992066d705b47d9223eb4a13b",
+    "file": "ngc2466_paper_nested_v3_ell0.08-0.22.npz"
+  },
+  "amusing/release_20261026/outputs/S/ngc2466_paper_nested_v3_ell0.22-0.35.json": {
+    "original_sha256": "f9f1183215d0efa3173da62fb935080768fcc710bb632c040da51a15dae08d29",
+    "file": "ngc2466_paper_nested_v3_ell0.22-0.35.json"
+  },
+  "amusing/release_20261026/outputs/S/ngc2466_paper_nested_v3_ell0.22-0.35.npz": {
+    "original_sha256": "35499de75a0ce1ef0f5122880691050a0bed1ec305950e8b07d379727cc002e6",
+    "file": "ngc2466_paper_nested_v3_ell0.22-0.35.npz"
+  },
+  "amusing/release_20261026/outputs/S/ngc2466_paper_nested_v3_ell0.35-0.5.json": {
+    "original_sha256": "89428d94410d4097cfbd3e403e0d04c820dab36a999082f0094820a45cb927cc",
+    "file": "ngc2466_paper_nested_v3_ell0.35-0.5.json"
+  },
+  "amusing/release_20261026/outputs/S/ngc2466_paper_nested_v3_ell0.35-0.5.npz": {
+    "original_sha256": "d52e1284c4d7495dd5d781a8feb518c92e6a70930dac81f4257ae6f3105b5c46",
+    "file": "ngc2466_paper_nested_v3_ell0.35-0.5.npz"
+  },
+  "amusing/release_20261026/outputs/S/ngc2466_paper_nested_v3_ell0.5-3.2.json": {
+    "original_sha256": "8380b91b697e35888f32be88ea228af5556647cd8ef8ea1d535285f74fae2355",
+    "file": "ngc2466_paper_nested_v3_ell0.5-3.2.json"
+  },
+  "amusing/release_20261026/outputs/S/ngc2466_paper_nested_v3_ell0.5-3.2.npz": {
+    "original_sha256": "7274421e78b42f6bac213464eef6a3440ea56cc3011764022281670382d0a6df",
+    "file": "ngc2466_paper_nested_v3_ell0.5-3.2.npz"
+  },
+  "amusing/release_20261026/inputs/S/ngc2466_morphology.json": {
+    "original_sha256": "a96a3d042b1ccefbd16298676e8a4b6c867447e7982e1a617f2f51f2e9482519",
+    "file": "ngc2466_morphology.json"
+  },
+  "amusing/release_20261026/inputs/S/ngc2466_diagnostics.csv": {
+    "original_sha256": "a8039fd36c9583e678ba9f34de7905087dc482ce488f3919b6e22dbcc690c723",
+    "file": "ngc2466_diagnostics.csv"
+  },
+  "amusing/release_20261026/outputs/S_r5/ngc2466_paper_nested_v3r5_ell0.08-0.22.json": {
+    "original_sha256": "0a29c0ac0cd9068dae6590b9ba855596a6ff9eb969cd13fc40cfef24cbd1ba5c",
+    "file": "ngc2466_paper_nested_v3r5_ell0.08-0.22.json"
+  },
+  "amusing/release_20261026/outputs/S_r5/ngc2466_paper_nested_v3r5_ell0.08-0.22.npz": {
+    "original_sha256": "757df214be9af2d6c178722acba3c73ee7d7dd5f65bbf65525536569f32b003b",
+    "file": "ngc2466_paper_nested_v3r5_ell0.08-0.22.npz"
+  },
+  "amusing/release_20261026/outputs/S_r5/ngc2466_paper_nested_v3r5_ell0.22-0.35.json": {
+    "original_sha256": "e3e0eb3f4882f697c7dfa45bb8017bcc5f00608aaf85d26b1a9d7310a4acc05c",
+    "file": "ngc2466_paper_nested_v3r5_ell0.22-0.35.json"
+  },
+  "amusing/release_20261026/outputs/S_r5/ngc2466_paper_nested_v3r5_ell0.22-0.35.npz": {
+    "original_sha256": "20966378993ffcc0de34dd2c3fec3f1d3216001c4f54832e99cd379c0043a6f1",
+    "file": "ngc2466_paper_nested_v3r5_ell0.22-0.35.npz"
+  },
+  "amusing/release_20261026/outputs/S_r5/ngc2466_paper_nested_v3r5_ell0.35-0.5.json": {
+    "original_sha256": "63e283aa07901e03dbac9561749826758d3e380fa679a59c4bc534d251e2a86f",
+    "file": "ngc2466_paper_nested_v3r5_ell0.35-0.5.json"
+  },
+  "amusing/release_20261026/outputs/S_r5/ngc2466_paper_nested_v3r5_ell0.35-0.5.npz": {
+    "original_sha256": "a02c3ca57bc8e3402ff5b40befd973613adfb232aa6879a96087f3cf9bde7673",
+    "file": "ngc2466_paper_nested_v3r5_ell0.35-0.5.npz"
+  },
+  "amusing/release_20261026/outputs/S_r5/ngc2466_paper_nested_v3r5_ell0.5-3.2.json": {
+    "original_sha256": "74ae3fb4d25b9902e483c1fdc8a1d0b5ab0407dd791b2e44f8a7ca2195221fef",
+    "file": "ngc2466_paper_nested_v3r5_ell0.5-3.2.json"
+  },
+  "amusing/release_20261026/outputs/S_r5/ngc2466_paper_nested_v3r5_ell0.5-3.2.npz": {
+    "original_sha256": "d7a59f23b1ce71b221756447b1227264329ae9bdf4e691b9b5d6cb93c79cb566",
+    "file": "ngc2466_paper_nested_v3r5_ell0.5-3.2.npz"
+  },
+  "amusing/release_20261026/inputs/S_r5/ngc2466_morphology.json": {
+    "original_sha256": "a96a3d042b1ccefbd16298676e8a4b6c867447e7982e1a617f2f51f2e9482519",
+    "file": "ngc2466_morphology.json"
+  },
+  "amusing/release_20261026/inputs/S_r5/ngc2466_diagnostics.csv": {
+    "original_sha256": "a8039fd36c9583e678ba9f34de7905087dc482ce488f3919b6e22dbcc690c723",
+    "file": "ngc2466_diagnostics.csv"
+  },
+  "amusing/release_20261026/outputs/D16/ngc2466_paper_nested_v3_ell0.08-0.22.json": {
+    "original_sha256": "36cfb44d7b319215b338bea9cb353ed5dd22e282bd17699fc60f418cbeecaa25",
+    "file": "ngc2466_paper_nested_v3_ell0.08-0.22.json"
+  },
+  "amusing/release_20261026/outputs/D16/ngc2466_paper_nested_v3_ell0.08-0.22.npz": {
+    "original_sha256": "530028b091a806d431c4b5d93a45053d1585cce137bbcf82c8dd60700b7e705d",
+    "file": "ngc2466_paper_nested_v3_ell0.08-0.22.npz"
+  },
+  "amusing/release_20261026/outputs/D16/ngc2466_paper_nested_v3_ell0.22-0.35.json": {
+    "original_sha256": "1326609a1a9c0992e9fe92849e577a7931467b1ee858a83e2108b38cad1debe1",
+    "file": "ngc2466_paper_nested_v3_ell0.22-0.35.json"
+  },
+  "amusing/release_20261026/outputs/D16/ngc2466_paper_nested_v3_ell0.22-0.35.npz": {
+    "original_sha256": "c80793f391a259f975f9edce3365c584785464efe384bc6f4c7f175b69920b28",
+    "file": "ngc2466_paper_nested_v3_ell0.22-0.35.npz"
+  },
+  "amusing/release_20261026/outputs/D16/ngc2466_paper_nested_v3_ell0.35-0.5.json": {
+    "original_sha256": "ef2562db668e1df31003207eb2b77cf2c4ec5c7ffedbf4f264bbc06b5361299f",
+    "file": "ngc2466_paper_nested_v3_ell0.35-0.5.json"
+  },
+  "amusing/release_20261026/outputs/D16/ngc2466_paper_nested_v3_ell0.35-0.5.npz": {
+    "original_sha256": "35943524aeec7ed61ab79cf5034c7760ce0837d598bad469c38f69b28e7fe02a",
+    "file": "ngc2466_paper_nested_v3_ell0.35-0.5.npz"
+  },
+  "amusing/release_20261026/outputs/D16/ngc2466_paper_nested_v3_ell0.5-3.2.json": {
+    "original_sha256": "6a5ecc3d765a0d8dc6842d9314014f50c21120476ca2aa66fe8989aba4a0359e",
+    "file": "ngc2466_paper_nested_v3_ell0.5-3.2.json"
+  },
+  "amusing/release_20261026/outputs/D16/ngc2466_paper_nested_v3_ell0.5-3.2.npz": {
+    "original_sha256": "78c192bd8195538c4e3fdfff4ba48f6c1e823b74333c181b356b4efcbc1163a6",
+    "file": "ngc2466_paper_nested_v3_ell0.5-3.2.npz"
+  },
+  "amusing/release_20261026/inputs/D16/ngc2466_morphology.json": {
+    "original_sha256": "524f43d1ab4fb18b9a76fe0f4a0a3930c527b4c037f5956255a526e6f9befd4d",
+    "file": "ngc2466_morphology.json"
+  },
+  "amusing/release_20261026/inputs/D16/ngc2466_diagnostics.csv": {
+    "original_sha256": "a8e36349880f2c76112514c84737b80698c7d8468fd9dbd6ce7489eacd8dd755",
+    "file": "ngc2466_diagnostics.csv"
+  },
+  "amusing/release_20261026/outputs/N1084D16/ngc1084_paper_nested_v3_ell0.08-0.5.json": {
+    "original_sha256": "2119cfb30a584ecea3e824cf1e9a1b4bb040d319ab9a0dd5d3641eb2f58921d1",
+    "file": "ngc1084_paper_nested_v3_ell0.08-0.5.json"
+  },
+  "amusing/release_20261026/outputs/N1084D16/ngc1084_paper_nested_v3_ell0.08-0.5.npz": {
+    "original_sha256": "2c70e2c5a3a22d0a7a8a27d602d7e74ac51bf74b86139cb967dbb823ba20c0cc",
+    "file": "ngc1084_paper_nested_v3_ell0.08-0.5.npz"
+  },
+  "amusing/release_20261026/outputs/N1084D16/ngc1084_paper_nested_v3_ell0.5-3.2.json": {
+    "original_sha256": "1706476e849352bae5f029e4e81011d87dba9024ee18f1da5537fbb84112db2e",
+    "file": "ngc1084_paper_nested_v3_ell0.5-3.2.json"
+  },
+  "amusing/release_20261026/outputs/N1084D16/ngc1084_paper_nested_v3_ell0.5-3.2.npz": {
+    "original_sha256": "e695a28e469012270513e69fe2d59493b12d56b5d810eac2877d139a2d480818",
+    "file": "ngc1084_paper_nested_v3_ell0.5-3.2.npz"
+  },
+  "amusing/release_20261026/inputs/N1084D16/ngc1084_morphology.json": {
+    "original_sha256": "5d2d24944e885c7b6b3c67edb73812add1b9e72e070882884e840b16c8eba077",
+    "file": "ngc1084_morphology.json"
+  },
+  "amusing/release_20261026/inputs/N1084D16/ngc1084_diagnostics.csv": {
+    "original_sha256": "cec6ed82d73cbd20f4ed1820959c1b7885a347b313ea37b3019c116642d26ec3",
+    "file": "ngc1084_diagnostics.csv"
+  },
+  "amusing/release_20261026/outputs/N1084S/ngc1084_paper_nested_v3_ell0.08-0.5.json": {
+    "original_sha256": "daa2345a5d5aa879e774a2c11bd4d4edc3ac1d6210a57c6d67d6ab4d22783a77",
+    "file": "ngc1084_paper_nested_v3_ell0.08-0.5.json"
+  },
+  "amusing/release_20261026/outputs/N1084S/ngc1084_paper_nested_v3_ell0.08-0.5.npz": {
+    "original_sha256": "a3503ff2fef9735c547428f229ad1b702df4aeceffa417a5b1b9f8ea1d8dd9cb",
+    "file": "ngc1084_paper_nested_v3_ell0.08-0.5.npz"
+  },
+  "amusing/release_20261026/outputs/N1084S/ngc1084_paper_nested_v3_ell0.5-3.2.json": {
+    "original_sha256": "2beeb38108cd66c4fbe426e0d8fd8361da1cd6cb6c722954bd5caba56c0965f5",
+    "file": "ngc1084_paper_nested_v3_ell0.5-3.2.json"
+  },
+  "amusing/release_20261026/outputs/N1084S/ngc1084_paper_nested_v3_ell0.5-3.2.npz": {
+    "original_sha256": "b2b2a2b6692e370f2c94c12fc3473ac01ffb4ee238ade87010c4ff64136858c9",
+    "file": "ngc1084_paper_nested_v3_ell0.5-3.2.npz"
+  },
+  "amusing/release_20261026/inputs/N1084S/ngc1084_morphology.json": {
+    "original_sha256": "a1843af6d1f7af36346ba4c929587662015d2eeadc00d402b2327fdb76369f2c",
+    "file": "ngc1084_morphology.json"
+  },
+  "amusing/release_20261026/inputs/N1084S/ngc1084_diagnostics.csv": {
+    "original_sha256": "4be387dd4ad88b4bd89b6fff979a4b1d8315657cf56574c276e115a1b436189b",
+    "file": "ngc1084_diagnostics.csv"
+  },
+  "amusing/release_20261026/outputs/N1084t05/ngc1084_paper_nested_v3_ell0.08-0.5.json": {
+    "original_sha256": "6f86e8d475eee0568511d7c0472f2760e58bfc4129a6784ca0d567357f8aa7cd",
+    "file": "ngc1084_paper_nested_v3_ell0.08-0.5.json"
+  },
+  "amusing/release_20261026/outputs/N1084t05/ngc1084_paper_nested_v3_ell0.08-0.5.npz": {
+    "original_sha256": "890062746ef3fafebb6fbc508f36e63f413034c98206e1dea805625d60ec4fab",
+    "file": "ngc1084_paper_nested_v3_ell0.08-0.5.npz"
+  },
+  "amusing/release_20261026/outputs/N1084t05/ngc1084_paper_nested_v3_ell0.5-3.2.json": {
+    "original_sha256": "95e16425d37ebf899922f62b5afa26b01fad8501b66832b58990b1ad813aa3f9",
+    "file": "ngc1084_paper_nested_v3_ell0.5-3.2.json"
+  },
+  "amusing/release_20261026/outputs/N1084t05/ngc1084_paper_nested_v3_ell0.5-3.2.npz": {
+    "original_sha256": "2856c421b6ec6314c7d02d7480d8114bce52d035adc72e09c0cab8657ca82a41",
+    "file": "ngc1084_paper_nested_v3_ell0.5-3.2.npz"
+  },
+  "amusing/release_20261026/inputs/N1084t05/ngc1084_morphology.json": {
+    "original_sha256": "6d909823c4d2454c149b4285ab035ffbd5bfc35eb9dc21371ac2e05df0d9ab47",
+    "file": "ngc1084_morphology.json"
+  },
+  "amusing/release_20261026/inputs/N1084t05/ngc1084_diagnostics.csv": {
+    "original_sha256": "cec6ed82d73cbd20f4ed1820959c1b7885a347b313ea37b3019c116642d26ec3",
+    "file": "ngc1084_diagnostics.csv"
+  },
+  "amusing/release_20261026/outputs/S_EB2/ngc2466_paper_nested_v3_ell0.08-0.22.json": {
+    "original_sha256": "0cc76c9bcf7e5e0beb511a4363d5cd2078f1192fe6b80514eaee5a1379f25047",
+    "file": "ngc2466_paper_nested_v3_ell0.08-0.22.json"
+  },
+  "amusing/release_20261026/outputs/S_EB2/ngc2466_paper_nested_v3_ell0.08-0.22.npz": {
+    "original_sha256": "2b6bee738f1d270532debe416e760847c5bdd28d32785d389f06da41a006bbb5",
+    "file": "ngc2466_paper_nested_v3_ell0.08-0.22.npz"
+  },
+  "amusing/release_20261026/outputs/S_EB2/ngc2466_paper_nested_v3_ell0.22-0.35.json": {
+    "original_sha256": "59d33eaab2596d052c353014666668697b823929a6322a7e4d3bb22f455ea50a",
+    "file": "ngc2466_paper_nested_v3_ell0.22-0.35.json"
+  },
+  "amusing/release_20261026/outputs/S_EB2/ngc2466_paper_nested_v3_ell0.22-0.35.npz": {
+    "original_sha256": "b07f3f1e1577597bfe2ace3568b40a3471fae7d938bd8ebe73793567a2553ae9",
+    "file": "ngc2466_paper_nested_v3_ell0.22-0.35.npz"
+  },
+  "amusing/release_20261026/outputs/S_EB2/ngc2466_paper_nested_v3_ell0.35-0.5.json": {
+    "original_sha256": "a922826e52e0576b8f637d052ae0256beb6b62c83682a8195dbd57348df10b33",
+    "file": "ngc2466_paper_nested_v3_ell0.35-0.5.json"
+  },
+  "amusing/release_20261026/outputs/S_EB2/ngc2466_paper_nested_v3_ell0.35-0.5.npz": {
+    "original_sha256": "81826e276d6fe2c1ad9b2885d77b5de7a265347ce9d160f8a83d2322ae9fa813",
+    "file": "ngc2466_paper_nested_v3_ell0.35-0.5.npz"
+  },
+  "amusing/release_20261026/outputs/S_EB2/ngc2466_paper_nested_v3_ell0.5-3.2.json": {
+    "original_sha256": "5cfc8f459ce95bd2d3f67a409628bb59f2d034d6485b30ef055f59256083751a",
+    "file": "ngc2466_paper_nested_v3_ell0.5-3.2.json"
+  },
+  "amusing/release_20261026/outputs/S_EB2/ngc2466_paper_nested_v3_ell0.5-3.2.npz": {
+    "original_sha256": "fb0a579538d3938089fbf7bdcd56de4a9d73a4b2a624adf19a34570c7d7000e8",
+    "file": "ngc2466_paper_nested_v3_ell0.5-3.2.npz"
+  },
+  "amusing/release_20261026/inputs/S_EB2/ngc2466_morphology.json": {
+    "original_sha256": "ca6aded704be056603181e1f561384f31fe728597325a68eb0fbc4dbcb92c127",
+    "file": "ngc2466_morphology.json"
+  },
+  "amusing/release_20261026/inputs/S_EB2/ngc2466_diagnostics.csv": {
+    "original_sha256": "56ace8a7b1b1e99c0eb8b33a4c78cf1c4351c68b14915110cd2ee2db53eaa94e",
+    "file": "ngc2466_diagnostics.csv"
+  },
+  "amusing/release_20261026/inputs/S_EB2/ngc2466_fit_covariance.npz": {
+    "original_sha256": "39378c2dc0e6baab7cdcd7e8ea6578e4f5ba347555112b1f2374c2b2353f617a",
+    "file": "ngc2466_fit_covariance.npz"
+  },
+  "amusing/release_20261026/outputs/S_r5_EB2/ngc2466_paper_nested_v3r5_ell0.08-0.22.json": {
+    "original_sha256": "ce8746d4d7f91b218bbf1717806d6cb3c1b0d55a84de19dc1c6abcdde69ed6cb",
+    "file": "ngc2466_paper_nested_v3r5_ell0.08-0.22.json"
+  },
+  "amusing/release_20261026/outputs/S_r5_EB2/ngc2466_paper_nested_v3r5_ell0.08-0.22.npz": {
+    "original_sha256": "b81175915eed0a7a7dc016cea8c0f0f5fff742cfbe92e3b356e7c263f8b58271",
+    "file": "ngc2466_paper_nested_v3r5_ell0.08-0.22.npz"
+  },
+  "amusing/release_20261026/outputs/S_r5_EB2/ngc2466_paper_nested_v3r5_ell0.22-0.35.json": {
+    "original_sha256": "21e3701e2d10442df9bf2a375c27ffd78e051d0dbae6d06083a75f0ffdaf664e",
+    "file": "ngc2466_paper_nested_v3r5_ell0.22-0.35.json"
+  },
+  "amusing/release_20261026/outputs/S_r5_EB2/ngc2466_paper_nested_v3r5_ell0.22-0.35.npz": {
+    "original_sha256": "31590332abf5fec1752b2f2d7e9c6caa501fb5014c82e3ed30566d525ddba2b7",
+    "file": "ngc2466_paper_nested_v3r5_ell0.22-0.35.npz"
+  },
+  "amusing/release_20261026/outputs/S_r5_EB2/ngc2466_paper_nested_v3r5_ell0.35-0.5.json": {
+    "original_sha256": "fd783965a5137102e25f6020f556005eeb3f7a3454addc506e2923329311d6e4",
+    "file": "ngc2466_paper_nested_v3r5_ell0.35-0.5.json"
+  },
+  "amusing/release_20261026/outputs/S_r5_EB2/ngc2466_paper_nested_v3r5_ell0.35-0.5.npz": {
+    "original_sha256": "0dc251f1bd3ddbafea9ea949bf670bedaabf89ceaf4a6eb1c5edb314044b78a8",
+    "file": "ngc2466_paper_nested_v3r5_ell0.35-0.5.npz"
+  },
+  "amusing/release_20261026/outputs/S_r5_EB2/ngc2466_paper_nested_v3r5_ell0.5-3.2.json": {
+    "original_sha256": "744404f619ac1122df06df3ea996e2cf3626c7a583a7f558726a3c99e8515577",
+    "file": "ngc2466_paper_nested_v3r5_ell0.5-3.2.json"
+  },
+  "amusing/release_20261026/outputs/S_r5_EB2/ngc2466_paper_nested_v3r5_ell0.5-3.2.npz": {
+    "original_sha256": "1bdffeeca86788a1f70487725eb33d519fc790d1f4a4e19aa2964636b727b232",
+    "file": "ngc2466_paper_nested_v3r5_ell0.5-3.2.npz"
+  },
+  "amusing/release_20261026/inputs/S_r5_EB2/ngc2466_morphology.json": {
+    "original_sha256": "ca6aded704be056603181e1f561384f31fe728597325a68eb0fbc4dbcb92c127",
+    "file": "ngc2466_morphology.json"
+  },
+  "amusing/release_20261026/inputs/S_r5_EB2/ngc2466_diagnostics.csv": {
+    "original_sha256": "56ace8a7b1b1e99c0eb8b33a4c78cf1c4351c68b14915110cd2ee2db53eaa94e",
+    "file": "ngc2466_diagnostics.csv"
+  },
+  "amusing/release_20261026/inputs/S_r5_EB2/ngc2466_fit_covariance.npz": {
+    "original_sha256": "39378c2dc0e6baab7cdcd7e8ea6578e4f5ba347555112b1f2374c2b2353f617a",
+    "file": "ngc2466_fit_covariance.npz"
+  },
+  "amusing/release_20261026/outputs/D16_EB2/ngc2466_paper_nested_v3_ell0.08-0.22.json": {
+    "original_sha256": "df708f73d9610116ca332a3a2858a4224549f4b1c737b7afaf7af554555a8879",
+    "file": "ngc2466_paper_nested_v3_ell0.08-0.22.json"
+  },
+  "amusing/release_20261026/outputs/D16_EB2/ngc2466_paper_nested_v3_ell0.08-0.22.npz": {
+    "original_sha256": "734db611f7fc2caa736bda04d5bdfea4fc87c41e631961d0654e641df6161ed8",
+    "file": "ngc2466_paper_nested_v3_ell0.08-0.22.npz"
+  },
+  "amusing/release_20261026/outputs/D16_EB2/ngc2466_paper_nested_v3_ell0.22-0.35.json": {
+    "original_sha256": "7259a9dd83c462d6fbca33e8fa3d7b2d9e585b57027b79a91356e42e1eba173c",
+    "file": "ngc2466_paper_nested_v3_ell0.22-0.35.json"
+  },
+  "amusing/release_20261026/outputs/D16_EB2/ngc2466_paper_nested_v3_ell0.22-0.35.npz": {
+    "original_sha256": "de54ae2165dcffc4084f720fb01ed7c25d57c63c377d6002006cce499053977b",
+    "file": "ngc2466_paper_nested_v3_ell0.22-0.35.npz"
+  },
+  "amusing/release_20261026/outputs/D16_EB2/ngc2466_paper_nested_v3_ell0.35-0.5.json": {
+    "original_sha256": "191751f4d68b4dd693e1b694609911c6d36893d6c98ad2ec04bbb2bb1cc2135b",
+    "file": "ngc2466_paper_nested_v3_ell0.35-0.5.json"
+  },
+  "amusing/release_20261026/outputs/D16_EB2/ngc2466_paper_nested_v3_ell0.35-0.5.npz": {
+    "original_sha256": "aed9dc5b6e0a397bf22502b1967aa52874cc5208f9530331d61deef9b360316e",
+    "file": "ngc2466_paper_nested_v3_ell0.35-0.5.npz"
+  },
+  "amusing/release_20261026/outputs/D16_EB2/ngc2466_paper_nested_v3_ell0.5-3.2.json": {
+    "original_sha256": "fb67b92607728428e527438ff9359e3d6fe9e860db968f20d861f908ee3e95df",
+    "file": "ngc2466_paper_nested_v3_ell0.5-3.2.json"
+  },
+  "amusing/release_20261026/outputs/D16_EB2/ngc2466_paper_nested_v3_ell0.5-3.2.npz": {
+    "original_sha256": "e06f1798c24f38f7ae0043576fdae1b405f4c58c7bc2b1c200e0a888aa6e1305",
+    "file": "ngc2466_paper_nested_v3_ell0.5-3.2.npz"
+  },
+  "amusing/release_20261026/inputs/D16_EB2/ngc2466_morphology.json": {
+    "original_sha256": "be52ea3362195bee6d17fee449086556bf4ba269feeff99f2b3e843834b4dc33",
+    "file": "ngc2466_morphology.json"
+  },
+  "amusing/release_20261026/inputs/D16_EB2/ngc2466_diagnostics.csv": {
+    "original_sha256": "05e9b946d4d1e865f72498710860df89d7c553dbf795768849d172b7f571542f",
+    "file": "ngc2466_diagnostics.csv"
+  },
+  "amusing/release_20261026/inputs/D16_EB2/ngc2466_fit_covariance.npz": {
+    "original_sha256": "dea483148925cfea39f6e4a359fa19d1283beb2f26db1e4dfd6c561ff6f17b16",
+    "file": "ngc2466_fit_covariance.npz"
+  },
+  "amusing/release_20261026/outputs/N1084D16_EB2/ngc1084_paper_nested_v3_ell0.08-0.5.json": {
+    "original_sha256": "7bc853c386926426ed3101a3b10dd7056fb79ec84a840927ebfa2bd9f3afe105",
+    "file": "ngc1084_paper_nested_v3_ell0.08-0.5.json"
+  },
+  "amusing/release_20261026/outputs/N1084D16_EB2/ngc1084_paper_nested_v3_ell0.08-0.5.npz": {
+    "original_sha256": "ccdb373b3f56073fc03a690d041305bb8482ea6d70905bce98990602d100b083",
+    "file": "ngc1084_paper_nested_v3_ell0.08-0.5.npz"
+  },
+  "amusing/release_20261026/outputs/N1084D16_EB2/ngc1084_paper_nested_v3_ell0.5-3.2.json": {
+    "original_sha256": "a3da49f8fdcb946e09ea9e40be064eb35e7a1787f126c515da667c1e6749e02d",
+    "file": "ngc1084_paper_nested_v3_ell0.5-3.2.json"
+  },
+  "amusing/release_20261026/outputs/N1084D16_EB2/ngc1084_paper_nested_v3_ell0.5-3.2.npz": {
+    "original_sha256": "fa7c43045bbadf5da495a5c322021ca4a218d288d9fd7206654fdd2346b09182",
+    "file": "ngc1084_paper_nested_v3_ell0.5-3.2.npz"
+  },
+  "amusing/release_20261026/inputs/N1084D16_EB2/ngc1084_morphology.json": {
+    "original_sha256": "06c289bc57a435771e47455916eead17c9b5f62b342c33bff0b34147bf3b8da6",
+    "file": "ngc1084_morphology.json"
+  },
+  "amusing/release_20261026/inputs/N1084D16_EB2/ngc1084_diagnostics.csv": {
+    "original_sha256": "251d4a722a84f08c03e9aca4ad7cc10de74f418a51aa69b3998205dfcebe5a37",
+    "file": "ngc1084_diagnostics.csv"
+  },
+  "amusing/release_20261026/inputs/N1084D16_EB2/ngc1084_fit_covariance.npz": {
+    "original_sha256": "cca371252161a6f7f79c4f1d2d79bb28d1ce0cfcaa3bb22be8042cdf02721aa8",
+    "file": "ngc1084_fit_covariance.npz"
+  },
+  "amusing/release_20261026/figure_inputs/NGC2466/ngc2466_pixel_map.npz": {
+    "original_sha256": "343b08f97f329cb5ebf5585f50352df282dbb95d6499b7ed3304efa5a854ed86",
+    "file": "ngc2466_pixel_map.npz"
+  },
+  "amusing/release_20261026/figure_inputs/NGC2466/ngc2466_paper_nested_v3_ell0.5-3.2.npz": {
+    "original_sha256": "7274421e78b42f6bac213464eef6a3440ea56cc3011764022281670382d0a6df",
+    "file": "ngc2466_paper_nested_v3_ell0.5-3.2.npz"
+  },
+  "amusing/release_20261026/figure_inputs/NGC2466/ngc2466_paper_nested_v3_ell0.08-0.22.npz": {
+    "original_sha256": "9ea26fcb6404da486dc8331ccc8fce8effd4a39992066d705b47d9223eb4a13b",
+    "file": "ngc2466_paper_nested_v3_ell0.08-0.22.npz"
+  },
+  "amusing/release_20261026/figure_inputs/NGC2466/ngc2466_diagnostics.csv": {
+    "original_sha256": "a8039fd36c9583e678ba9f34de7905087dc482ce488f3919b6e22dbcc690c723",
+    "file": "ngc2466_diagnostics.csv"
+  },
+  "amusing/release_20261026/figure_inputs/NGC2466/evidence_S.json": {
+    "original_sha256": "9e3c030ad127135ea0fa3a2c38223a56d211460b2695c691f05d552bd99b852b",
+    "file": "evidence_S.json"
+  },
+  "amusing/release_20261026/figure_inputs/NGC2466/case_S.json": {
+    "original_sha256": "ede36980d9ec61f2fedf3b911484cb91f8ee4b9bcb8072a5e97952b0a5e0f739",
+    "file": "case_S.json"
+  },
+  "amusing/release_20261026/figure_inputs/NGC2466/ngc2466_paper_nested_v3_ell0.22-0.35.npz": {
+    "original_sha256": "35499de75a0ce1ef0f5122880691050a0bed1ec305950e8b07d379727cc002e6",
+    "file": "ngc2466_paper_nested_v3_ell0.22-0.35.npz"
+  },
+  "amusing/release_20261026/figure_inputs/NGC2466/ngc2466_fit_covariance.npz": {
+    "original_sha256": "46449a8726c54908fe21c6c984c9ea8f0a6f500a73520e66ba6b467ea20fc1ed",
+    "file": "ngc2466_fit_covariance.npz"
+  },
+  "amusing/release_20261026/figure_inputs/NGC2466/ngc2466_paper_nested_v3_ell0.08-0.22.json": {
+    "original_sha256": "2fba7be459345e47ef9d3fb7d1cf5cfec3ba357fbbbfd0b100f20b2b5deff011",
+    "file": "ngc2466_paper_nested_v3_ell0.08-0.22.json"
+  },
+  "amusing/release_20261026/figure_inputs/NGC2466/ngc2466_paper_nested_v3_ell0.22-0.35.json": {
+    "original_sha256": "f9f1183215d0efa3173da62fb935080768fcc710bb632c040da51a15dae08d29",
+    "file": "ngc2466_paper_nested_v3_ell0.22-0.35.json"
+  },
+  "amusing/release_20261026/figure_inputs/NGC2466/ngc2466_paper_nested_v3_ell0.35-0.5.npz": {
+    "original_sha256": "d52e1284c4d7495dd5d781a8feb518c92e6a70930dac81f4257ae6f3105b5c46",
+    "file": "ngc2466_paper_nested_v3_ell0.35-0.5.npz"
+  },
+  "amusing/release_20261026/figure_inputs/NGC2466/ngc2466_paper_nested_v3_ell0.35-0.5.json": {
+    "original_sha256": "89428d94410d4097cfbd3e403e0d04c820dab36a999082f0094820a45cb927cc",
+    "file": "ngc2466_paper_nested_v3_ell0.35-0.5.json"
+  },
+  "amusing/release_20261026/figure_inputs/NGC2466/ngc2466_paper_nested_v3_ell0.5-3.2.json": {
+    "original_sha256": "8380b91b697e35888f32be88ea228af5556647cd8ef8ea1d535285f74fae2355",
+    "file": "ngc2466_paper_nested_v3_ell0.5-3.2.json"
+  },
+  "amusing/release_20261026/figure_inputs/NGC2466/ngc2466_morphology.json": {
+    "original_sha256": "a96a3d042b1ccefbd16298676e8a4b6c867447e7982e1a617f2f51f2e9482519",
+    "file": "ngc2466_morphology.json"
+  },
+  "amusing/release_20261026/figures/NGC2466_dump.json": {
+    "original_sha256": "f2f50101e61296d316cc8c1e326a2563c1ff8f20892df0e16de625fd679b7454",
+    "file": "NGC2466_dump.json"
+  },
+  "amusing/release_20261026/figure_inputs/NGC1084/case_N1084D16.json": {
+    "original_sha256": "e18e07e6ecd90bada9426daa005138870ba2f6db84067dbe5abb08691dba9e6b",
+    "file": "case_N1084D16.json"
+  },
+  "amusing/release_20261026/figure_inputs/NGC1084/evidence_N1084D16.json": {
+    "original_sha256": "f2e129e203f1c9c8f64187b2466d8ec42c1afd26af88443c3486f3a6ab5f7905",
+    "file": "evidence_N1084D16.json"
+  },
+  "amusing/release_20261026/figure_inputs/NGC1084/ngc1084_morphology.json": {
+    "original_sha256": "5d2d24944e885c7b6b3c67edb73812add1b9e72e070882884e840b16c8eba077",
+    "file": "ngc1084_morphology.json"
+  },
+  "amusing/release_20261026/figure_inputs/NGC1084/ngc1084_paper_nested_v3_ell0.08-0.5.json": {
+    "original_sha256": "2119cfb30a584ecea3e824cf1e9a1b4bb040d319ab9a0dd5d3641eb2f58921d1",
+    "file": "ngc1084_paper_nested_v3_ell0.08-0.5.json"
+  },
+  "amusing/release_20261026/figure_inputs/NGC1084/ngc1084_paper_nested_v3_ell0.5-3.2.npz": {
+    "original_sha256": "e695a28e469012270513e69fe2d59493b12d56b5d810eac2877d139a2d480818",
+    "file": "ngc1084_paper_nested_v3_ell0.5-3.2.npz"
+  },
+  "amusing/release_20261026/figure_inputs/NGC1084/ngc1084_diagnostics.csv": {
+    "original_sha256": "cec6ed82d73cbd20f4ed1820959c1b7885a347b313ea37b3019c116642d26ec3",
+    "file": "ngc1084_diagnostics.csv"
+  },
+  "amusing/release_20261026/figure_inputs/NGC1084/ngc1084_pixel_map.npz": {
+    "original_sha256": "82f8e245a5ae242d1fb058d7ec2c8c28e548f1e32dd86639b250ffe07e002e4a",
+    "file": "ngc1084_pixel_map.npz"
+  },
+  "amusing/release_20261026/figure_inputs/NGC1084/ngc1084_paper_nested_v3_ell0.5-3.2.json": {
+    "original_sha256": "1706476e849352bae5f029e4e81011d87dba9024ee18f1da5537fbb84112db2e",
+    "file": "ngc1084_paper_nested_v3_ell0.5-3.2.json"
+  },
+  "amusing/release_20261026/figure_inputs/NGC1084/ngc1084_paper_nested_v3_ell0.08-0.5.npz": {
+    "original_sha256": "2c70e2c5a3a22d0a7a8a27d602d7e74ac51bf74b86139cb967dbb823ba20c0cc",
+    "file": "ngc1084_paper_nested_v3_ell0.08-0.5.npz"
+  },
+  "amusing/release_20261026/figure_inputs/NGC1084/ngc1084_fit_covariance.npz": {
+    "original_sha256": "07423a8bd8d7d05bfb6fd4fb667d735bdf82b758c6f0d9ab1738a2962f00c215",
+    "file": "ngc1084_fit_covariance.npz"
+  },
+  "amusing/release_20261026/figures/NGC1084_dump.json": {
+    "original_sha256": "1e072827708ea7c6ecfc49bd1d7cdd8b9294e9a8e3fc0295cf7123b66ef177d7",
+    "file": "NGC1084_dump.json"
+  },
+  "amusing/release_20261026/checks/regsig/N1084D16_L2_postpred.json": {
+    "original_sha256": "aff68a25dae8fe21a6116e3cbe013d08f468895bc2d10edbaeb6cb134b8db9e9",
+    "file": "N1084D16_L2_postpred.json"
+  },
+  "amusing/release_20261026/checks/regsig/S_L2.json": {
+    "original_sha256": "fa630182cc7e6f875c9a88fd2185de5d69693e646e91a236504b3bb7fd87dcb8",
+    "file": "S_L2.json"
+  },
+  "amusing/release_20261026/checks/regsig/S_L2_postpred.json": {
+    "original_sha256": "712b30228117d12e4f343ccb25d55f198d98c053178026e9d4a36819c8708eeb",
+    "file": "S_L2_postpred.json"
+  },
+  "amusing/release_20261026/checks/regsig/D16_L2.json": {
+    "original_sha256": "6d69d395a86a026df2db45537c859f581a1ff5f1a7f2b2737408e2dc4cbb54a6",
+    "file": "D16_L2.json"
+  },
+  "amusing/release_20261026/checks/regsig/D16_L2_postpred.json": {
+    "original_sha256": "387b28bca52f3c363702b2a655d31338455fcb78a547cb0a30dca87abafa0c34",
+    "file": "D16_L2_postpred.json"
+  },
+  "amusing/release_20261026/checks/direct/N1084D16_A_L2median.json": {
+    "original_sha256": "d4ded0ce1d196ffd60568a6a13878f48c2fa915063309063d161d68989015ce5",
+    "file": "N1084D16_A_L2median.json"
+  },
+  "amusing/release_20261026/checks/direct/N2466D16_A_small.json": {
+    "original_sha256": "53d2cfe628cb03a39af4b1e244dbe3f68149dc0ca32efa35a63efedbadcb1abd",
+    "file": "N2466D16_A_small.json"
+  },
+  "amusing/release_20261026/checks/direct/N1084D16_B_boundary.json": {
+    "original_sha256": "2b443df59aced26b38255a7cfe16c1313b918fd9095aa025c468e5f98ed6a78e",
+    "file": "N1084D16_B_boundary.json"
+  },
+  "amusing/release_20261026/checks/direct_vm/N2466S_L2med_n16.json": {
+    "original_sha256": "e9c2bca26baecafbec8683b50f4cd4a9c3912c613b06e8e3388df235b826c855",
+    "file": "N2466S_L2med_n16.json"
+  },
+  "amusing/release_20261026/checks/direct_vm/N1084S_L1nmed_n16.json": {
+    "original_sha256": "426bff017acffd04220da23ebeb75a6baed3500510e33fb643b36ddfb67cc6c9",
+    "file": "N1084S_L1nmed_n16.json"
+  },
+  "amusing/release_20261026/checks/direct_vm/N2466S_boundary_n16.json": {
+    "original_sha256": "1e30ebdf55c7444d30dd7c0f4c84de05799a0770f18deb12ac7ef3defdedcfaf",
+    "file": "N2466S_boundary_n16.json"
+  },
+  "amusing/release_20261026/checks/direct_vm/N2466D16_L2med_n16.json": {
+    "original_sha256": "5dbae2b904f99d8ee6079b3851960ec82409f7b0e2e1d73f955fd1d3ca4f77e1",
+    "file": "N2466D16_L2med_n16.json"
+  },
+  "amusing/release_20261026/checks/post_exact/N1084D16_EB2__v3_ell0.08-0.5.json": {
+    "original_sha256": "76240f91db1399823700256cfd78873bc08d043af6364e90edc52d1f65ab6a30",
+    "file": "N1084D16_EB2__v3_ell0.08-0.5.json"
+  },
+  "amusing/release_20261026/checks/post_exact/S_r5__v3r5_ell0.35-0.5.json": {
+    "original_sha256": "6bbe56ae8ae78207a6335506d83140b5e8097f6a18b1db70c143f1720d7aedb1",
+    "file": "S_r5__v3r5_ell0.35-0.5.json"
+  },
+  "amusing/release_20261026/checks/post_exact/D16__v3_ell0.35-0.5.json": {
+    "original_sha256": "de73270925416e7c8073f5df966d173c615f9ec8a47bae723c87cab7adb74b63",
+    "file": "D16__v3_ell0.35-0.5.json"
+  },
+  "amusing/release_20261026/checks/post_exact/D16_EB2__v3_ell0.35-0.5.json": {
+    "original_sha256": "b24143739640305551003941cf39ba9a60e5a92397f4848efb3f27b03527c1b7",
+    "file": "D16_EB2__v3_ell0.35-0.5.json"
+  },
+  "amusing/release_20261026/checks/post_exact/S_r5__v3r5_ell0.22-0.35.json": {
+    "original_sha256": "82adf8812200d3f7d7e798feaf4b3de14c5944f83cbccd1874207fdee355231b",
+    "file": "S_r5__v3r5_ell0.22-0.35.json"
+  },
+  "amusing/release_20261026/checks/post_exact/S_EB2__v3_ell0.22-0.35.json": {
+    "original_sha256": "60b829a91774181322f2a5a027fd9c8081161a9bcabd5395beaa82ffb3351c86",
+    "file": "S_EB2__v3_ell0.22-0.35.json"
+  },
+  "amusing/release_20261026/checks/post_exact/N1084S__v3_ell0.08-0.5.json": {
+    "original_sha256": "b13d0b60c7b850a9e1fd81a835b2959eab14ddf3fab8f0e716ff2a51a6d7ab5a",
+    "file": "N1084S__v3_ell0.08-0.5.json"
+  },
+  "amusing/release_20261026/checks/post_exact/S_r5__v3r5_ell0.08-0.22.json": {
+    "original_sha256": "79f3e8c779f9ebf55891cfd96a021ed5b53a3c2e8cdb5890d7c380de57464556",
+    "file": "S_r5__v3r5_ell0.08-0.22.json"
+  },
+  "amusing/release_20261026/checks/post_exact/S_EB2__v3_ell0.08-0.22.json": {
+    "original_sha256": "61548eb25c1bd1967467a68b9b02e0f8fbb78e103f13fdbec98e6c46e008ee79",
+    "file": "S_EB2__v3_ell0.08-0.22.json"
+  },
+  "amusing/release_20261026/checks/post_exact/S_r5_EB2__v3r5_ell0.35-0.5.json": {
+    "original_sha256": "3b3ad70c65d1fc99c58595f3ef64da3c43f40f90bccf31ca94643e6fc0bb74ac",
+    "file": "S_r5_EB2__v3r5_ell0.35-0.5.json"
+  },
+  "amusing/release_20261026/checks/post_exact/D16__v3_ell0.22-0.35.json": {
+    "original_sha256": "4d64a3d235d6c772faef2b3d2c91e4424f57068648b8d9fb8b239e90fed15b70",
+    "file": "D16__v3_ell0.22-0.35.json"
+  },
+  "amusing/release_20261026/checks/post_exact/D16__v3_ell0.08-0.22.json": {
+    "original_sha256": "31f9bbd0b551146b48028d1aa8f073129468fbafa53b6f71ada34c2cf31d9f24",
+    "file": "D16__v3_ell0.08-0.22.json"
+  },
+  "amusing/release_20261026/checks/post_exact/S_EB2__v3_ell0.5-3.2.json": {
+    "original_sha256": "a02054d544489ff1662f702aa45eb761999788829ea14a902a7a662d7b8be1ac",
+    "file": "S_EB2__v3_ell0.5-3.2.json"
+  },
+  "amusing/release_20261026/checks/post_exact/S_r5_EB2__v3r5_ell0.22-0.35.json": {
+    "original_sha256": "80f569487c6ce2f51944ed4350e48df97f248fa2be8fa24aaeff07c61c0edf9c",
+    "file": "S_r5_EB2__v3r5_ell0.22-0.35.json"
+  },
+  "amusing/release_20261026/checks/post_exact/S_r5_EB2__v3r5_ell0.08-0.22.json": {
+    "original_sha256": "1263efc6eaac3e07ee45825ced6f593d41babd101febbe35f61f14359885132b",
+    "file": "S_r5_EB2__v3r5_ell0.08-0.22.json"
+  },
+  "amusing/release_20261026/checks/post_exact/D16_EB2.json": {
+    "original_sha256": "f45acbad400f3a133b04e00fadec8cc5e077fbc874caed9ae21007c915f0b3a3",
+    "file": "D16_EB2.json"
+  },
+  "amusing/release_20261026/checks/post_exact/D16__v3_ell0.5-3.2.json": {
+    "original_sha256": "d0da35b3839ec52c633714504e7480800ab01767b5e8a4b6326375f3f78dafe5",
+    "file": "D16__v3_ell0.5-3.2.json"
+  },
+  "amusing/release_20261026/checks/post_exact/S_r5__v3r5_ell0.5-3.2.json": {
+    "original_sha256": "3b3898cba8961ee4c4f1118598f277fd0ba6f2d9782462d460a23bd0fa528f3e",
+    "file": "S_r5__v3r5_ell0.5-3.2.json"
+  },
+  "amusing/release_20261026/checks/post_exact/S__v3_ell0.22-0.35.json": {
+    "original_sha256": "4cddd314537da9a252574297e8cd6814bfb4766ec574f13277c0d94c0f9f0f02",
+    "file": "S__v3_ell0.22-0.35.json"
+  },
+  "amusing/release_20261026/checks/post_exact/S__v3_ell0.5-3.2.json": {
+    "original_sha256": "6d7c85a7e88b7e6679a956d5664f66c6f2e7d1ded68e245be2489e6ae4965668",
+    "file": "S__v3_ell0.5-3.2.json"
+  },
+  "amusing/release_20261026/checks/post_exact/S_EB2__v3_ell0.35-0.5.json": {
+    "original_sha256": "c833680d6f003119e250c324061e1a426efec43d11f3ff71da88c3ccf5e9c84b",
+    "file": "S_EB2__v3_ell0.35-0.5.json"
+  },
+  "amusing/release_20261026/checks/post_exact/N1084D16_EB2__v3_ell0.5-3.2.json": {
+    "original_sha256": "692056359fde30c0b0f3f2001734c3d1f845f2f210d62c91f22069f71b84ab3b",
+    "file": "N1084D16_EB2__v3_ell0.5-3.2.json"
+  },
+  "amusing/release_20261026/checks/post_exact/S__v3_ell0.08-0.22.json": {
+    "original_sha256": "65bb3f409e50b5ecac391e8380f02d3c20e75c73f7cbebb44077e8cf67c377c6",
+    "file": "S__v3_ell0.08-0.22.json"
+  },
+  "amusing/release_20261026/checks/post_exact/D16_EB2__v3_ell0.08-0.22.json": {
+    "original_sha256": "e9d327fe7696222736fb534c00ba6333b93b760dca7963d126efa1963225fd2c",
+    "file": "D16_EB2__v3_ell0.08-0.22.json"
+  },
+  "amusing/release_20261026/checks/post_exact/N1084S__v3_ell0.5-3.2.json": {
+    "original_sha256": "9169fb8ac5a92e7940c48b7745d7e0033b425c61cde87d240d29f15708faaceb",
+    "file": "N1084S__v3_ell0.5-3.2.json"
+  },
+  "amusing/release_20261026/checks/post_exact/N1084t05__v3_ell0.08-0.5.json": {
+    "original_sha256": "e903e67c22b6b22fd60a5150ab561d0123463fd33902eac5817569c901340418",
+    "file": "N1084t05__v3_ell0.08-0.5.json"
+  },
+  "amusing/release_20261026/checks/post_exact/D16_EB2__v3_ell0.22-0.35.json": {
+    "original_sha256": "6905ec08f8f4083c7e0e6c1e8021185a8bb1c4861df7f49d7aa44e6d6657ec19",
+    "file": "D16_EB2__v3_ell0.22-0.35.json"
+  },
+  "amusing/release_20261026/checks/post_exact/S__v3_ell0.35-0.5.json": {
+    "original_sha256": "db1e0dc071f0aebbb64866939e1be7171d435ea1a082e4108b57faf710b5c247",
+    "file": "S__v3_ell0.35-0.5.json"
+  },
+  "amusing/release_20261026/checks/post_exact/D16_EB2__v3_ell0.5-3.2.json": {
+    "original_sha256": "41fcd8e1e0c9f26577b54314ec4ed562c09f76c44bb37df7e3186206763305b3",
+    "file": "D16_EB2__v3_ell0.5-3.2.json"
+  },
+  "amusing/release_20261026/checks/post_exact/N1084t05__v3_ell0.5-3.2.json": {
+    "original_sha256": "c15fd0169d4ec53cb445d29e4c3c58cf6eb697d8c5de5873f36e288923178af0",
+    "file": "N1084t05__v3_ell0.5-3.2.json"
+  },
+  "amusing/release_20261026/checks/post_exact/S_r5_EB2__v3r5_ell0.5-3.2.json": {
+    "original_sha256": "7f00eca958e12a2287b5808818c162b3796c0a3c076ee39311d04900ba2d55a5",
+    "file": "S_r5_EB2__v3r5_ell0.5-3.2.json"
+  },
+  "amusing/release_20261026/checks/tmplcmp/S_L2.json": {
+    "original_sha256": "dafb10b40c1125145bf4ca667c9e0ef011dd55f8c7b9117ed57015629b22709e",
+    "file": "S_L2.json"
+  },
+  "amusing/release_20261026/checks/tmplcmp/N1084D16_L2.json": {
+    "original_sha256": "a519ac88e84910eebb916cd8023740525705549f7684ed3b4cbb77011ac0d512",
+    "file": "N1084D16_L2.json"
+  },
+  "amusing/release_20261026/checks/tmplcmp/N1084S_L2.json": {
+    "original_sha256": "3d577a1d7078fabdff9c0336e2ca6b92af482afb09832cdf660181e2b0dde544",
+    "file": "N1084S_L2.json"
+  },
+  "amusing/release_20261026/checks/tmplcmp/D16_L2.json": {
+    "original_sha256": "463fb4047f9810d991c6e762d75a57644996e29bc46bdd386b12cc3fff9019ff",
+    "file": "D16_L2.json"
+  },
+  "amusing/release_20261026/checks/tmplcmp/N1084t05_L1.json": {
+    "original_sha256": "df3a19e0c37c466b3acfc28bdea2da485c5007516bdfb745a4f57c92e8744ef2",
+    "file": "N1084t05_L1.json"
+  },
+  "amusing/release_20261026/checks/tmplcmp/N1084t05_L2.json": {
+    "original_sha256": "34743a0f91a12649c6ed3c9bfe8c62874d64bde24e5c59378255aedb0b057425",
+    "file": "N1084t05_L2.json"
+  },
+  "amusing/release_20261026/checks/tmplcmp/D16_L1.json": {
+    "original_sha256": "4233bc838eee53607a6e023a73e512ca040474ac161aef5fe5f20fa0e9ae63c7",
+    "file": "D16_L1.json"
+  },
+  "amusing/release_20261026/checks/tmplcmp/N1084S_L1.json": {
+    "original_sha256": "ab6381f6d271dabde2be49216d38fcc63048918cb7a74d388f0d49b71a6a3e8a",
+    "file": "N1084S_L1.json"
+  },
+  "amusing/release_20261026/checks/tmplcmp/N1084D16_L1.json": {
+    "original_sha256": "64dc9a0c135720ca938e69c3997ad319b39e9ab63d10b2710d1858d4598acb27",
+    "file": "N1084D16_L1.json"
+  },
+  "amusing/release_20261026/checks/tmplcmp/S_L1.json": {
+    "original_sha256": "28b6741990654c15f126472887dde2d3c1eb7b7a2f61bd31c1b1c5b90dfeafb1",
+    "file": "S_L1.json"
+  },
+  "amusing/release_20261026/metadata/parameters.json": {
+    "original_sha256": "5dee6dfaaed5f747733e7f9417bc7efb25d5043a2fc5ebbe2ad45e3dce393a48",
+    "file": "param_summaries_si1026.json"
+  }
+}

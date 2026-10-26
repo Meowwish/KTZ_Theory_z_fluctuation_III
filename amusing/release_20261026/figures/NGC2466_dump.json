@@ -1,0 +1,157 @@
+{
+  "dominant_intervals": {
+    "L0": {
+      "interval": [
+        0.5,
+        3.2
+      ],
+      "posterior_weight": 0.9997131235155762,
+      "ell_star_conditional": [
+        2.033564213671636,
+        2.623467739144818,
+        3.007889489099967
+      ]
+    },
+    "L1": {
+      "interval": [
+        0.08,
+        0.22
+      ],
+      "posterior_weight": 0.8500324590706341,
+      "ell_star_conditional": [
+        0.11146631416064322,
+        0.14275446329338706,
+        0.1864155066180501
+      ]
+    },
+    "L1n": {
+      "interval": [
+        0.22,
+        0.35
+      ],
+      "posterior_weight": 0.47955372218446457,
+      "ell_star_conditional": [
+        0.24538269507319543,
+        0.28891606320380014,
+        0.33097435064832753
+      ]
+    },
+    "L2": {
+      "interval": [
+        0.08,
+        0.22
+      ],
+      "posterior_weight": 0.8294520486934942,
+      "ell_star_conditional": [
+        0.10928133433292793,
+        0.1459174393226081,
+        0.18972338829528182
+      ]
+    }
+  },
+  "arrays": {
+    "ax0_coll0_QuadContourSet": "b45b119c69f591f4",
+    "ax0_image0": "f979371dc53c556b",
+    "ax1_line0": "0a361a0c062ac9c9",
+    "ax1_line1": "57608421604cd4af",
+    "ax1_line2": "eae6b7b9734084ce",
+    "ax1_line3": "f72797f8a77745b9",
+    "ax1_line4": "f13fda1a3862aecc",
+    "ax1_line5": "e4b4945358ec29a6",
+    "ax1_line6": "ee282b9a2a908de5",
+    "ax1_coll0_LineCollection": "1b972108109afd51",
+    "ax1_coll1_LineCollection": "76b78ffef59fafdf",
+    "ax1_coll2_FillBetweenPolyCollection": "239792d2f75cfa3e",
+    "ax1_coll3_FillBetweenPolyCollection": "0ff3639471ded925",
+    "ax2_line0": "b4282769beb55822",
+    "ax2_line1": "6ad2d540b664b1d6",
+    "ax2_line2": "0ffa1fc6e33a9f4f",
+    "ax2_line3": "357d0ccc02014384",
+    "ax2_line4": "f72797f8a77745b9",
+    "ax2_line5": "0a361a0c062ac9c9",
+    "ax2_line6": "57608421604cd4af",
+    "ax2_line7": "ee282b9a2a908de5",
+    "ax2_coll0_LineCollection": "1b972108109afd51",
+    "ax2_coll1_LineCollection": "76b78ffef59fafdf",
+    "ax3_coll0_LineCollection": "e3b0c44298fc1c14",
+    "ax3_coll1_QuadMesh": "5624fdcad0df7a88"
+  },
+  "texts": {
+    "ax0": {
+      "title": "NGC2466: abundance residual (S)",
+      "legend": [],
+      "xlim": [
+        -10.8,
+        10.8
+      ],
+      "ylim": [
+        -10.8,
+        10.8
+      ]
+    },
+    "ax1": {
+      "title": "finite-window statistic, nested models",
+      "legend": [
+        "L0 [0.5,3.2]: $\\ell_\\ast=2.62$ kpc",
+        "L2 [0.08,0.22]: $\\ell_\\ast=0.15$ kpc",
+        "L1n [0.22,0.35]: $\\ell_\\ast=0.29$ kpc",
+        "L1 [0.08,0.22]: $\\ell_\\ast=0.14$ kpc",
+        "observed"
+      ],
+      "xlim": [
+        0.0,
+        8.02
+      ],
+      "ylim": [
+        -0.17,
+        0.45
+      ]
+    },
+    "ax2": {
+      "title": "complete KTZ (L2): components",
+      "legend": [
+        "$C_{{\\rm 2p},0}$ (same event, unmodulated)",
+        "$C_{{\\rm 2p},N}$ (same event, H$\\alpha$-modulated)",
+        "$C_{\\rm M}$ (unremoved mean field)",
+        "$C_{\\rm NP}$ (isotropic distinct-event term)",
+        "L2 total"
+      ],
+      "xlim": [
+        0.0,
+        8.02
+      ],
+      "ylim": [
+        -0.17,
+        0.45
+      ]
+    },
+    "ax3": {
+      "title": "",
+      "legend": [],
+      "xlim": [
+        0.0,
+        1.0
+      ],
+      "ylim": [
+        -0.15,
+        0.15
+      ]
+    }
+  },
+  "inputs_used": {
+    "L0_pred_p16": "bd00fea49327f655",
+    "L0_pred_p50": "223eaede0492681f",
+    "L0_pred_p84": "b9928aa0410a96c9",
+    "L2_pred_p16": "c6d447f0725a19a4",
+    "L2_pred_p50": "1a34637ba4b84897",
+    "L2_pred_p84": "bf6c946a47f159e8",
+    "L1_pred_p50": "6fc054cedcceda10",
+    "L1n_pred_p50": "71d4cf1eff0581be",
+    "L2_comp_p50": "d09e26fdb166e22c",
+    "r": "30081d930e61b8e1",
+    "obs": "4b4d33c89ba8a236",
+    "err": "be4255730a3d9e44",
+    "residual_dex": "f4a721aa4ed930df",
+    "arm_source_modulation": "2dd891b27f7d0151"
+  }
+}

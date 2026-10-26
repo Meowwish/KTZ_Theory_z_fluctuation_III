@@ -2,7 +2,12 @@
 
 The two observational applications are implemented as ordinary Python modules and shell drivers, not as Jupyter notebooks.
 
-**Current manuscript release:** [release_20261022/README.md](release_20261022/README.md).
+**Current manuscript release:** [release_20261026/README.md](release_20261026/README.md).
+
+Production entrypoints are now in `source_integral/`. The material below records
+the archived 22 October midpoint-rate release; its results and response-building
+entrypoints are superseded for the current manuscript, while its prepared data
+and numerical-validation experiment remain available.
 Use its final products and explicit reproduction commands, not the historical driver defaults.
 
 * `scripts/amusing_firstlook.py` and `scripts/amusing_ktz_stage.py` prepare the AMUSING++ maps and KTZ inputs.

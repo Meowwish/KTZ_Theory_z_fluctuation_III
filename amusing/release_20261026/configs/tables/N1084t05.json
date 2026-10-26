@@ -1,0 +1,13 @@
+{
+  "dir": "amusing/release_20261026/work/inputs/N1084t05_pixbeam_fa",
+  "galaxy": "ngc1084",
+  "out": "amusing/release_20261026/work/tables/N1084t05",
+  "n_slope": 33,
+  "n_V": 32,
+  "L_lo": 0.12,
+  "L_hi": 2.5,
+  "n_L": 33,
+  "r_step": 0.05,
+  "r_order": 8,
+  "m_max": 170
+}

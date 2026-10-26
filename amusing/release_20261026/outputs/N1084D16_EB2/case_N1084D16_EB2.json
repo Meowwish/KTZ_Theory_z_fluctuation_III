@@ -1,0 +1,19 @@
+{
+  "N1084D16_EB2": {
+    "galaxy": "NGC1084",
+    "variant": "d16_mockcov_v4e_pp_pixbeam_unif65e_fa_si1026",
+    "dir": "amusing/release_20261026/outputs/N1084D16_EB2",
+    "tagprefix": "v3",
+    "pieces": [
+      [
+        0.08,
+        0.5
+      ],
+      [
+        0.5,
+        3.2
+      ]
+    ],
+    "morphology": "amusing/release_20261026/inputs/N1084D16_EB2/ngc1084_morphology.json"
+  }
+}

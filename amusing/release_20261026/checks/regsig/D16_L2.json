@@ -1,0 +1,32 @@
+{
+  "par": {
+    "ell": 0.13705819659812413,
+    "eps": 0.27448109809412435,
+    "beta": 0.6039673944808494,
+    "eta": 0.27449628854164665,
+    "slope": -0.2331558185625966,
+    "betaA": 0.07621645929659311,
+    "ell_src": 3.3589101310043503,
+    "A_dip": 0.20817270080553882,
+    "m1": 9.0,
+    "amp": "auto",
+    "source": "NGC2466 D16 null L2 dominant piece [0.08,0.22] (VM fit 2026-10-26) L2 coordinate-wise posterior median of ngc2466_paper_nested_v3_ell0.08-0.22.npz"
+  },
+  "amp": 0.13215225595456492,
+  "signal_var": 0.0037142668554932083,
+  "slope_obs": 0.020034643193214973,
+  "noise_slope_std": 0.0003316828569539671,
+  "n_noise": 50,
+  "null_slope_mean": -4.212669870843561e-05,
+  "null_slope_std_field": 0.003768351154953,
+  "slope_std": 0.0037829200288444845,
+  "significance": 5.307214992344413,
+  "field_only_P_slope_std": 0.0024365693142105365,
+  "p_two_sided_empirical_field_only": 0.0,
+  "n_mocks": 2000,
+  "seed": 11,
+  "n_age": 16,
+  "seconds": 1860.1291670799255,
+  "m1_control": true,
+  "null": "legal source-integral stochastic field amp*(e_P+e_NP) of the L2 parameter point"
+}

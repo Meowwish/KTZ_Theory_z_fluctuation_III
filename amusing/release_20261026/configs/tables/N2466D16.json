@@ -1,0 +1,13 @@
+{
+  "dir": "amusing/release_20261026/work/inputs/D16_pixbeam_fa",
+  "galaxy": "ngc2466",
+  "out": "amusing/release_20261026/work/tables/N2466D16",
+  "n_slope": 13,
+  "n_V": 32,
+  "L_lo": 0.12,
+  "L_hi": 4.0,
+  "n_L": 33,
+  "r_step": 0.1,
+  "r_order": 8,
+  "m_max": 210
+}
