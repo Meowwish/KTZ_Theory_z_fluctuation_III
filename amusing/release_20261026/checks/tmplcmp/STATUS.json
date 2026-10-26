@@ -1,0 +1,14 @@
+{
+  "scope": "Archived unfiltered-mean-only diagnostic at fixed parameters, not a bound on all template-filtering effects.",
+  "invalid_scalar_summaries": [
+    "N1084S_L1.json",
+    "N1084t05_L1.json"
+  ],
+  "reason": "The stored delta-chi-square median and percentiles are non-finite. These files do not provide usable quantitative diagnostic results.",
+  "handling": "Preserved as archived diagnostics; excluded from quantitative manuscript summaries. Production fit results and evidence records are separate and unchanged.",
+  "manuscript_examples": [
+    "S_L1.json",
+    "D16_L1.json",
+    "S_L2.json"
+  ]
+}

@@ -47,6 +47,13 @@ def main():
             assert abs(box-np.log(F)-ev[model]['logZ']) < 1e-10
             np.testing.assert_allclose(np.exp(np.log(f)+raw-box), ev[model]['weights'], atol=1e-12)
         print(key, 'full prior and posterior records PASS')
+    status = json.loads((REL/'checks/tmplcmp/STATUS.json').read_text())
+    for name in status['manuscript_examples']:
+        record = json.loads((REL/'checks/tmplcmp'/name).read_text())
+        assert np.isfinite(list(record['dchi2_old_minus_new'].values())).all()
+    for name in status['invalid_scalar_summaries']:
+        record = json.loads((REL/'checks/tmplcmp'/name).read_text())
+        assert not np.isfinite(list(record['dchi2_old_minus_new'].values())).all()
     table = json.loads((ROOT/'amusing/metadata/table3_numbers.json').read_text())
     assert table == json.loads((REL/'metadata/table3_numbers.json').read_text())
     for name, key, eb in [('S_final','S','S_EB2'), ('D_final','D16','D16_EB2'), ('N_final','N1084D16','N1084D16_EB2')]:

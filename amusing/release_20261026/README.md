@@ -36,6 +36,10 @@ assumptions, not a full generative calibration of the fitted field.
   EB reconstruction and local template-regression records. The local regression
   score is conditional on its null fields and does not jointly propagate shared
   H-alpha noise and cell selection.
+- `checks/tmplcmp/STATUS.json` flags the non-finite archived NGC1084 S L1 and
+  0.5-kpc-template L1 diagnostic summaries. They are not usable quantitative
+  tests. The manuscript's mean-filter comparison quotes medians only from the
+  specified finite NGC2466 S/D16 tests, not sample maxima or a global bound.
 - `metadata/manuscript_state.json` records the private manuscript's SHA-256 and
   the hashes of its updated figures. The full manuscript is not published here.
 
