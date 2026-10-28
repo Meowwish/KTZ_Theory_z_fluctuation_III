@@ -117,7 +117,7 @@ p0_val = sigma_scalar**2 + sigma_beam**2
 p_ast_val = sigma_scalar**2 + 2 * kappa * t_star + sigma_beam**2
 component_order = ['CP0', 'CPN', 'CM', 'CNP']
 component_colors = {'CP0': '#7fc97f', 'CPN': '#ffff99', 'CM': '#fdc086', 'CNP': '#beaed4'}
-component_labels = {'CP0': r'$C_{\rm 2p,0}$', 'CPN': r'$C_{\rm 2p,N}$', 'CM': r'$C_{\rm M}$', 'CNP': r'$C_{\rm NP}$'}
+component_labels = {'CP0': r'$C_{\rm U}$', 'CPN': r'$C_{\rm T}$', 'CM': r'$C_{\rm M}$', 'CNP': r'$C_{\rm D}$'}
 
 @lru_cache(maxsize=None)
 def I0(r):

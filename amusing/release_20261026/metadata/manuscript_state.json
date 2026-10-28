@@ -1,13 +1,13 @@
 {
   "release": "20261026",
-  "manuscript_sha256": "16af9f2e91e61540d0d1caf3a8e8a561d15276ccabe9280587c01ed465f1c2c5",
+  "manuscript_sha256": "7bbd9f3c2ca7fa04b1a2e75bbbd67e416edd86ea4519e31e1df6f26ca947d1f7",
   "source_completion": "Radial exponential continued over whole plane; unmeasured H-alpha contrast zero, not source rate zero.",
   "primary_covariance": "fixed null; unchanged",
   "secondary_covariance": "rebuilt stationary EB proxy",
   "scope": "Selected-field working-likelihood comparisons, not a full generative calibration.",
   "figures": {
-    "ngc2466_single_pointing.pdf": "8e85d4c376beb2fb48ef1820e50270264f7e32a54c3b22a2d085dea0e7a2f769",
-    "ngc1084_single_pointing.pdf": "3c3a651c6c7a0f881bf40ebd2a9272a898c026749c332e23f1d2b9c800b431cb",
+    "ngc2466_single_pointing.pdf": "c5db0d94abaec10d81df66af6879d3c06b239dfbffbaac1afef867840380594c",
+    "ngc1084_single_pointing.pdf": "8712db4d66e3d1e2a2e4e7c4be59548bd1e0f3510c03696173deaeda8e24ab0b",
     "fitting_workflow_tikz.tex": "15caf372957e46aebc8cf5dad714ad1efc91779d71034d2c85d21c0f120fcf74"
   }
 }

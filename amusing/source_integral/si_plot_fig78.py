@@ -70,7 +70,7 @@ ax.plot(r, A["L1_pred_p50"], color=C_M, lw=1.2, ls=":", label=f"L1 {lab_iv('L1')
 ax.axhline(0, color="0.5", lw=0.6); ax.set(xlabel="$r$ [kpc]", ylabel=r"$\xi_{3,\rm pp}(r)$", xlim=(0, r.max()+0.1), ylim=PLOT_YLIM, title="finite-window statistic, nested models")
 ax.legend(frameon=False, loc="upper right", fontsize=7.2)
 ax = axes[2]; cm = A["L2_comp_p50"]
-for i, (lab, col, ls) in enumerate([(r"$C_{{\rm 2p},0}$ (same event, unmodulated)", C_2P, "-"), (r"$C_{{\rm 2p},N}$ (same event, H$\alpha$-modulated)", "#2ca02c", "-"), (r"$C_{\rm M}$ (unremoved mean field)", C_M, "-"), (r"$C_{\rm NP}$ (isotropic distinct-event term)", C_NP, "-")]):
+for i, (lab, col, ls) in enumerate([(r"$C_{\rm U}$ (same event, unmodulated)", C_2P, "-"), (r"$C_{\rm T}$ (same event, H$\alpha$-modulated)", "#2ca02c", "-"), (r"$\mathbf{S}_{\rm M}$ (projected complete mean field)", C_M, "-"), (r"$C_{\rm D}$ (isotropic distinct-event excess)", C_NP, "-")]):
     ax.plot(r, cm[i], color=col, lw=1.4, ls=ls, label=lab)
 ax.plot(r, A["L2_pred_p50"], color=C_KTZ, lw=1.8, label="L2 total"); ax.errorbar(r[~excl], obs[~excl], err[~excl], fmt="o", ms=2, color="k", lw=0.5, alpha=0.6); ax.errorbar(r[excl], obs[excl], err[excl], fmt="o", ms=2, mfc="w", color="k", lw=0.5, alpha=0.6)
 ax.axhline(0, color="0.5", lw=0.6); ax.set(xlabel="$r$ [kpc]", ylabel="contribution to $\\xi_{3,\\rm pp}$", xlim=(0, r.max()+0.1), ylim=PLOT_YLIM, title="complete KTZ (L2): components")

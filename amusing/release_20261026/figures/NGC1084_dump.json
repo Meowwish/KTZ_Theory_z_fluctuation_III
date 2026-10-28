@@ -110,10 +110,10 @@
     "ax2": {
       "title": "complete KTZ (L2): components",
       "legend": [
-        "$C_{{\\rm 2p},0}$ (same event, unmodulated)",
-        "$C_{{\\rm 2p},N}$ (same event, H$\\alpha$-modulated)",
-        "$C_{\\rm M}$ (unremoved mean field)",
-        "$C_{\\rm NP}$ (isotropic distinct-event term)",
+        "$C_{\\rm U}$ (same event, unmodulated)",
+        "$C_{\\rm T}$ (same event, H$\\alpha$-modulated)",
+        "$\\mathbf{S}_{\\rm M}$ (projected complete mean field)",
+        "$C_{\\rm D}$ (isotropic distinct-event excess)",
         "L2 total"
       ],
       "xlim": [

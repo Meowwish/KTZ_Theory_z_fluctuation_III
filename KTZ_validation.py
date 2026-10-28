@@ -2,9 +2,9 @@
 # # Unified clustered-source validation of the KTZ covariance (Paper III, Section 3)
 #
 # One Monte Carlo experiment tests the complete observable covariance
-# $C_{\rm obs}=C_{{\rm 2p},0}+C_{{\rm 2p},N}+C_{\rm M}+C_{\rm NP}$.
+# $C_{\rm obs}=C_{\rm U}+C_{\rm T}+C_{\rm M}+C_{\rm D}$.
 # Half of the enrichment events are drawn in Thomas-process complexes whose parents follow the
-# spiral-modulated intensity $\lambda(\boldsymbol x)$, so the distinct-event term $C_{\rm NP}$ is present
+# spiral-modulated intensity $\lambda(\boldsymbol x)$, so the distinct-event term $C_{\rm D}$ is present
 # in addition to the same-event and mean-field terms.
 #
 # Observation operator (identical in simulation and theory): the metal field is convolved with a
@@ -276,7 +276,7 @@ p0_val = sigma_scalar**2 + sigma_beam**2
 p_ast_val = sigma_scalar**2 + 2 * kappa * t_star + sigma_beam**2
 component_order = ['CP0', 'CPN', 'CM', 'CNP']
 component_colors = {'CP0': '#7fc97f', 'CPN': '#ffff99', 'CM': '#fdc086', 'CNP': '#beaed4'}
-component_labels = {'CP0': r'$C_{\rm 2p,0}$', 'CPN': r'$C_{\rm 2p,N}$', 'CM': r'$C_{\rm M}$', 'CNP': r'$C_{\rm NP}$'}
+component_labels = {'CP0': r'$C_{\rm U}$', 'CPN': r'$C_{\rm T}$', 'CM': r'$C_{\rm M}$', 'CNP': r'$C_{\rm D}$'}
 
 @lru_cache(maxsize=None)
 def I0(r):
@@ -469,7 +469,7 @@ def summarize(sim, th, unc):
                 pearson=float(np.corrcoef(sim[ok], th[ok])[0, 1]), max_abs=float(np.max(np.abs(d))),
                 within_1sigma=int(np.sum(np.abs(d) <= unc[ok])))
 
-ann_labels = dict(component_labels); ann_labels['CPN'] = r'$C_{\rm 2p,N}=0$'
+ann_labels = dict(component_labels); ann_labels['CPN'] = r'$C_{\rm T}=0$'
 fig, axes = plt.subplots(2, 3, figsize=(15, 9), sharey=True); axes = axes.flatten()
 for i, (ax, vm) in enumerate(zip(axes, radii_test)):
     r = np.concatenate([[0.0], r_centers])
@@ -482,7 +482,7 @@ for i, (ax, vm) in enumerate(zip(axes, radii_test)):
     ax.fill_between(r, sm - sd, sm + sd, color='k', alpha=0.16, lw=0, label=r'Single-realisation $1\sigma$', zorder=3)
     ax.errorbar(r, sm, yerr=se, fmt='none', ecolor='k', elinewidth=0.9, capsize=2, label=r'Mean $1\sigma$ uncertainty', zorder=5)
     ax.plot(r, tot, '-', color='#d62728', lw=1.6, label='Full KTZ', zorder=6)
-    ax.plot(r, nonp, ls='--', color='#6a3d9a', lw=1.6, label=r'KTZ without $C_{\rm NP}$', zorder=6)
+    ax.plot(r, nonp, ls='--', color='#6a3d9a', lw=1.6, label=r'KTZ without $C_{\rm D}$', zorder=6)
     ax.axhline(0, color='grey', lw=0.5); ax.set_title(fr'$\varpi_m = {vm}$ kpc'); ax.set_xlabel('r (kpc)'); ax.set_xlim(0, validation_rmax)
     if i == 0:
         ax.legend(loc='lower left', fontsize=7.5, ncol=2)
@@ -506,7 +506,7 @@ def single_panel(stem, rr, comp0, comp, nonp, sm, sd, se, rmax, ylabel, title=No
     ax.fill_between(r, sm - sd, sm + sd, color='k', alpha=0.14, lw=0, label=r'Single-realisation $1\sigma$', zorder=3)
     ax.errorbar(r, sm, yerr=se, fmt='none', ecolor='k', elinewidth=0.9, capsize=2, label=r'Mean $1\sigma$ uncertainty', zorder=5)
     ax.plot(r, sum(c[k] for k in component_order), '-', color='#d62728', lw=1.6, label='Full KTZ', zorder=6)
-    ax.plot(r, np.concatenate([[1.0], nonp]), ls='--', color='#6a3d9a', lw=1.6, label=r'KTZ without $C_{\rm NP}$', zorder=6)
+    ax.plot(r, np.concatenate([[1.0], nonp]), ls='--', color='#6a3d9a', lw=1.6, label=r'KTZ without $C_{\rm D}$', zorder=6)
     ax.axhline(0, color='grey', lw=0.5); ax.set_xlabel('r (kpc)'); ax.set_ylabel(ylabel); ax.set_xlim(0, rmax)
     if title:
         ax.set_title(title)
