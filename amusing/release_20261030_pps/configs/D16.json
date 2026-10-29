@@ -1,0 +1,13 @@
+{
+  "galaxy": "ngc2466",
+  "n_slope": 13,
+  "n_V": 32,
+  "L_lo": 0.12,
+  "L_hi": 4.0,
+  "n_L": 33,
+  "r_step": 0.1,
+  "r_order": 8,
+  "m_max": 210,
+  "dir": "amusing/release_20261022/stage_inputs/inputs/D16_pixbeam_fa",
+  "out": "work/tables/D16"
+}

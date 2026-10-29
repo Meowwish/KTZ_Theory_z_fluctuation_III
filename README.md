@@ -15,12 +15,16 @@ working likelihoods and the stated source-completion assumption.
 - Current evidence table: `amusing/metadata/table3_numbers.json`.
 - Current per-interval posteriors, prepared-input index, convergence records and
   figure inputs: `amusing/release_20261026/`.
+- Conditional common-covariance sensitivity: [30 October supplement](amusing/release_20261030_pps/README.md),
+  with generation/assembly code, binned matrices and L0/L2 refit summaries.
+  This does not replace Table 3 or certify generative calibration.
 - Figures 7/8: `figs/ngc2466_single_pointing.pdf` and
   `figs/ngc1084_single_pointing.pdf`; redraw from the released arrays without
   fitting a model.
 
 The full manuscript remains in the existing private manuscript repository.
-Its hash is recorded in `amusing/release_20261026/metadata/manuscript_state.json`.
+The base-release hash is recorded in `amusing/release_20261026/metadata/manuscript_state.json`;
+the text follow-up hash is in `amusing/release_20261030_pps/manuscript_state.json`.
 Older releases and production workers are retained for provenance and do not
 produce the current source-integral results. No raw cubes or MAUVE products are
 added by this release.

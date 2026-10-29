@@ -1,0 +1,58 @@
+{
+  "fields": {
+    "S": {
+      "galaxy": "ngc2466",
+      "null_input": "amusing/release_20261022/stage_inputs/inputs/S_pixbeam_fa",
+      "morphology": "amusing/release_20261022/stage_inputs/inputs/S_pixbeam_fa/ngc2466_morphology.json",
+      "input_hashes": {
+        "diagnostics.csv": "a8039fd36c9583e678ba9f34de7905087dc482ce488f3919b6e22dbcc690c723",
+        "morphology.json": "a96a3d042b1ccefbd16298676e8a4b6c867447e7982e1a617f2f51f2e9482519",
+        "pixel_map.npz": "343b08f97f329cb5ebf5585f50352df282dbb95d6499b7ed3304efa5a854ed86",
+        "fit_covariance.npz": "46449a8726c54908fe21c6c984c9ea8f0a6f500a73520e66ba6b467ea20fc1ed"
+      }
+    },
+    "D16": {
+      "galaxy": "ngc2466",
+      "null_input": "amusing/release_20261022/stage_inputs/inputs/D16_pixbeam_fa",
+      "morphology": "amusing/release_20261022/stage_inputs/inputs/D16_pixbeam_fa/ngc2466_morphology.json",
+      "input_hashes": {
+        "diagnostics.csv": "a8e36349880f2c76112514c84737b80698c7d8468fd9dbd6ce7489eacd8dd755",
+        "morphology.json": "524f43d1ab4fb18b9a76fe0f4a0a3930c527b4c037f5956255a526e6f9befd4d",
+        "pixel_map.npz": "1a655a3f242a639a5e643f662db43b4892f35b9b72fa267d740a64ee91087b6f",
+        "fit_covariance.npz": "a64ee0193de04b6eaa076d1ccc0e5fe321451439255f985450ce20a2fa129e05"
+      }
+    },
+    "N1084D16": {
+      "galaxy": "ngc1084",
+      "null_input": "amusing/release_20261022/stage_inputs/inputs/N1084D16_pixbeam_fa",
+      "morphology": "amusing/release_20261022/stage_inputs/inputs/N1084D16_pixbeam_fa/ngc1084_morphology.json",
+      "input_hashes": {
+        "diagnostics.csv": "cec6ed82d73cbd20f4ed1820959c1b7885a347b313ea37b3019c116642d26ec3",
+        "morphology.json": "5d2d24944e885c7b6b3c67edb73812add1b9e72e070882884e840b16c8eba077",
+        "pixel_map.npz": "82f8e245a5ae242d1fb058d7ec2c8c28e548f1e32dd86639b250ffe07e002e4a",
+        "fit_covariance.npz": "07423a8bd8d7d05bfb6fd4fb667d735bdf82b758c6f0d9ab1738a2962f00c215"
+      }
+    }
+  },
+  "generation": {
+    "L2gen": {
+      "seed": 303
+    },
+    "L0gen": {
+      "seed": 404
+    }
+  },
+  "draws_per_point": 50,
+  "npilot": 100,
+  "n_age": 16,
+  "point_selection_seed": 31,
+  "shrink": 0.35,
+  "floor": 0.01,
+  "nlive": 400,
+  "fit_seed": 2,
+  "eps_prior": "manuscript",
+  "source_archives": {
+    "L2gen": "6b59ca20d30145f37123b4cc4b1916eb19d6d7dc1cf0426657a77244530ef4d2",
+    "L0gen": "dc144b7c99fa30b1140f1ae9a40bbe49ac91825f033737451984f22f2ca4558d"
+  }
+}

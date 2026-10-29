@@ -1,0 +1,38 @@
+{
+  "interpretation": "Fixed-template, stored common-support diagnostic; not a joint-noise bias calibration",
+  "fields": {
+    "S": {
+      "b_obs": 0.0025222472451699564,
+      "noise_slope_mean": 0.0001623147111903564,
+      "noise_slope_sd": 0.00010797515521830274,
+      "n_maps": 50,
+      "noise_mean_over_b_obs": 0.0643532118039519,
+      "common_cell_fraction_on_support": [
+        0.8520599250936329,
+        0.869538077403246
+      ]
+    },
+    "D16": {
+      "b_obs": 0.020034643193214973,
+      "noise_slope_mean": 0.0015588819645346553,
+      "noise_slope_sd": 0.0003350502819363968,
+      "n_maps": 50,
+      "noise_mean_over_b_obs": 0.07780932006129232,
+      "common_cell_fraction_on_support": [
+        0.8812285223367697,
+        0.8944730813287515
+      ]
+    },
+    "N1084D16": {
+      "b_obs": 0.022728238436939566,
+      "noise_slope_mean": -3.6745538655759673e-05,
+      "noise_slope_sd": 0.00022615865222976367,
+      "n_maps": 50,
+      "noise_mean_over_b_obs": -0.0016167350038020626,
+      "common_cell_fraction_on_support": [
+        0.9993023719354196,
+        1.0
+      ]
+    }
+  }
+}
