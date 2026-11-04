@@ -1,0 +1,24 @@
+{
+ "pred_a24_d20.npz": {
+  "max_abs_dxi_all_windows": 4.3443026953582375e-13,
+  "max_abs_dxi_modulated_CD": 4.3443026953582375e-13,
+  "max_abs_d_CU_over_den": 1.736642314599964e-17,
+  "max_abs_d_CT_over_den": 1.819625581836052e-19,
+  "max_abs_d_CD_over_den": 8.60077288932613e-14,
+  "max_abs_d_SM_over_den": 3.267150195375548e-16
+ },
+ "pred_fine_radial.npz": {
+  "max_abs_dxi_all_windows": 8.619708280477312e-10,
+  "max_abs_d_CU_over_den": 9.33180795538577e-12,
+  "max_abs_d_CT_over_den": 6.928099422584029e-18,
+  "max_abs_d_CD_over_den": 1.3848673730025547e-11,
+  "max_abs_d_SM_over_den": 5.961505252072953e-10
+ },
+ "pred_rcut9.npz": {
+  "max_abs_dxi_all_windows": 1.6653345369377348e-15,
+  "max_abs_d_CU_over_den": 2.3184404284114217e-19,
+  "max_abs_d_CT_over_den": 9.97055113334823e-21,
+  "max_abs_d_CD_over_den": 1.0728291426131996e-15,
+  "max_abs_d_SM_over_den": 0.0
+ }
+}

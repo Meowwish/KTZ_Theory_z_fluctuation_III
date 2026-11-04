@@ -1,0 +1,140 @@
+[
+ {
+  "quantity": "full window: RMSE",
+  "before": 0.011052458269487577,
+  "delivered_1103": 0.004563522058183998,
+  "rework_1104": 0.004563522058183998
+ },
+ {
+  "quantity": "full window: mean residual",
+  "before": 0.010128539945383727,
+  "delivered_1103": 0.003968454256317273,
+  "rework_1104": 0.003968454256317273
+ },
+ {
+  "quantity": "full window: max |residual|",
+  "before": 0.01573265875626284,
+  "delivered_1103": 0.007269376899276508,
+  "rework_1104": 0.007269376899276508
+ },
+ {
+  "quantity": "sector: RMSE",
+  "before": 0.02969881499119813,
+  "delivered_1103": 0.018373181280719474,
+  "rework_1104": 0.018373181280719474
+ },
+ {
+  "quantity": "fixed radius: RMSE",
+  "before": 0.04438533954123785,
+  "delivered_1103": 0.02699731491785344,
+  "rework_1104": 0.02699731491785344
+ },
+ {
+  "quantity": "Xi_AB: RMSE",
+  "before": 0.011319606078128512,
+  "delivered_1103": 0.019156550753913995,
+  "rework_1104": 0.014384640502545287
+ },
+ {
+  "quantity": "Xi_AB: mean residual",
+  "before": -0.005522434412761374,
+  "delivered_1103": -0.014202856969327445,
+  "rework_1104": -0.009480243450881186
+ },
+ {
+  "quantity": "Xi_AB: Pearson",
+  "before": 0.9991387065300757,
+  "delivered_1103": 0.9988635072137444,
+  "rework_1104": 0.9991396056282574
+ },
+ {
+  "quantity": "Xi_AB: max |residual|",
+  "before": 0.028307276382977475,
+  "delivered_1103": 0.04624481049108531,
+  "rework_1104": 0.035043030397279684
+ },
+ {
+  "quantity": "Xi_AB: pairs within 2 sigma (of 120)",
+  "before": 108,
+  "delivered_1103": 110,
+  "rework_1104": 111
+ },
+ {
+  "quantity": "Xi_AB without C_D: RMSE",
+  "before": 0.010215081384989111,
+  "delivered_1103": 0.01727852722155339,
+  "rework_1104": 0.0127233637060422
+ },
+ {
+  "quantity": "Xi_AB without C_D: max |residual|",
+  "before": 0.02581010890414348,
+  "delivered_1103": 0.04368669805290343,
+  "rework_1104": 0.03248628002718884
+ },
+ {
+  "quantity": "Xi_AB local-diagonal variant: RMSE",
+  "before": null,
+  "delivered_1103": 0.014911998669499759,
+  "rework_1104": 0.014911998669499759
+ },
+ {
+  "quantity": "Xi_AB 11-03 24-node diagonal recomputed: RMSE",
+  "before": null,
+  "delivered_1103": 0.019156550753913995,
+  "rework_1104": 0.01915655524205987
+ },
+ {
+  "quantity": "Xi_AB 24-node vs converged: max |change|",
+  "before": null,
+  "delivered_1103": null,
+  "rework_1104": 0.01120179115718295
+ },
+ {
+  "quantity": "Xi_AB 45 pairs without N/s-process: RMSE",
+  "before": null,
+  "delivered_1103": null,
+  "rework_1104": 0.006937541321132332
+ },
+ {
+  "quantity": "Xi_AB 45 pairs without N/s-process: mean residual",
+  "before": null,
+  "delivered_1103": null,
+  "rework_1104": -0.0033973439021598192
+ },
+ {
+  "quantity": "Xi_AB 75 pairs with N/s-process: RMSE",
+  "before": null,
+  "delivered_1103": null,
+  "rework_1104": 0.017383639551903245
+ },
+ {
+  "quantity": "Xi_AB 75 pairs with N/s-process: mean residual",
+  "before": null,
+  "delivered_1103": null,
+  "rework_1104": -0.013129983180114003
+ },
+ {
+  "quantity": "ring check: max |dXi| among N,O,Fe,Ba",
+  "before": null,
+  "delivered_1103": null,
+  "rework_1104": 0.00016485487385459185
+ },
+ {
+  "quantity": "projected mean: max |relative amplitude - 1|",
+  "before": null,
+  "delivered_1103": null,
+  "rework_1104": 0.008923739141836862
+ },
+ {
+  "quantity": "KTZ - KT25: min",
+  "before": -0.008171121413393267,
+  "delivered_1103": -0.00585820886966959,
+  "rework_1104": -0.007047560484008897
+ },
+ {
+  "quantity": "KTZ - KT25: max",
+  "before": 0.4374322720597771,
+  "delivered_1103": 0.4448572791401574,
+  "rework_1104": 0.4382794000959811
+ }
+]

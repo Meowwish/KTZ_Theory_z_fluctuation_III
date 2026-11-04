@@ -67,13 +67,13 @@ ax.fill_between(r, A["L2_pred_p16"], A["L2_pred_p84"], color=C_KTZ, alpha=0.25, 
 ax.plot(r, A["L2_pred_p50"], color=C_KTZ, lw=1.8, label=f"L2 {lab_iv('L2')}: $\\ell_\\ast={ell['L2']:.2f}$ kpc")
 ax.plot(r, A["L1n_pred_p50"], color=C_NP, lw=1.2, ls="--", label=f"L1n {lab_iv('L1n')}: $\\ell_\\ast={ell['L1n']:.2f}$ kpc")
 ax.plot(r, A["L1_pred_p50"], color=C_M, lw=1.2, ls=":", label=f"L1 {lab_iv('L1')}: $\\ell_\\ast={ell['L1']:.2f}$ kpc")
-ax.axhline(0, color="0.5", lw=0.6); ax.set(xlabel="$r$ [kpc]", ylabel=r"$\xi_{3,\rm pp}(r)$", xlim=(0, r.max()+0.1), ylim=PLOT_YLIM, title="finite-window statistic, nested models")
+ax.axhline(0, color="0.5", lw=0.6); ax.set(xlabel="$r$ [kpc]", ylabel=r"$\xi_b$", xlim=(0, r.max()+0.1), ylim=PLOT_YLIM, title="finite-window statistic, nested models")
 ax.legend(frameon=False, loc="upper right", fontsize=7.2)
 ax = axes[2]; cm = A["L2_comp_p50"]
 for i, (lab, col, ls) in enumerate([(r"$C_{\rm U}$ (same event, unmodulated)", C_2P, "-"), (r"$C_{\rm T}$ (same event, H$\alpha$-modulated)", "#2ca02c", "-"), (r"$\mathbf{S}_{\rm M}$ (projected complete mean field)", C_M, "-"), (r"$C_{\rm D}$ (isotropic distinct-event excess)", C_NP, "-")]):
     ax.plot(r, cm[i], color=col, lw=1.4, ls=ls, label=lab)
 ax.plot(r, A["L2_pred_p50"], color=C_KTZ, lw=1.8, label="L2 total"); ax.errorbar(r[~excl], obs[~excl], err[~excl], fmt="o", ms=2, color="k", lw=0.5, alpha=0.6); ax.errorbar(r[excl], obs[excl], err[excl], fmt="o", ms=2, mfc="w", color="k", lw=0.5, alpha=0.6)
-ax.axhline(0, color="0.5", lw=0.6); ax.set(xlabel="$r$ [kpc]", ylabel="contribution to $\\xi_{3,\\rm pp}$", xlim=(0, r.max()+0.1), ylim=PLOT_YLIM, title="complete KTZ (L2): components")
+ax.axhline(0, color="0.5", lw=0.6); ax.set(xlabel="$r$ [kpc]", ylabel="contribution to $\\xi_b$", xlim=(0, r.max()+0.1), ylim=PLOT_YLIM, title="complete KTZ (L2): components")
 ax.legend(frameon=False, loc="upper right", fontsize=7.2)
 for p in ("pdf", "png"): fig.savefig(outdir/f"{c['stem']}.{p}", dpi=150)
 if cl.dump:

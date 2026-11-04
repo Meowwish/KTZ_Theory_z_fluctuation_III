@@ -1,0 +1,8 @@
+numpy>=2
+scipy
+matplotlib
+numba
+astropy
+mpmath
+nbconvert
+ipykernel

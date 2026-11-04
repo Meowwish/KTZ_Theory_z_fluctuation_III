@@ -1,0 +1,19 @@
+{
+  "release": "20261104_unified_finite_map_xi",
+  "main_tex_sha256": "dba7e8f5bb785f9e32f4eb096bdfa1e90455883b5aa358df314b8953826cc7cc",
+  "manuscript_repository": "Meowwish/TITANIC",
+  "manuscript_commit": "e3f02fc21d329e41d4ba89ef30e1f89ebc80e3d4",
+  "manuscript_public": false,
+  "production_table3_unchanged": true,
+  "observational_refits_performed": false,
+  "observational_figures_change": "xi_b axis labels only; numerical arrays unchanged",
+  "scalar_full_window_rmse": 0.004563522058183998,
+  "cross_element_rmse": 0.014384640502545312,
+  "diagonal_version": "same_parent_diag_source/v2-lnS-2026-11-04",
+  "full_generative_calibration": false,
+  "remaining_limitations": [
+    "local multi-element ring correction and distinct-event approximation",
+    "unexplained element-dependent validation residual",
+    "simulation centre sampling differs from observed finite-cell response"
+  ]
+}

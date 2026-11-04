@@ -1,0 +1,124 @@
+{
+ "projector_vs_loop": {
+  "value": 4.440892098500626e-16,
+  "tol": 1e-13,
+  "kind": "abs",
+  "passed": true
+ },
+ "projector_matrix_idempotent": {
+  "value": 4.440892098500626e-15,
+  "tol": 1e-12,
+  "kind": "abs",
+  "passed": true
+ },
+ "pair_products_num_vs_brute": {
+  "value": 0.0,
+  "tol": 1e-11,
+  "kind": "abs",
+  "passed": true
+ },
+ "pair_products_den_vs_brute": {
+  "value": 0.0,
+  "tol": 1e-11,
+  "kind": "abs",
+  "passed": true
+ },
+ "pair_counts_vs_brute": {
+  "value": 0.0,
+  "tol": 0,
+  "kind": "abs",
+  "passed": true
+ },
+ "pair_sums_order_invariance": {
+  "value": 2.9842794901924208e-12,
+  "tol": 1e-11,
+  "kind": "abs",
+  "passed": true
+ },
+ "empty_bins_have_zero_counts": {
+  "n_empty": 0,
+  "passed": true
+ },
+ "projected_cov_pair_sums_decomposition": {
+  "value": 4.121147867408581e-13,
+  "tol": 1e-11,
+  "kind": "abs",
+  "passed": true
+ },
+ "projected_cov_diagonal": {
+  "value": 2.4424906541753444e-15,
+  "tol": 1e-12,
+  "kind": "abs",
+  "passed": true
+ },
+ "mc_moment_relation_rel": {
+  "value": 0.0035255556808361692,
+  "tol": 0.02,
+  "kind": "abs",
+  "passed": true
+ },
+ "mean_product_rank_one": {
+  "value": 3.110421314301631e-13,
+  "tol": 1e-12,
+  "kind": "abs",
+  "passed": true
+ },
+ "harmonic_smoothing_vs_brute_rel": {
+  "value": 4.0003432671438804e-16,
+  "tol": 2e-06,
+  "kind": "abs",
+  "passed": true
+ },
+ "same_event_gram_vs_direct_rel": {
+  "value": 1.1337254597449455e-10,
+  "tol": 2e-06,
+  "kind": "abs",
+  "passed": true
+ },
+ "same_event_age_quadrature_16_vs_48_rel": {
+  "value": 2.220446049250313e-16,
+  "tol": 0.0005,
+  "kind": "abs",
+  "passed": true
+ },
+ "distinct_event_gram_vs_direct_rel": {
+  "value": 5.202168172758381e-10,
+  "tol": 2e-06,
+  "kind": "abs",
+  "passed": true
+ },
+ "child_smoothing_vs_brute_rel": {
+  "value": 4.3622710604917496e-16,
+  "tol": 2e-06,
+  "kind": "abs",
+  "passed": true
+ },
+ "psd_same_event_min_eig_rel": {
+  "value": 0.0,
+  "tol": 1e-10,
+  "kind": "abs",
+  "passed": true
+ },
+ "psd_unmodulated_min_eig_rel": {
+  "value": 0.0,
+  "tol": 1e-10,
+  "kind": "abs",
+  "passed": true
+ },
+ "C_T_alone_min_eig_rel": {
+  "value": -0.1780939945581743,
+  "note": "C_T is a signed correction; PSD not required"
+ },
+ "cell_response_effective_gaussian_rel_to_peak": {
+  "value": 0.0028326270859813088,
+  "tol": 0.02,
+  "kind": "abs",
+  "passed": true
+ },
+ "serial_vs_parallel_pair_products": {
+  "value": 4.334310688136611e-13,
+  "tol": 1e-11,
+  "kind": "abs",
+  "passed": true
+ }
+}

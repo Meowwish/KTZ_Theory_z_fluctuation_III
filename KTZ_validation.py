@@ -1,27 +1,25 @@
 # %% [markdown]
-# # Unified clustered-source validation of the KTZ covariance (Paper III, Section 3)
+# # Unified clustered-source validation of the KTZ statistic (Paper III, Section 3)
 #
-# One Monte Carlo experiment tests the complete observable covariance
-# $C_{\rm obs}=C_{\rm U}+C_{\rm T}+C_{\rm M}+C_{\rm D}$.
+# One clustered-source Monte Carlo experiment tests the complete residual second moment, with
+# stochastic covariance $C_{\rm conn}=C_{\rm U}+C_{\rm T}+C_{\rm D}$ and the complete deterministic mean.
 # Half of the enrichment events are drawn in Thomas-process complexes whose parents follow the
-# spiral-modulated intensity $\lambda(\boldsymbol x)$, so the distinct-event term $C_{\rm D}$ is present
-# in addition to the same-event and mean-field terms.
+# spiral-modulated intensity $\lambda(\boldsymbol x)$.
 #
-# Observation operator (identical in simulation and theory): the metal field is convolved with a
-# Gaussian beam of ${\rm FWHM}_b=2\Delta x$ and sampled at fixed grid centres. Because every event
-# kernel is Gaussian, the beam simply adds $\sigma_b^2$ to the per-axis variance of every kernel,
-# $s^2\to s^2+\sigma_b^2$, in the simulated fields and in every analytic term.
+# Simulation and prediction use the same operators of Sec. 2.3.4 (2026-11-03 unified treatment):
+# response $\boldsymbol\Psi$ (Gaussian beam ${\rm FWHM}_b=2\Delta x$, sampled at the valid cell centres),
+# annular projection $\mathbf P$ with the annular mean estimated from every realisation on the valid cells,
+# sums over the unordered valid-cell pairs ${\cal P}_b$ of each separation bin, and normalisation last:
+# $\xi_b=\sum_{{\cal P}_b}S_{ij}/[\tfrac12\sum_{{\cal P}_b}(S_{ii}+S_{jj})]$ with
+# $\mathbf S=\mathbf P\boldsymbol\Psi C_{\rm conn}\boldsymbol\Psi^{\sf T}\mathbf P^{\sf T}+\bs m\bs m^{\sf T}$, $\bs m=\mathbf P\boldsymbol\Psi\mu$.
+# The prediction uses legal source-position (Gram) integrals over the finite source support, evaluated
+# exactly in polar harmonics (validation/ktz_unified_ops.py, validation/ktz_unified_scalar.py).
+# The phase-restricted window and the fixed-midpoint-radius check (appendix) are the same estimator with
+# a different pair window.  The earlier known-profile outputs in validation/outputs are kept for audit.
 #
-# Residual maps subtract the known axisymmetric ensemble mean $\bar\mu(\varpi)$ rather than an annular
-# mean estimated from each map. The scalar estimators enumerate every unordered pixel pair in the
-# analysis window; analytic predictions are averaged over the identical separation bins with the
-# planar $r\,{\rm d}r$ pair measure.
-#
-# Multi-element same-event term: the KTZ prediction uses the direct two-dimensional Gaussian drift
-# average, <exp[-v^2 dt^2/(4S)]> = [1 + sigma_v^2 dt^2/(2S)]^{-1}, integrated over age (eq. J0_AB).
-# The reference labelled KT25 is the published KT25 closed form (Dawson/asinh, KT25 eqs. 28-29 and
-# App. A10), which differs from J0_AB for unequal delays and agrees with it for equal delays. The
-# log/J0_AB uniform curve is recorded separately as the 'uniform KTZ limit'.
+# Multi-element same-event term: direct two-dimensional Gaussian drift average (eq. J0_AB); the
+# reference labelled KT25 is the published Dawson/asinh closed form.  The zero-lag statistic now uses the
+# same annular projection of every element map and of the transported mean (validation/ktz_unified_cross.py).
 
 # %% Block 1: parameters
 import os, sys, json, time
@@ -37,8 +35,11 @@ import warnings
 warnings.filterwarnings('ignore')
 
 ROOT = Path(os.environ.get('KTZ_VALIDATION_ROOT', Path.cwd()))
-FIG_DIR = ROOT / 'figs'; FIG_DIR.mkdir(exist_ok=True)
-OUT_DIR = ROOT / 'outputs'; OUT_DIR.mkdir(exist_ok=True)
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+RUN_TAG = os.environ.get('KTZ_RUN_TAG', 'rework_20261104')
+FIG_DIR = ROOT / 'validation' / f'figs_{RUN_TAG}'; FIG_DIR.mkdir(parents=True, exist_ok=True)
+OUT_DIR = ROOT / 'validation' / f'outputs_{RUN_TAG}'; OUT_DIR.mkdir(parents=True, exist_ok=True)
 METRICS = {}
 T_START = time.time()
 
@@ -190,350 +191,252 @@ Z, N_events, event_x, event_y, event_is_clustered = generate_synthetic_galaxy(rn
 print(f'Expected events {expected_total:.0f}; realisation 1: {N_events} ({event_is_clustered.sum()} clustered); {time.time()-t0:.1f}s')
 METRICS['scalar_setup']['expected_events_per_realisation'] = float(expected_total)
 
-# %% Block 4: deterministic axisymmetric mean and residual
+# %% Block 4: valid cells, annular projection P and pair windows P_b (shared by simulation and prediction)
+from validation import ktz_unified_ops as uop
+from validation.ktz_unified_scalar import ScalarSetup, build_prediction
+
 disk_mask = (R_grid >= R_in) & (R_grid <= R_out)
 window_margin = np.sqrt(2.0) * dx
 analysis_R_in = R_in + window_margin
 analysis_R_out = R_out - window_margin
-Z_bg = np.where(disk_mask, Y_val * lambda0_0 * t_star * np.exp(-R_grid / h_R), np.nan)
-
-def subtract_axisymmetric_mean(Z):
-    return np.where(disk_mask, Z - Z_bg, np.nan)
-
-Z_res = subtract_axisymmetric_mean(Z)
-
-# %% Block 5: two-point statistics from the simulated maps (every unordered pair)
+valid = disk_mask & (R_grid >= analysis_R_in) & (R_grid <= analysis_R_out)
+cell_iy, cell_ix = np.nonzero(valid)
+cell_x, cell_y = X[valid], Y[valid]
+n_cells = cell_x.size
+# Annular projection: equal-width annuli of about 3.4 cells across the analysis window
+# (the observational maps use 0.2- and 0.4-kpc annuli on 60- and 120-pc cells, i.e. 3.3 cells).
+n_annuli = 17
+annulus_edges = np.linspace(analysis_R_in, analysis_R_out, n_annuli + 1)
+annulus_edges[-1] += 1e-9
+cell_ann = uop.annulus_labels(np.hypot(cell_x, cell_y), annulus_edges)
+# Separation bins and pair windows.  Window 0: every unordered pair of valid cells (the final xi of
+# Sec. 2.3.4); window 1: arm-phase sector (midpoint phase, midpoint radius and r <= 1.5 kpc); windows
+# 2..7: one-cell-wide fixed midpoint-radius windows (radial check of the appendix).
 radii_test = np.round(np.linspace(analysis_R_in + 0.5, analysis_R_out - 0.5, 6), 2)
 midpoint_annulus_halfwidth = 0.5 * dx
-max_pair_separation = R_out
-r_bins = np.linspace(0.1, max_pair_separation, 30)
+r_bins = np.linspace(0.1, R_out, 30)
 r_centers = 0.5 * (r_bins[:-1] + r_bins[1:])
 sector_last_bin = np.flatnonzero(r_centers <= sector_validation_rmax)[-1]
-block = 64
+window_par = np.array([sector_analysis_R_in, sector_analysis_R_out, sector_phase_halfwidth, sector_last_bin,
+                       m_arms, m_arms / np.tan(pitch_rad), R_in, Theta0], float)
+n_windows = 2 + radii_test.size
+W_FULL, W_SECTOR = 0, 1
+NTHREADS = int(os.environ.get('KTZ_THREADS', '2'))
+METRICS['unified_operators'] = dict(
+    n_valid_cells=int(n_cells), n_annuli=n_annuli, annulus_width_kpc=float(np.diff(annulus_edges[:2])[0]),
+    response='Gaussian beam FWHM_b = 2 dx, sampled at valid cell centres (no cell average)',
+    full_window='both endpoints valid; no midpoint cut', threads=NTHREADS,
+    sector_window=dict(R_m=[sector_analysis_R_in, sector_analysis_R_out], phase_halfwidth_deg=30.0, r_max_kpc=sector_validation_rmax),
+    radial_check_radii=radii_test.tolist(), radial_check_halfwidth_kpc=midpoint_annulus_halfwidth)
+print(METRICS['unified_operators'], flush=True)
 
-def measure_full_pair_statistics(Z_res):
-    m = np.isfinite(Z_res) & (R_grid >= analysis_R_in) & (R_grid <= analysis_R_out)
-    px, py, pv = X[m], Y[m], Z_res[m]
-    n = pv.size; nb = len(r_centers); nm = len(radii_test)
-    x3p = np.zeros(nb); x3w = np.zeros(nb); x3n = np.zeros(nb, np.int64)
-    sp = np.zeros(nb); sw = np.zeros(nb); sn = np.zeros(nb, np.int64)
-    x2p = np.zeros((nm, nb)); x2w = np.zeros((nm, nb)); x2n = np.zeros((nm, nb), np.int64)
-    idx_all = np.arange(n)[None, :]; v_all = pv[None, :]; p_all = v_all**2
-    for s0 in range(0, n, block):
-        s1 = min(s0 + block, n)
-        upper = idx_all > np.arange(s0, s1)[:, None]
-        ddx = px[None, :] - px[s0:s1, None]; ddy = py[None, :] - py[s0:s1, None]
-        sep = np.hypot(ddx, ddy)
-        sb = np.searchsorted(r_bins, sep, side='right') - 1
-        ok = upper & (sb >= 0) & (sb < nb)
-        bv = pv[s0:s1, None]
-        prod = bv * v_all; powr = 0.5 * (bv**2 + p_all)
-        mx = 0.5 * (px[None, :] + px[s0:s1, None]); my = 0.5 * (py[None, :] + py[s0:s1, None])
-        mr = np.hypot(mx, my)
-        full = ok & (mr >= analysis_R_in) & (mr <= analysis_R_out)
-        b = sb[full]
-        x3n += np.bincount(b, minlength=nb); x3p += np.bincount(b, prod[full], nb); x3w += np.bincount(b, powr[full], nb)
-        cand = full & (mr >= sector_analysis_R_in) & (mr <= sector_analysis_R_out) & (sb <= sector_last_bin)
-        th = spiral_phase(mr[cand], np.arctan2(my[cand], mx[cand]))
-        ins = np.abs((th + np.pi) % (2 * np.pi) - np.pi) < sector_phase_halfwidth
-        b = sb[cand][ins]
-        sn += np.bincount(b, minlength=nb); sp += np.bincount(b, prod[cand][ins], nb); sw += np.bincount(b, powr[cand][ins], nb)
-        for k, vm in enumerate(radii_test):
-            sel = ok & (np.abs(mr - vm) < midpoint_annulus_halfwidth)
-            b = sb[sel]
-            x2n[k] += np.bincount(b, minlength=nb); x2p[k] += np.bincount(b, prod[sel], nb); x2w[k] += np.bincount(b, powr[sel], nb)
-    div = lambda a, w, c: np.divide(a, w, out=np.full(a.shape, np.nan), where=(c > 0) & (w > 0))
-    x2 = div(x2p, x2w, x2n)
-    return dict(xi2={vm: x2[k] for k, vm in enumerate(radii_test)}, xi3=div(x3p, x3w, x3n),
-                xi_sector=div(sp, sw, sn), xi3_pair_count=x3n)
+def map_values(Zmap):
+    return Zmap[valid]
 
-xi2_real, xi3_real, sec_real = [], [], []
+def projected_pair_statistic(Zmap):
+    """Data estimator of Sec. 2.3.4: P on the valid cells, then pair sums over every window, then ratio."""
+    r = uop.project(map_values(Zmap), cell_ann, n_annuli)
+    num, den, cnt = uop.run_rows(uop.pair_products, n_cells, NTHREADS, cell_x, cell_y, r[None], (r**2)[None],
+                                 r_bins, window_par, radii_test, midpoint_annulus_halfwidth, n_windows)
+    return num[0], den[0], cnt
+
+# %% Block 5: simulated maps (seed 42, regenerated in the original order) and their projected statistic
+fields_cache = OUT_DIR / 'scalar_fields_raw.npz'
+if fields_cache.exists():
+    _fc = np.load(fields_cache)
+    Z_stack = _fc['Z']; N_events_stack = _fc['N_events']
+    assert Z_stack.shape[0] == n_realizations
+    print(f'loaded {n_realizations} archived raw fields from {fields_cache.name}', flush=True)
+else:
+    Z_stack = [Z]; N_events_stack = [N_events]
+    for ireal in range(1, n_realizations):
+        Zi, Ni = generate_synthetic_galaxy(rng)
+        Z_stack.append(Zi); N_events_stack.append(Ni)
+        print(f'generated realisation {ireal+1}/{n_realizations}', flush=True)
+    Z_stack = np.array(Z_stack); N_events_stack = np.array(N_events_stack)
+    _tmp = OUT_DIR / 'scalar_fields_raw.tmp.npz'
+    np.savez_compressed(_tmp, Z=Z_stack, N_events=N_events_stack, seed=42, grid_x=grid_x)
+    os.replace(_tmp, fields_cache)
+
+# Audit: the regenerated fields reproduce the archived statistic of the earlier known-profile prescription
+legacy_file = ROOT / 'validation' / 'outputs' / 'scalar_simulation_statistics.npz'
+def legacy_full_window(Zmap):
+    """Earlier prescription (known axisymmetric profile, midpoint cut) for the field audit only."""
+    Z_bg = Y_val * lambda0_0 * t_star * np.exp(-R_grid / h_R)
+    r = (Zmap - Z_bg)[valid]
+    wp = window_par.copy(); wp[0], wp[1] = analysis_R_in, analysis_R_out; wp[2] = 4.0; wp[3] = len(r_centers)
+    num, den, cnt = uop.run_rows(uop.pair_products, n_cells, NTHREADS, cell_x, cell_y, r[None], (r**2)[None],
+                                 r_bins, wp, np.zeros(0), 0.0, 2)
+    return num[0, 1] / den[0, 1]   # window 1 here = midpoint inside the analysis window
+if legacy_file.exists() and not QUICK:
+    _old = np.load(legacy_file)['xi3']
+    _aud = [float(np.nanmax(np.abs(legacy_full_window(Z_stack[k]) - _old[k]))) for k in (0, n_realizations - 1)]
+    METRICS['field_audit_max_abs_vs_archived_xi3'] = dict(realisation_1=_aud[0], realisation_last=_aud[1])
+    print('field audit vs archived known-profile xi3:', _aud, flush=True)
+    assert max(_aud) < 1e-10, 'regenerated fields differ from the archived realisations'
+
+sim_num, sim_den, sim_cnt = [], [], []
 for ireal in range(n_realizations):
     t0 = time.time()
-    if ireal == 0:
-        res = Z_res
-    else:
-        Zi, Ni = generate_synthetic_galaxy(rng)
-        res = subtract_axisymmetric_mean(Zi)
-    st = measure_full_pair_statistics(res)
-    xi2_real.append(st['xi2']); xi3_real.append(st['xi3']); sec_real.append(st['xi_sector'])
-    print(f'realisation {ireal+1}/{n_realizations}: {time.time()-t0:.0f}s', flush=True)
+    nm_, dn_, ct_ = projected_pair_statistic(Z_stack[ireal])
+    sim_num.append(nm_); sim_den.append(dn_); sim_cnt = ct_
+    print(f'projected statistic {ireal+1}/{n_realizations}: {time.time()-t0:.0f}s', flush=True)
+sim_num = np.array(sim_num); sim_den = np.array(sim_den)
+with np.errstate(invalid='ignore', divide='ignore'):
+    sim_xi = sim_num / sim_den                      # (realisation, window, bin)
+sim_mean = np.nanmean(sim_xi, 0); sim_std = np.nanstd(sim_xi, 0, ddof=1); sim_sem = sim_std / np.sqrt(n_realizations)
+np.savez(OUT_DIR / 'scalar_simulation_statistics_unified.npz', r_bins=r_bins, radii=radii_test,
+         windows=np.array(['full', 'sector'] + [f'fixed_radius_{v}' for v in radii_test]),
+         num=sim_num, den=sim_den, counts=sim_cnt, xi=sim_xi, annulus_edges=annulus_edges)
 
-sim_xi2_mean = {vm: np.nanmean([r[vm] for r in xi2_real], 0) for vm in radii_test}
-sim_xi2_std = {vm: np.nanstd([r[vm] for r in xi2_real], 0, ddof=1) for vm in radii_test}
-sim_xi2_sem = {vm: sim_xi2_std[vm] / np.sqrt(n_realizations) for vm in radii_test}
-xi3_stack = np.vstack(xi3_real); sec_stack = np.vstack(sec_real)
-xi3_sim_mean, xi3_sim_std = np.nanmean(xi3_stack, 0), np.nanstd(xi3_stack, 0, ddof=1)
-sec_sim_mean, sec_sim_std = np.nanmean(sec_stack, 0), np.nanstd(sec_stack, 0, ddof=1)
-xi3_sim_sem = xi3_sim_std / np.sqrt(n_realizations); sec_sim_sem = sec_sim_std / np.sqrt(n_realizations)
-np.savez(OUT_DIR / 'scalar_simulation_statistics.npz', r_bins=r_bins, radii=radii_test,
-         xi2=np.array([[r[vm] for vm in radii_test] for r in xi2_real]), xi3=xi3_stack, sector=sec_stack)
+# %% Block 6: KTZ prediction with the same Psi, P and P_b (legal source-position integrals)
+setup = ScalarSetup(dict(R_in=R_in, R_out=R_out, kappa=kappa, sigma=sigma_scalar, t_star=t_star, sigma_b=sigma_beam,
+                         cell_var=0.0, m_arms=m_arms, pitch_deg=pitch_angle, Theta0=Theta0, eta=eta,
+                         harm_n=list(harmonic_n), harm_g=list(harmonic_g), harm_alpha=list(harmonic_alpha),
+                         lambda00=lambda0_0, h_R=h_R, f_cl=cluster_fraction, sigma_cl=cluster_radius,
+                         N_ch=mean_children_per_cluster, dx=dx, grid0=grid_x[0], ngrid=grid_x.size,
+                         rho_max=analysis_R_out + 0.05))
+PRED_NODES = dict(n_age=int(os.environ.get('KTZ_NAGE', 16)), n_age_D=int(os.environ.get('KTZ_NAGED', 16)))
+pred_cache = OUT_DIR / f"scalar_prediction_unified_a{PRED_NODES['n_age']}_d{PRED_NODES['n_age_D']}.npz"
+if pred_cache.exists():
+    _pc = np.load(pred_cache)
+    pred = dict(comp={k: _pc[k] for k in ('CU', 'CT', 'CD', 'CDmod', 'SM')}, den=_pc['den'], den_dmod=_pc['den_dmod'],
+                pdiag=_pc['pdiag'], m=_pc['m'], mu=_pc['mu'], mu_ax=_pc['mu_ax'], cnt=_pc['cnt'])
+    print(f'loaded prediction {pred_cache.name}', flush=True)
+else:
+    pred = build_prediction(setup, cell_x, cell_y, cell_ix.astype(np.int64), cell_iy.astype(np.int64), cell_ann, n_annuli,
+                            r_bins, window_par, radii_test, midpoint_annulus_halfwidth, n_windows,
+                            nthreads=NTHREADS, do_dmod=True, **PRED_NODES)
+    _tmp = OUT_DIR / 'scalar_prediction.tmp.npz'
+    np.savez(_tmp, **pred['comp'], den=pred['den'], den_dmod=pred['den_dmod'], pdiag=pred['pdiag'], m=pred['m'],
+             mu=pred['mu'], mu_ax=pred['mu_ax'], cnt=pred['cnt'], **{f'nodes_{k}': v for k, v in PRED_NODES.items()})
+    os.replace(_tmp, pred_cache)
+    METRICS['prediction_runtime_s'] = pred['runtime']
+assert np.array_equal(pred['cnt'], sim_cnt), 'prediction and data use different pair sets'
+component_order = ['CU', 'CT', 'SM', 'CD']
+component_colors = {'CU': '#7fc97f', 'CT': '#ffff99', 'SM': '#fdc086', 'CD': '#beaed4'}
+component_labels = {'CU': r'$C_{\rm U}$', 'CT': r'$C_{\rm T}$', 'SM': r'$\mathbf{S}_{\rm M}$', 'CD': r'$C_{\rm D}$'}
+with np.errstate(invalid='ignore', divide='ignore'):
+    th = {k: pred['comp'][k] / pred['den'] for k in component_order}
+    th_total = sum(th[k] for k in component_order)
+# prediction without C_D: same pair sums with the C_D numerator and endpoint terms removed
+pd_ = pred['pdiag']
+_vals = np.stack([pd_[2]])
+_, den_D, _ = uop.run_rows(uop.pair_products, n_cells, NTHREADS, cell_x, cell_y, np.zeros((1, n_cells)), _vals,
+                           r_bins, window_par, radii_test, midpoint_annulus_halfwidth, n_windows)
+with np.errstate(invalid='ignore', divide='ignore'):
+    th_noD = (pred['comp']['CU'] + pred['comp']['CT'] + pred['comp']['SM']) / (pred['den'] - den_D[0])
+    th_dmod = (pred['comp']['CU'] + pred['comp']['CT'] + pred['comp']['SM'] + pred['comp']['CDmod']) / pred['den_dmod']
+# zero-lag anchors: component shares of the window-averaged endpoint second moment
+_d0 = {'CU': pd_[0], 'CT': pd_[1], 'SM': pred['m']**2, 'CD': pd_[2]}
+METRICS['component_shares_r0_full'] = {k: float(_d0[k].sum() / sum(v.sum() for v in _d0.values())) for k in component_order}
 
-# %% Block 6: KTZ prediction with the same Gaussian observation operator
-from functools import lru_cache
-# u-coordinate in physical units: p = 2 B_s = sigma^2 + 2 kappa s; the beam adds sigma_b^2 to every kernel
-p0_val = sigma_scalar**2 + sigma_beam**2
-p_ast_val = sigma_scalar**2 + 2 * kappa * t_star + sigma_beam**2
-component_order = ['CP0', 'CPN', 'CM', 'CNP']
-component_colors = {'CP0': '#7fc97f', 'CPN': '#ffff99', 'CM': '#fdc086', 'CNP': '#beaed4'}
-component_labels = {'CP0': r'$C_{\rm U}$', 'CPN': r'$C_{\rm T}$', 'CM': r'$C_{\rm M}$', 'CNP': r'$C_{\rm D}$'}
-
-@lru_cache(maxsize=None)
-def I0(r):
-    if r == 0:
-        return 0.5 * np.log(p_ast_val / p0_val)
-    return 0.5 * (exp1(r**2 / (4 * p_ast_val)) - exp1(r**2 / (4 * p0_val)))
-
-@lru_cache(maxsize=None)
-def InP(r, Qn):
-    f = lambda p: 0.5 / p * np.exp(-r**2 / (4 * p) - Qn**2 * p / 4)
-    return quad(f, p0_val, p_ast_val, limit=100)[0]
-
-@lru_cache(maxsize=None)
-def Tn(Qn):
-    """int_0^t* exp[-(B_s + sigma_b^2/2) Q^2] ds (beam-attenuated mean-field transfer times t*)."""
-    if Qn == 0:
-        return t_star
-    return np.exp(-0.5 * (sigma_scalar**2 + sigma_beam**2) * Qn**2) * (1 - np.exp(-kappa * t_star * Qn**2)) / (kappa * Qn**2)
-
-# C_NP for the Gaussian pair excess E_src = A_src exp(-Delta^2 / 2 ell_src^2), ell_src = sqrt(2) sigma_cl.
-_qx, _qw = np.polynomial.legendre.leggauss(cluster_theory_nodes)
-_t_nodes = 0.5 * t_star * (_qx + 1.0); _t_w = 0.5 * t_star * _qw
-_p_nodes = sigma_scalar**2 + 2 * kappa * _t_nodes + sigma_beam**2
-_l2 = 2.0 * cluster_radius**2
-
-@lru_cache(maxsize=None)
-def I_cluster_np(r):
-    den = _l2 + _p_nodes[:, None] + _p_nodes[None, :]
-    return float(np.sum(_t_w[:, None] * _t_w[None, :] * (_l2 / den) * np.exp(-r**2 / (2.0 * den))))
-
-def CNP_prefactor(varpi_m):
-    """C_NP / A_2p for the Thomas component: lambda_0^2 A_src ... with Sigma_src = lambda_0 t*."""
-    lam_local = lambda0_0 * np.exp(-varpi_m / h_R)
-    sigma_src = lam_local * t_star
-    A_src = cluster_fraction * mean_children_per_cluster / (4 * np.pi * sigma_src * cluster_radius**2)
-    # C_NP = Y^2 lambda_0^2 A_src * int int (l^2/den) e^{-r^2/2den}; divide by A_2p = Y^2 lambda_0 /(4 pi kappa)
-    return 4 * np.pi * kappa * lam_local * A_src
-
-def A_2p_factor(varpi_m):
-    return Y_val**2 * lambda0_0 * np.exp(-varpi_m / h_R) / (4 * np.pi * kappa)
-
-def source_harmonic_damping(Qn):
-    return (1.0 - cluster_fraction) + cluster_fraction * np.exp(-0.5 * (Qn * cluster_radius)**2)
-
-def local_cov_component_parts(varpi_m, phi_m, r, psi):
-    Theta_m = spiral_phase(varpi_m, phi_m)
-    Qb = k_perp(varpi_m)
-    dPhi = (m_arms / np.tan(pitch_rad)) / varpi_m
-    gx = dPhi * np.cos(phi_m) + (m_arms / varpi_m) * np.sin(phi_m)
-    gy = dPhi * np.sin(phi_m) - (m_arms / varpi_m) * np.cos(phi_m)
-    dot = r * (gx * np.cos(psi) + gy * np.sin(psi))
-    Tm, Tp = Theta_m - 0.5 * dot, Theta_m + 0.5 * dot
-    lam_local = lambda0_0 * np.exp(-varpi_m / h_R)
-    R_val = 4 * np.pi * kappa * lam_local * eta**2
-    cpn = cvm = cvp = mm = mp = 0.0
-    for n, g, a in zip(harmonic_n, harmonic_g, harmonic_alpha):
-        Qn = n * Qb; d = source_harmonic_damping(Qn)
-        S_m, S_mi, S_pl = g * d * np.cos(n * Theta_m + a), g * d * np.cos(n * Tm + a), g * d * np.cos(n * Tp + a)
-        cpn += InP(r, Qn) * S_m; cvm += InP(0, Qn) * S_mi; cvp += InP(0, Qn) * S_pl
-        t = Tn(Qn); mm += t * S_mi; mp += t * S_pl
-    cnp = CNP_prefactor(varpi_m)
-    nums = {'CP0': I0(r), 'CPN': eta * cpn, 'CM': R_val * mm * mp, 'CNP': cnp * I_cluster_np(r)}
-    vm_ = {'CP0': I0(0), 'CPN': eta * cvm, 'CM': R_val * mm**2, 'CNP': cnp * I_cluster_np(0.0)}
-    vp_ = {'CP0': I0(0), 'CPN': eta * cvp, 'CM': R_val * mp**2, 'CNP': cnp * I_cluster_np(0.0)}
-    return nums, vm_, vp_
-
-def endpoint_window_ok(varpi_m, phi_m, r, psi):
-    mx, my = varpi_m * np.cos(phi_m), varpi_m * np.sin(phi_m)
-    hx, hy = 0.5 * r * np.cos(psi), 0.5 * r * np.sin(psi)
-    rm, rp = np.hypot(mx - hx, my - hy), np.hypot(mx + hx, my + hy)
-    return (analysis_R_in <= rm <= analysis_R_out) and (analysis_R_in <= rp <= analysis_R_out)
-
-def average_parts(parts, weights):
-    """Pair-product average, normalised after averaging; returns components and the no-C_NP total."""
-    if not parts:
-        return {k: np.nan for k in component_order + ['noCNP']}
-    w = np.asarray(weights, float)
-    num = {k: np.sum(w * np.array([p[0][k] for p in parts])) / w.sum() for k in component_order}
-    vm = {k: np.sum(w * np.array([p[1][k] for p in parts])) / w.sum() for k in component_order}
-    vp = {k: np.sum(w * np.array([p[2][k] for p in parts])) / w.sum() for k in component_order}
-    den = np.sqrt(sum(vm.values()) * sum(vp.values()))
-    out = {k: num[k] / den for k in component_order}
-    keep = [k for k in component_order if k != 'CNP']
-    out['noCNP'] = sum(num[k] for k in keep) / np.sqrt(sum(vm[k] for k in keep) * sum(vp[k] for k in keep))
-    return out
-
-_gx, _gw = np.polynomial.legendre.leggauss(5)
-def bin_nodes(lo, hi):
-    r = 0.5 * (hi - lo) * _gx + 0.5 * (hi + lo)
-    return r, 0.5 * (hi - lo) * _gw * r
-
-def xi2_theory(varpi_m, lo, hi, Nphi=24 if QUICK else 40, Npsi=8 if QUICK else 40):
-    phis = np.linspace(0, 2 * np.pi, Nphi, endpoint=False); psis = np.linspace(0, 2 * np.pi, Npsi, endpoint=False)
-    parts, wts = [], []
-    rs, rw = bin_nodes(lo, hi) if hi > lo else (np.array([lo]), np.array([1.0]))
-    for r, w in zip(rs, rw):
-        for ph in phis:
-            for ps in psis:
-                if endpoint_window_ok(varpi_m, ph, r, ps):
-                    parts.append(local_cov_component_parts(varpi_m, ph, r, ps)); wts.append(w)
-    return average_parts(parts, wts)
-
-def xi3_theory(lo, hi, phase_limited=False, Nvarpi=6 if QUICK else 30, Nphi=24 if QUICK else 60, Npsi=6 if QUICK else 20):
-    rin = sector_analysis_R_in if phase_limited else analysis_R_in
-    rout = sector_analysis_R_out if phase_limited else analysis_R_out
-    e2 = np.linspace(rin**2, rout**2, Nvarpi + 1); vs = np.sqrt(0.5 * (e2[:-1] + e2[1:]))
-    phis = np.linspace(0, 2 * np.pi, Nphi, endpoint=False); psis = np.linspace(0, 2 * np.pi, Npsi, endpoint=False)
-    rs, rw = bin_nodes(lo, hi) if hi > lo else (np.array([lo]), np.array([1.0]))
-    parts, wts = [], []
-    for r, w in zip(rs, rw):
-        for v in vs:
-            A = A_2p_factor(v)
-            for ph in phis:
-                if phase_limited and abs(np.angle(np.exp(1j * spiral_phase(v, ph)))) >= sector_phase_halfwidth:
-                    continue
-                for ps in psis:
-                    if endpoint_window_ok(v, ph, r, ps):
-                        parts.append(local_cov_component_parts(v, ph, r, ps)); wts.append(w * A)
-    return average_parts(parts, wts)
-
-def to_arrays(lst):
-    return {k: np.array([c[k] for c in lst]) for k in component_order + ['noCNP']}
-
-t0 = time.time()
-th_xi2 = {vm: to_arrays([xi2_theory(vm, lo, hi) for lo, hi in zip(r_bins[:-1], r_bins[1:])]) for vm in radii_test}
-th_xi2_0 = {vm: xi2_theory(vm, 0.0, 0.0) for vm in radii_test}
-assert QUICK or max(np.nanmax(np.abs(th_xi2[vm]['CPN'])) for vm in radii_test) < 1e-12
-print(f'xi2 theory {time.time()-t0:.0f}s', flush=True)
-
-vmask = r_centers <= validation_rmax
-smask = r_centers <= sector_validation_rmax
-t0 = time.time()
-th_xi3 = to_arrays([xi3_theory(lo, hi) for lo, hi in zip(r_bins[:-1][vmask], r_bins[1:][vmask])])
-th_xi3_0 = xi3_theory(0.0, 0.0)
-assert QUICK or np.nanmax(np.abs(th_xi3['CPN'])) < 1e-12
-th_sec = to_arrays([xi3_theory(lo, hi, True) for lo, hi in zip(r_bins[:-1][smask], r_bins[1:][smask])])
-th_sec_0 = xi3_theory(0.0, 0.0, True)
-print(f'xi3/sector theory {time.time()-t0:.0f}s', flush=True)
-
-# %% Block 7: field figure (simulation / subtracted axisymmetric mean / fluctuation used for xi)
-def full_mean_field(Xg, Yg):
-    """Beam-smoothed ensemble mean mu = mu_bar + mu_mod in the local-WKBJ approximation."""
-    vr = np.hypot(Xg, Yg); ph = np.arctan2(Yg, Xg)
-    vr_safe = np.clip(vr, R_in, R_out)
-    th = spiral_phase(vr_safe, ph); Qb = k_perp(vr_safe)
-    mod = np.zeros_like(vr)
-    for n, g, a in zip(harmonic_n, harmonic_g, harmonic_alpha):
-        Q = n * Qb
-        tn = np.exp(-0.5 * (sigma_scalar**2 + sigma_beam**2) * Q**2) * (1 - np.exp(-kappa * t_star * Q**2)) / (kappa * Q**2)
-        mod += eta * g * source_harmonic_damping(Q) * (tn / t_star) * np.cos(n * th + a)
-    return np.where(disk_mask, Y_val * lambda0_0 * t_star * np.exp(-vr / h_R) * (1.0 + mod), np.nan)
-
-mu_full = full_mean_field(X, Y)
-Z_plot = np.where(disk_mask, Z, np.nan)
-stoch = Z_plot - mu_full  # Preserve the published stochastic-field diagnostics below.
-dX_ax = Z_res  # Block 4: the fluctuation passed to the pair estimator.
-ana = np.isfinite(dX_ax) & (R_grid >= analysis_R_in) & (R_grid <= analysis_R_out)
+# %% Block 7: field figure (simulated field, annular mean estimated from this map, projected residual)
+Z_plot = np.where(disk_mask, Z_stack[0], np.nan)
+ann_mean_map = np.full(Z_plot.shape, np.nan)
+_v = map_values(Z_stack[0]); _am = np.bincount(cell_ann, _v, n_annuli) / np.bincount(cell_ann, minlength=n_annuli)
+ann_mean_map[valid] = _am[cell_ann]
+res_map = np.full(Z_plot.shape, np.nan); res_map[valid] = _v - _am[cell_ann]
 fig, axes = plt.subplots(1, 3, figsize=(15, 4.8))
 vmin, vmax = np.nanpercentile(Z_plot, [1, 99])
 for ax, field, lab, title in [(axes[0], Z_plot, r'$\Sigma_X$', 'Simulation'),
-                             (axes[1], Z_bg, r'$\bar\mu$', 'Subtracted axisymmetric mean')]:
+                             (axes[1], ann_mean_map, r'annular mean', 'Annular mean of this map')]:
     im = ax.pcolormesh(X, Y, field, cmap='plasma', shading='auto', vmin=vmin, vmax=vmax)
     plt.colorbar(im, ax=ax, label=lab); ax.set_title(title)
-lim = np.nanpercentile(np.abs(dX_ax[ana]), 99.5)
-im = axes[2].pcolormesh(X, Y, dX_ax, cmap='RdBu_r', shading='auto', vmin=-lim, vmax=lim)
-plt.colorbar(im, ax=axes[2], label=r'$\delta\Sigma_{X,{\rm ax}}=\Sigma_X-\bar\mu$')
-axes[2].set_title(r'Fluctuation used for $\xi$ (simulation $-\;\bar\mu$)')
-for rr in (analysis_R_in, analysis_R_out):
-    axes[2].add_patch(plt.Circle((0, 0), rr, fill=False, ls='--', lw=0.8, color='0.25'))
+lim = np.nanpercentile(np.abs(res_map[valid]), 99.5)
+im = axes[2].pcolormesh(X, Y, res_map, cmap='RdBu_r', shading='auto', vmin=-lim, vmax=lim)
+plt.colorbar(im, ax=axes[2], label=r'$(\mathbf{P}\Sigma_X)_i$')   # Sigma_X is already beam-convolved and centre-sampled
+axes[2].set_title(r'Projected residual used for $\xi$')
 for ax in axes:
+    for rr in (analysis_R_in, analysis_R_out):
+        ax.add_patch(plt.Circle((0, 0), rr, fill=False, ls='--', lw=0.8, color='0.25'))
     ax.set_xlim(-R_out, R_out); ax.set_ylim(-R_out, R_out); ax.set_aspect('equal'); ax.set_xlabel(r'$x\;({\rm kpc})$')
 axes[0].set_ylabel(r'$y\;({\rm kpc})$')
-plt.tight_layout(); fig.savefig(figure_path('scalar_fields'), dpi=160, bbox_inches='tight'); plt.close(fig)
-METRICS['scalar_fields'] = dict(residual_mean_over_window=float(np.nanmean(stoch[(R_grid >= analysis_R_in) & (R_grid <= analysis_R_out)])),
-                                residual_rms=float(np.nanstd(stoch[(R_grid >= analysis_R_in) & (R_grid <= analysis_R_out)])),
-                                mean_field_rms=float(np.nanstd(mu_full - Z_bg)))
+plt.tight_layout(); fig.savefig(figure_path('unified_fields'), dpi=160, bbox_inches='tight'); plt.close(fig)
+np.savez_compressed(OUT_DIR / 'fig_unified_fields.npz', X=X, Y=Y, Z=Z_plot, annular_mean=ann_mean_map, residual=res_map,
+                    analysis_R=np.array([analysis_R_in, analysis_R_out]))
+METRICS['scalar_fields_unified'] = dict(
+    projected_residual_rms=float(np.nanstd(res_map[valid])),
+    projected_mean_rms=float(np.std(pred['m'])),
+    projected_mean_axisymmetric_residual_rms=float(np.std(uop.project(pred['mu_ax'], cell_ann, n_annuli))))
 
-# %% Block 8: xi2, xi3 and arm-sector comparisons; metrics
-def stack_plot(ax, r, comp, labels):
-    cum = np.zeros_like(r)
-    for k in component_order:
-        ax.fill_between(r, cum, cum + comp[k], color=component_colors[k], alpha=0.42, lw=0, label=labels[k], zorder=1)
-        cum = cum + comp[k]
-
-def summarize(sim, th, unc):
-    sim, th, unc = map(np.asarray, (sim, th, unc))
-    ok = np.isfinite(sim) & np.isfinite(th) & np.isfinite(unc)
-    d = sim[ok] - th[ok]
+# %% Block 8: comparisons (full window, arm sector, fixed-radius check); metrics
+def summarize(sim, th_, unc):
+    sim, th_, unc = map(np.asarray, (sim, th_, unc))
+    ok = np.isfinite(sim) & np.isfinite(th_) & np.isfinite(unc)
+    d = sim[ok] - th_[ok]
     return dict(n=int(ok.sum()), rmse=float(np.sqrt(np.mean(d**2))), bias=float(np.mean(d)),
-                pearson=float(np.corrcoef(sim[ok], th[ok])[0, 1]), max_abs=float(np.max(np.abs(d))),
+                pearson=float(np.corrcoef(sim[ok], th_[ok])[0, 1]), max_abs=float(np.max(np.abs(d))),
                 within_1sigma=int(np.sum(np.abs(d) <= unc[ok])))
 
-ann_labels = dict(component_labels); ann_labels['CPN'] = r'$C_{\rm T}=0$'
-fig, axes = plt.subplots(2, 3, figsize=(15, 9), sharey=True); axes = axes.flatten()
-for i, (ax, vm) in enumerate(zip(axes, radii_test)):
-    r = np.concatenate([[0.0], r_centers])
-    comp = {k: np.concatenate([[th_xi2_0[vm][k]], th_xi2[vm][k]]) for k in component_order}
-    tot = sum(comp[k] for k in component_order)
-    nonp = np.concatenate([[1.0], th_xi2[vm]['noCNP']])
-    sm = np.concatenate([[1.0], sim_xi2_mean[vm]]); sd = np.concatenate([[0.0], sim_xi2_std[vm]]); se = np.concatenate([[0.0], sim_xi2_sem[vm]])
-    stack_plot(ax, r, comp, ann_labels)
-    ax.plot(r, sm, 'o-', color='k', ms=4, label='Simulation mean', zorder=4)
-    ax.fill_between(r, sm - sd, sm + sd, color='k', alpha=0.16, lw=0, label=r'Single-realisation $1\sigma$', zorder=3)
-    ax.errorbar(r, sm, yerr=se, fmt='none', ecolor='k', elinewidth=0.9, capsize=2, label=r'Mean $1\sigma$ uncertainty', zorder=5)
-    ax.plot(r, tot, '-', color='#d62728', lw=1.6, label='Full KTZ', zorder=6)
-    ax.plot(r, nonp, ls='--', color='#6a3d9a', lw=1.6, label=r'KTZ without $C_{\rm D}$', zorder=6)
-    ax.axhline(0, color='grey', lw=0.5); ax.set_title(fr'$\varpi_m = {vm}$ kpc'); ax.set_xlabel('r (kpc)'); ax.set_xlim(0, validation_rmax)
-    if i == 0:
-        ax.legend(loc='lower left', fontsize=7.5, ncol=2)
-axes[0].set_ylabel(r'$\xi_{2,{\rm pp}}(\varpi_m,r)$'); axes[3].set_ylabel(r'$\xi_{2,{\rm pp}}(\varpi_m,r)$')
-plt.tight_layout(); fig.savefig(figure_path('scalar_xi2'), dpi=160, bbox_inches='tight'); plt.close(fig)
+def stack_plot(ax, r, comp):
+    cum = np.zeros_like(r); cumn = np.zeros_like(r)
+    for k in component_order:
+        v = comp[k]
+        pos = np.clip(v, 0, None); neg = np.clip(v, None, 0)
+        ax.fill_between(r, cum, cum + pos, color=component_colors[k], alpha=0.42, lw=0, label=component_labels[k], zorder=1)
+        ax.fill_between(r, cumn, cumn + neg, color=component_colors[k], alpha=0.42, lw=0, zorder=1)
+        cum = cum + pos; cumn = cumn + neg
 
-xm = r_centers <= validation_rmax
-sim2 = np.concatenate([sim_xi2_mean[vm][xm] for vm in radii_test])
-unc2 = np.concatenate([sim_xi2_sem[vm][xm] for vm in radii_test])
-th2 = np.concatenate([sum(th_xi2[vm][k] for k in component_order)[xm] for vm in radii_test])
-th2n = np.concatenate([th_xi2[vm]['noCNP'][xm] for vm in radii_test])
-METRICS['xi2'] = summarize(sim2, th2, unc2); METRICS['xi2_noCNP'] = summarize(sim2, th2n, unc2)
-
-def single_panel(stem, rr, comp0, comp, nonp, sm, sd, se, rmax, ylabel, title=None, labels=component_labels):
-    r = np.concatenate([[0.0], rr])
-    c = {k: np.concatenate([[comp0[k]], comp[k]]) for k in component_order}
-    fig, ax = plt.subplots(figsize=(7, 5))
-    stack_plot(ax, r, c, labels)
-    sm = np.concatenate([[1.0], sm]); sd = np.concatenate([[0.0], sd]); se = np.concatenate([[0.0], se])
+def comparison_panel(ax, w, rmax, title=None, legend=True, r0=True):
+    sel = r_centers <= rmax
+    r = r_centers[sel]
+    comp = {k: th[k][w][sel] for k in component_order}
+    if r0:
+        r = np.concatenate([[0.0], r])
+        comp = {k: np.concatenate([[METRICS['component_shares_r0_full'][k] if w == W_FULL else np.nan], comp[k]]) for k in comp}
+    stack_plot(ax, r, comp)
+    pad = (lambda a, v: np.concatenate([[v], a])) if r0 else (lambda a, v: a)
+    sm, sd, se = pad(sim_mean[w][sel], 1.0), pad(sim_std[w][sel], 0.0), pad(sim_sem[w][sel], 0.0)
     ax.plot(r, sm, 'o-', color='k', ms=4, label='Simulation mean', zorder=4)
     ax.fill_between(r, sm - sd, sm + sd, color='k', alpha=0.14, lw=0, label=r'Single-realisation $1\sigma$', zorder=3)
     ax.errorbar(r, sm, yerr=se, fmt='none', ecolor='k', elinewidth=0.9, capsize=2, label=r'Mean $1\sigma$ uncertainty', zorder=5)
-    ax.plot(r, sum(c[k] for k in component_order), '-', color='#d62728', lw=1.6, label='Full KTZ', zorder=6)
-    ax.plot(r, np.concatenate([[1.0], nonp]), ls='--', color='#6a3d9a', lw=1.6, label=r'KTZ without $C_{\rm D}$', zorder=6)
-    ax.axhline(0, color='grey', lw=0.5); ax.set_xlabel('r (kpc)'); ax.set_ylabel(ylabel); ax.set_xlim(0, rmax)
+    ax.plot(r, pad(th_total[w][sel], 1.0), '-', color='#d62728', lw=1.6, label='Full KTZ', zorder=6)
+    ax.plot(r, pad(th_noD[w][sel], 1.0), ls='--', color='#6a3d9a', lw=1.6, label=r'KTZ without $C_{\rm D}$', zorder=6)
+    ax.axhline(0, color='grey', lw=0.5); ax.set_xlabel('r (kpc)'); ax.set_xlim(0, rmax); ax.grid(alpha=0.25)
     if title:
         ax.set_title(title)
-    ax.legend(fontsize=8); ax.grid(alpha=0.25)
-    plt.tight_layout(); fig.savefig(figure_path(stem), dpi=160, bbox_inches='tight'); plt.close(fig)
+    if legend:
+        ax.legend(fontsize=7.5)
 
-single_panel('scalar_xi3', r_centers[xm], th_xi3_0, th_xi3, th_xi3['noCNP'], xi3_sim_mean[xm], xi3_sim_std[xm], xi3_sim_sem[xm],
-             validation_rmax, r'$\xi_{3,{\rm pp}}(r)$', labels=ann_labels)
-single_panel('scalar_sector', r_centers[smask], th_sec_0, th_sec, th_sec['noCNP'], sec_sim_mean[smask], sec_sim_std[smask], sec_sim_sem[smask],
-             sector_validation_rmax, r'$\xi_{\rm arm,pp}(r)$',
-             title=rf'Arm-phase sector: $|\Theta_m|<30^\circ$, ${sector_analysis_R_in:.1f}<\varpi_m/{{\rm kpc}}<{sector_analysis_R_out:.1f}$')
-METRICS['xi3'] = summarize(xi3_sim_mean[xm], sum(th_xi3[k] for k in component_order), xi3_sim_sem[xm])
-METRICS['xi3_noCNP'] = summarize(xi3_sim_mean[xm], th_xi3['noCNP'], xi3_sim_sem[xm])
-METRICS['sector'] = summarize(sec_sim_mean[smask], sum(th_sec[k] for k in component_order), sec_sim_sem[smask])
-METRICS['sector_noCNP'] = summarize(sec_sim_mean[smask], th_sec['noCNP'], sec_sim_sem[smask])
-METRICS['sector']['max_abs_CPN'] = float(np.nanmax(np.abs(th_sec['CPN'])))
-METRICS['component_shares_r0'] = {
-    'xi3': {k: float(th_xi3_0[k]) for k in component_order},
-    'sector': {k: float(th_sec_0[k]) for k in component_order}}
-METRICS['max_abs_CNP_contribution'] = {'xi2': float(max(np.nanmax(np.abs(th_xi2[vm]['CNP'][xm])) for vm in radii_test)),
-                                       'xi3': float(np.nanmax(np.abs(th_xi3['CNP'])))}
-np.savez(OUT_DIR / 'scalar_theory.npz', r_centers=r_centers, radii=radii_test,
-         **{f'xi2_{vm}_{k}': th_xi2[vm][k] for vm in radii_test for k in component_order + ['noCNP']},
-         **{f'xi3_{k}': th_xi3[k] for k in component_order + ['noCNP']}, **{f'sector_{k}': th_sec[k] for k in component_order + ['noCNP']})
-for k in ['xi2', 'xi2_noCNP', 'xi3', 'xi3_noCNP', 'sector', 'sector_noCNP']:
-    print(k, METRICS[k])
-json.dump(METRICS, open(OUT_DIR / 'validation_metrics.json', 'w'), indent=1)
+xm = r_centers <= validation_rmax
+smask = r_centers <= sector_validation_rmax
+fig, axes = plt.subplots(1, 2, figsize=(13, 5))
+comparison_panel(axes[0], W_FULL, validation_rmax, title='Full window')
+axes[0].set_ylabel(r'$\xi_b$')
+comparison_panel(axes[1], W_SECTOR, sector_validation_rmax, legend=False, r0=False,
+                 title=rf'Arm-phase sector: $|\Theta_m|<30^\circ$, ${sector_analysis_R_in:.1f}<\varpi_m/{{\rm kpc}}<{sector_analysis_R_out:.1f}$')
+plt.tight_layout(); fig.savefig(figure_path('unified_xi'), dpi=160, bbox_inches='tight'); plt.close(fig)
+
+fig, axes = plt.subplots(2, 3, figsize=(15, 9), sharey=True); axes = axes.flatten()
+for i, (ax, vm) in enumerate(zip(axes, radii_test)):
+    comparison_panel(ax, 2 + i, validation_rmax, title=fr'$|\varpi_m-{vm}\,{{\rm kpc}}|<\Delta x/2$', legend=(i == 0), r0=False)
+axes[0].set_ylabel(r'$\xi_b$'); axes[3].set_ylabel(r'$\xi_b$')
+plt.tight_layout(); fig.savefig(figure_path('unified_radial_check'), dpi=160, bbox_inches='tight'); plt.close(fig)
+
+METRICS['xi_full'] = summarize(sim_mean[W_FULL][xm], th_total[W_FULL][xm], sim_sem[W_FULL][xm])
+METRICS['xi_full_noCD'] = summarize(sim_mean[W_FULL][xm], th_noD[W_FULL][xm], sim_sem[W_FULL][xm])
+METRICS['sector'] = summarize(sim_mean[W_SECTOR][smask], th_total[W_SECTOR][smask], sim_sem[W_SECTOR][smask])
+METRICS['sector_noCD'] = summarize(sim_mean[W_SECTOR][smask], th_noD[W_SECTOR][smask], sim_sem[W_SECTOR][smask])
+METRICS['sector_modulated_CD_diagnostic'] = summarize(sim_mean[W_SECTOR][smask], th_dmod[W_SECTOR][smask], sim_sem[W_SECTOR][smask])
+METRICS['sector']['max_abs_CT'] = float(np.nanmax(np.abs(th['CT'][W_SECTOR][smask])))
+METRICS['xi_full']['max_abs_CT'] = float(np.nanmax(np.abs(th['CT'][W_FULL][xm])))
+_rs = lambda f: np.concatenate([f[2 + i][xm] for i in range(radii_test.size)])
+METRICS['radial_check'] = summarize(_rs(sim_mean), _rs(th_total), _rs(sim_sem))
+METRICS['radial_check_noCD'] = summarize(_rs(sim_mean), _rs(th_noD), _rs(sim_sem))
+METRICS['radial_check_modulated_CD_diagnostic'] = summarize(_rs(sim_mean), _rs(th_dmod), _rs(sim_sem))
+METRICS['xi_full_modulated_CD_diagnostic'] = summarize(sim_mean[W_FULL][xm], th_dmod[W_FULL][xm], sim_sem[W_FULL][xm])
+METRICS['radial_check_per_radius_modulated_CD_diagnostic'] = {str(v): summarize(sim_mean[2 + i][xm], th_dmod[2 + i][xm], sim_sem[2 + i][xm])
+                                                              for i, v in enumerate(radii_test)}
+METRICS['radial_check_per_radius'] = {str(v): summarize(sim_mean[2 + i][xm], th_total[2 + i][xm], sim_sem[2 + i][xm])
+                                      for i, v in enumerate(radii_test)}
+METRICS['max_abs_CD_contribution'] = dict(full=float(np.nanmax(np.abs(th['CD'][W_FULL][xm]))),
+                                          sector=float(np.nanmax(np.abs(th['CD'][W_SECTOR][smask]))))
+np.savez(OUT_DIR / 'scalar_theory_unified.npz', r_centers=r_centers, radii=radii_test, total=th_total, noCD=th_noD,
+         CDmod_total=th_dmod, **{k: th[k] for k in component_order}, den=pred['den'], counts=pred['cnt'])
+for k in ['xi_full', 'xi_full_noCD', 'sector', 'sector_noCD', 'sector_modulated_CD_diagnostic', 'radial_check', 'radial_check_noCD']:
+    print(k, METRICS[k], flush=True)
+json.dump(METRICS, open(OUT_DIR / 'validation_metrics_unified.json', 'w'), indent=1)
 print(f'scalar part done in {time.time()-T_START:.0f}s', flush=True)
 
 # %% [markdown]
@@ -597,6 +500,11 @@ kt25_sigma_inj = np.array([0.060, 0.001, 0.060])
 print(f'KT25: {len(kt25_elements)} elements, t_corr={kt25_t_corr:.3f} Gyr, kappa={kt25_kappa:.4f}, sigma_v={kt25_sigma_v:.4f}')
 
 # %% Block 10: KT25 baseline and full-window KTZ prediction
+legacy_cross_keys = ['CP0', 'CPN', 'CM', 'CNP']
+
+def source_harmonic_damping(Qn):
+    return (1.0 - cluster_fraction) + cluster_fraction * np.exp(-0.5 * (Qn * cluster_radius)**2)
+
 def _drift_kernel(num, den, beta):
     """Age integral of eq. (J0_AB): int dS / [S U(S)] with U = 1 + beta/S over S in [den, num],
     where S is the summed per-axis variance of the two kernels and beta = sigma_v^2 dt^2 for the
@@ -681,7 +589,7 @@ def _cnp_matrix(sigma_inj):
 def ktz_window_components(sigma_inj):
     cp0 = kt25_covariance_matrix(sigma_inj, channel_second_moment=kt25_second_yield_normalized)
     cnp = _cnp_matrix(sigma_inj)
-    comps = {k: np.zeros_like(cp0) for k in component_order}
+    comps = {k: np.zeros_like(cp0) for k in legacy_cross_keys}
     for v, w in zip(cross_varpi_nodes, cross_w):
         local_cm = np.zeros_like(cp0)
         for n, g, a in zip(harmonic_n, harmonic_g, harmonic_alpha):
@@ -694,6 +602,7 @@ def ktz_window_components(sigma_inj):
         comps[k] /= cross_w.sum()
     return comps
 
+# Earlier local window prediction (known axisymmetric profile, no annular projection): kept for audit only
 cross_comps = ktz_window_components(cross_sigma_obs)
 Xi_KTZ_obs = normalize_cross_covariance(sum(cross_comps.values()))
 Xi_KTZ_obs_noCNP = normalize_cross_covariance(sum(v for k, v in cross_comps.items() if k != 'CNP'))
@@ -814,41 +723,244 @@ def cross_realization(rng):
                 s = b == k
                 F += np.fft.rfft2(ngp(xb[s], yb[s], wb[s])) * np.exp(-0.5 * K2 * broad_mid[k]) / dx_cross**2
         fields[e] += np.fft.irfft2(F, s=(NFFT, NFFT))[:NX, :NX]
-    resid = fields - cross_bg
-    vals = resid[:, c_ana]
-    return dict(cov=vals @ vals.T / vals.shape[1], n=n, n_narrow=int(n_narrow),
-                display=dict(fields=fields[[2, 1]].astype(np.float32), resid=resid[[2, 1]].astype(np.float32)))
+    resid = fields - cross_bg                      # earlier known-profile residual (audit only)
+    vals_old = resid[:, c_ana]
+    vals = uop.project(fields[:, cross_valid], cross_ann, cross_n_annuli)   # P Psi Sigma_A on the valid cells
+    return dict(cov=vals @ vals.T / vals.shape[1], cov_legacy=vals_old @ vals_old.T / vals_old.shape[1],
+                vals=vals.astype(np.float32), n=n, n_narrow=int(n_narrow),
+                display=dict(fields=fields[[2, 1]].astype(np.float32)))
 
-cache = OUT_DIR / 'cross_covariance_stack.npz'
+# %% Block 11b: unified operators for the multi-element maps (valid cells, annuli, projected theory)
+from validation import ktz_unified_cross as ucx
+
+
+cross_valid = c_ana
+cvx, cvy = cX[cross_valid], cY[cross_valid]; cvr = np.hypot(cvx, cvy); cvp = np.arctan2(cvy, cvx)
+n_cross_cells = cvx.size
+cross_n_annuli = int(round((cross_R_out_a - cross_R_in_a) / (10.0 / 3.0 * dx_cross)))
+cross_ann_edges = np.linspace(cross_R_in_a, cross_R_out_a, cross_n_annuli + 1); cross_ann_edges[-1] += 1e-9
+cross_ann = uop.annulus_labels(cvr, cross_ann_edges)
+cross_n_a = np.bincount(cross_ann, minlength=cross_n_annuli).astype(float)
+METRICS['cross_unified_operators'] = dict(n_valid_cells=int(n_cross_cells), n_annuli=cross_n_annuli,
+                                          annulus_width_kpc=float(np.diff(cross_ann_edges[:2])[0]),
+                                          response='Gaussian beam FWHM_b = 2 dx_cross, sampled at valid cell centres')
+cross_theory_cache = OUT_DIR / 'cross_theory_unified.npz'
+ce = cross_idx; nce = len(cross_elements)
+
+def channel_pair_params(i, j, sigma_inj, second):
+    ys, nu, de, be = [], [], [], []
+    for a in range(3):
+        la2 = kt25_kappa * kt25_delay[i, a]
+        for b in range(3):
+            y_ = second[i, a, j, b]
+            if y_ == 0:
+                continue
+            lb2 = kt25_kappa * kt25_delay[j, b]
+            s2 = sigma_inj[a]**2 + sigma_inj[b]**2
+            dd = abs(kt25_delay[i, a] - kt25_delay[j, b])
+            ys.append(y_); nu.append(4 * kt25_lcorr**2 - 2 * la2 - 2 * lb2 + s2); de.append(2 * abs(la2 - lb2) + s2)
+            be.append((kt25_sigma_v * dd)**2)
+    return np.array(ys), np.array(nu), np.array(de), np.array(be)
+
+if cross_theory_cache.exists():
+    _ct = np.load(cross_theory_cache)
+    cross_U, cross_D, cross_M = _ct['U'], _ct['D'], _ct['M']
+    METRICS['cross_theory_diagnostics'] = json.loads(str(_ct['diag']))
+    print('loaded', cross_theory_cache.name, flush=True)
+else:
+    t0 = time.time()
+    ann2d = np.full(cR.shape, -1, int); ann2d[cross_valid] = cross_ann
+    varpi_a = np.bincount(cross_ann, cvr, cross_n_annuli) / cross_n_a
+    Hw, _npairs = ucx.annulus_offset_histograms(cross_valid, ann2d, cross_n_annuli, dx_cross, np.exp(-varpi_a / h_R) / cross_n_a)
+    assert _npairs == np.sum(cross_n_a**2), 'annulus pair counts'
+    nz = np.flatnonzero(Hw); r_n = np.sqrt(nz) * dx_cross; Hw_nz = Hw[nz]
+    lam_sum = np.exp(-cvr / h_R).sum()
+    print(f'annulus offset histograms: {len(nz)} distinct separations ({time.time()-t0:.0f}s)', flush=True)
+    # same-parent term: local zero-lag kernel at each cell minus the annular-mean correction
+    cross_U = np.zeros((nce, nce)); U_diag = np.zeros((nce, nce))
+    for p_, i in enumerate(ce):
+        for q_, j in enumerate(ce):
+            if q_ < p_:
+                continue
+            prm = channel_pair_params(i, j, cross_sigma_obs, kt25_second_yield_normalized)
+            k0 = ucx.same_parent_kernel_r(np.array([0.0]), *prm)[0]
+            ring = np.sum(Hw_nz * ucx.same_parent_kernel_r(r_n, *prm))
+            U_diag[p_, q_] = U_diag[q_, p_] = lam_sum * k0
+            cross_U[p_, q_] = cross_U[q_, p_] = (lam_sum * k0 - ring) / n_cross_cells
+    print(f'same-parent projected term ({time.time()-t0:.0f}s)', flush=True)
+    # distinct-parent term: local isotropic kernel C_D(r) (Hankel transform of the Thomas spectrum)
+    kq = np.linspace(0.0, 12.0, 6001)
+    Psrc = cluster_fraction * mean_children_per_cluster / (kt25_Gamma * kt25_t_corr) * np.exp(-(cluster_radius * kq)**2)
+    Tq = np.zeros((nce, kq.size))
+    for p_, e in enumerate(ce):
+        for c in range(3):
+            if kt25_mean_yield[e, c] != 0:
+                Tq[p_] += kt25_mean_yield[e, c] * np.nan_to_num(_transfer_k(kt25_delay[e, c], cross_sigma_obs[c], np.maximum(kq, 1e-12)))
+    r_tab = np.arange(0.0, r_n.max() + 0.05, 0.01)
+    J = ucx.j0(np.outer(r_tab, kq)) * (kq * Psrc / (2 * np.pi))[None, :]
+    wq = np.full(kq.size, kq[1] - kq[0]); wq[[0, -1]] *= 0.5
+    cross_D = np.zeros((nce, nce)); D0 = np.zeros((nce, nce))
+    for p_ in range(nce):
+        for q_ in range(p_, nce):
+            kd = cross_pref0 * (J * (Tq[p_] * Tq[q_] * wq)[None, :]).sum(1)
+            ring = np.sum(Hw_nz * uop.cubic_uniform(r_tab, kd, r_n))
+            D0[p_, q_] = D0[q_, p_] = kd[0]
+            cross_D[p_, q_] = cross_D[q_, p_] = (lam_sum * kd[0] - ring) / n_cross_cells
+    del J
+    print(f'distinct-parent projected term ({time.time()-t0:.0f}s)', flush=True)
+    # complete mean: exact smoothing of the one-point rate on the padded support, drift and delays
+    nodes_c = np.concatenate([uop.radial_nodes(cross_source_R_in, 3.0, 0.004, 6)[0], uop.radial_nodes(3.0, cross_source_R_out, 0.02, 6)[0]])
+    wts_c = np.concatenate([uop.radial_nodes(cross_source_R_in, 3.0, 0.004, 6)[1], uop.radial_nodes(3.0, cross_source_R_out, 0.02, 6)[1]])
+    lam0n = np.exp(-nodes_c / h_R)
+    Phin = (m_arms / np.tan(pitch_rad)) * np.log(nodes_c / R_in)
+    lamh = {0: lam0n.astype(complex)}
+    for n_, g, a in zip(harmonic_n, harmonic_g, harmonic_alpha):
+        lamh[int(n_ * m_arms)] = eta * g * lam0n * np.exp(1j * (n_ * (Phin + Theta0) + a))
+    lamh_cl = {k: uop.smoothing_matrix(k, cluster_radius**2, nodes_c, nodes_c, wts_c) @ c for k, c in lamh.items()}
+    lamh1 = {k: (1 - cluster_fraction) * lamh[k] + cluster_fraction * lamh_cl[k] for k in lamh}
+    print(f'one-point rate on {nodes_c.size} padded-support nodes ({time.time()-t0:.0f}s)', flush=True)
+    rho_out_c = np.arange(cross_R_in_a - 0.05, cross_R_out_a + 0.05, 0.005)
+    Vlist = []
+    for e in ce:
+        for c in range(3):
+            if kt25_mean_yield[e, c] != 0 and kt25_delay[e, c] < kt25_t_corr:
+                v0 = cross_sigma_obs[c]**2 + (kt25_sigma_v * kt25_delay[e, c])**2
+                Vlist += [v0, v0 + 2 * kt25_kappa * (kt25_t_corr - kt25_delay[e, c])]
+    lnV_nodes = np.linspace(np.log(min(Vlist)) - 0.3, np.log(max(Vlist)) + 0.3, int(os.environ.get('KTZ_CROSS_NV', 80)))
+    mtab = ucx.transported_mean_tables(lamh1, nodes_c, wts_c, rho_out_c, np.exp(lnV_nodes))
+    print(f'mean smoothing tables for {lnV_nodes.size} variances ({time.time()-t0:.0f}s)', flush=True)
+    xg, xw = np.polynomial.legendre.leggauss(int(os.environ.get('KTZ_CROSS_NTAU', 24)))
+    mu_hat = np.zeros((nce, n_cross_cells))
+    for p_, e in enumerate(ce):
+        acc = {k: np.zeros(rho_out_c.size, complex) for k in mtab}
+        for c in range(3):
+            if kt25_mean_yield[e, c] == 0 or kt25_delay[e, c] >= kt25_t_corr:
+                continue
+            v0 = cross_sigma_obs[c]**2 + (kt25_sigma_v * kt25_delay[e, c])**2
+            v1 = v0 + 2 * kt25_kappa * (kt25_t_corr - kt25_delay[e, c])
+            lo, hi = np.log(v0), np.log(v1)
+            for x_, w_ in zip(xg, xw):
+                lv = 0.5 * (hi - lo) * x_ + 0.5 * (hi + lo); V_ = np.exp(lv)
+                dtau = 0.5 * (hi - lo) * w_ * V_ / (2 * kt25_kappa)
+                tb = ucx.interp_lnV(mtab, lnV_nodes, lv)
+                for k in acc:
+                    acc[k] += kt25_mean_yield[e, c] * dtau * tb[k]
+        mu_hat[p_] = uop.eval_harmonics(acc, rho_out_c, cvr, cvp)
+    m_hat = uop.project(mu_hat, cross_ann, cross_n_annuli)
+    cross_M = cross_pref0 * (m_hat @ m_hat.T) / n_cross_cells
+    # size of the discrete-ring residual of the linear harmonic term (complete-annulus cancellation)
+    th_c = spiral_phase(cvr, cvp)
+    lin = max(abs(np.sum(np.exp(-cvr / h_R) * np.cos(n_ * th_c + a))) / lam_sum for n_, a in zip(harmonic_n, harmonic_alpha))
+    diag_info = dict(n_distinct_separations=int(len(nz)), annular_correction_fraction_U=float(np.max(1 - cross_U * n_cross_cells / np.where(U_diag != 0, U_diag, np.nan))),
+                     max_abs_linear_harmonic_ring_sum=float(lin), mean_radius_nodes=int(nodes_c.size),
+                     n_lnV=int(lnV_nodes.size), runtime_s=time.time() - t0,
+                     D0_vs_geomspace_cnp_max_rel=float(np.max(np.abs(D0 / _cnp_matrix(cross_sigma_obs)[np.ix_(ce, ce)] - 1))))
+    METRICS['cross_theory_diagnostics'] = diag_info
+    np.savez(cross_theory_cache, U=cross_U, D=cross_D, M=cross_M, mu_hat=mu_hat.astype(np.float32), diag=json.dumps(diag_info))
+    print('cross theory', diag_info, flush=True)
+
+# Same-event diagonal source integral (finite padded support, radial gradient and curvature, drift), the
+# annular-mean correction with the local kernels, and the local distinct-event term.  2026-11-04 rework: the age
+# integral is Gauss-Legendre in ln(S + sigma_v^2 d^2) (ucx.same_parent_diag_source); the earlier linear-age,
+# 24-node evaluation (ucx.same_parent_diag_exact) was not converged and is kept only as an audit variant.
+# Cache names carry the implementation version and the integration/table configuration.
+DIAG_CFG = dict(version=ucx.DIAG_SOURCE_VERSION, n_t=int(os.environ.get('KTZ_CROSS_NT', 128)),
+                n_lnw=int(os.environ.get('KTZ_CROSS_NW', 192)), lnw_range=[4e-4, 60.0], rho_step=0.005, panels=[0.004, 0.02])
+_tag = f"v2_nt{DIAG_CFG['n_t']}_nw{DIAG_CFG['n_lnw']}"
+tab_cache = OUT_DIR / f"cross_diag_tables_nw{DIAG_CFG['n_lnw']}_rho0.005_p0.004-0.02.npz"
+diag_cache = OUT_DIR / f'cross_same_parent_diag_source_{_tag}.npz'
+if diag_cache.exists() and json.loads(str(np.load(diag_cache)['config'])) == DIAG_CFG:
+    _dc = np.load(diag_cache); U_diag_exact = _dc['U_diag_source']; U_diag_local = _dc['U_diag_local']; U_diag_old24 = _dc['U_diag_old_linear24']
+    print('loaded', diag_cache.name, flush=True)
+else:
+    t0 = time.time()
+    lnw_nodes = np.linspace(np.log(DIAG_CFG['lnw_range'][0]), np.log(DIAG_CFG['lnw_range'][1]), DIAG_CFG['n_lnw'])
+    if tab_cache.exists() and np.allclose(np.load(tab_cache)['lnw'], lnw_nodes):
+        sumtab = np.load(tab_cache)['sums']
+    else:
+        rho_tab = np.arange(cross_R_in_a - 0.05, cross_R_out_a + 0.05, DIAG_CFG['rho_step'])
+        _tabs, sumtab, _ = ucx.axisymmetric_rate_tables(cross_source_R_in, cross_source_R_out, h_R, cluster_fraction, cluster_radius,
+                                                        rho_tab, lnw_nodes, cvr, *DIAG_CFG['panels'])
+        _tmp = OUT_DIR / (tab_cache.stem + '.tmp.npz')
+        np.savez(_tmp, tabs=_tabs, sums=sumtab, lnw=lnw_nodes, rho_tab=rho_tab, version=ucx.DIAG_SOURCE_VERSION); os.replace(_tmp, tab_cache)
+    U_diag_exact = np.zeros((nce, nce)); U_diag_local = np.zeros((nce, nce)); U_diag_old24 = np.zeros((nce, nce))
+    lam_sum_loc = np.exp(-cvr / h_R).sum()
+    for p_, i in enumerate(ce):
+        for q_, j in enumerate(ce):
+            if q_ < p_:
+                continue
+            tot = old = 0.0
+            for a in range(3):
+                for b in range(3):
+                    y_ = kt25_second_yield_normalized[i, a, j, b]
+                    if y_ == 0:
+                        continue
+                    args = (cross_sigma_obs[a]**2, cross_sigma_obs[b]**2, kt25_delay[i, a], kt25_delay[j, b])
+                    tot += ucx.same_parent_diag_source(y_, *args, kt25_kappa, kt25_sigma_v, kt25_t_corr, lnw_nodes, sumtab, n_t=DIAG_CFG['n_t'])
+                    old += ucx.same_parent_diag_exact(None, None, None, None, y_, *args[:2], args[2], args[3], None, kt25_kappa,
+                                                      kt25_sigma_v, kt25_t_corr, lnw_nodes, sumtab=sumtab, n_s=24)
+            U_diag_exact[p_, q_] = U_diag_exact[q_, p_] = tot; U_diag_old24[p_, q_] = U_diag_old24[q_, p_] = old
+            k0 = ucx.same_parent_kernel_r(np.array([0.0]), *channel_pair_params(i, j, cross_sigma_obs, kt25_second_yield_normalized))[0]
+            U_diag_local[p_, q_] = U_diag_local[q_, p_] = lam_sum_loc * k0
+    _tmp = OUT_DIR / (diag_cache.stem + '.tmp.npz')
+    np.savez(_tmp, U_diag_source=U_diag_exact, U_diag_local=U_diag_local, U_diag_old_linear24=U_diag_old24, lnw_nodes=lnw_nodes,
+             sumtab=sumtab, config=json.dumps(DIAG_CFG)); os.replace(_tmp, diag_cache)
+    print(f'same-event diagonal source integral ({time.time()-t0:.0f}s); max rel diff vs local {np.max(np.abs(U_diag_exact / U_diag_local - 1)):.4f}', flush=True)
+METRICS['cross_diag_config'] = DIAG_CFG
+U_ring = U_diag_local - cross_U * n_cross_cells          # local annular-mean correction recovered from the cache
+cross_U_exactdiag = (U_diag_exact - U_ring) / n_cross_cells
+METRICS['cross_theory_diagnostics']['same_parent_diag_source_vs_local_max_rel'] = float(np.max(np.abs(U_diag_exact / U_diag_local - 1)))
+METRICS['cross_theory_diagnostics']['same_parent_diag_source_vs_old_linear24_max_rel'] = float(np.max(np.abs(U_diag_old24 / U_diag_exact - 1)))
+Xi_KTZ_unified_old24 = normalize_cross_covariance((U_diag_old24 - U_ring) / n_cross_cells + cross_D + cross_M)
+Xi_KTZ_unified_localdiag = normalize_cross_covariance(cross_U + cross_D + cross_M)
+Xi_KTZ_unified = normalize_cross_covariance(cross_U_exactdiag + cross_D + cross_M)
+Xi_KTZ_unified_noD = normalize_cross_covariance(cross_U_exactdiag + cross_M)
+
+
+# %% Block 12: multi-element Monte Carlo realisations (seed 20260625, original order; resumable)
+cache = OUT_DIR / 'cross_covariance_stack_unified.npz'
 crng = default_rng(20260625)
-covs = []; disp = None
+covs, covs_old, done = [], [], 0
+if cache.exists():
+    _cc = np.load(cache, allow_pickle=True)
+    covs, covs_old = list(_cc['covariance_stack']), list(_cc['covariance_stack_known_profile'])
+    done = len(covs); crng.bit_generator.state = json.loads(str(_cc['rng_state']))
+    print(f'resuming cross realisations after {done}', flush=True)
 t0 = time.time()
-for i in range(n_cross_real):
-    rr_ = cross_realization(crng); covs.append(rr_['cov'])
-    if disp is None:
-        disp = rr_['display']
+for i in range(done, n_cross_real):
+    rr_ = cross_realization(crng); covs.append(rr_['cov']); covs_old.append(rr_['cov_legacy'])
+    np.save(OUT_DIR / f'cross_projected_values_r{i+1:02d}.npy', rr_['vals'])
     print(f'cross realisation {i+1}/{n_cross_real}: {rr_["n"]:,} events, {rr_["n_narrow"]:,} exact narrow returns, {time.time()-t0:.0f}s', flush=True)
-    np.savez_compressed(cache, covariance_stack=np.array(covs))
+    _tmp = OUT_DIR / 'cross_covariance_stack_unified.tmp.npz'
+    np.savez_compressed(_tmp, covariance_stack=np.array(covs), covariance_stack_known_profile=np.array(covs_old),
+                        rng_state=json.dumps(crng.bit_generator.state), elements=np.array(cross_elements))
+    os.replace(_tmp, cache)
 cov_stack = np.array(covs)
+_arch = ROOT / 'validation' / 'outputs' / 'cross_covariance_stack.npz'
+if _arch.exists() and not QUICK:
+    _a = np.load(_arch)['covariance_stack']
+    METRICS['cross_field_audit_max_rel_vs_archived'] = float(np.max(np.abs(np.array(covs_old) - _a)) / np.max(np.abs(_a)))
+    print('cross field audit vs archived known-profile covariances:', METRICS['cross_field_audit_max_rel_vs_archived'], flush=True)
 sim_cov = cov_stack.mean(0); Xi_sim = normalize_cross_covariance(sim_cov)
 brng = default_rng(20260626)
 boot = np.array([normalize_cross_covariance(cov_stack[brng.integers(0, n_cross_real, n_cross_real)].mean(0)) for _ in range(1000)])
 Xi_sim_err = boot.std(0, ddof=1) if n_cross_real > 1 else np.full_like(Xi_sim, np.nan)
 
-# %% Block 12: matrices and scatter figures; metrics
-th_sub = Xi_KTZ_obs[np.ix_(cross_idx, cross_idx)]
-th_sub_n = Xi_KTZ_obs_noCNP[np.ix_(cross_idx, cross_idx)]
+# %% Block 13: matrices and scatter figures; metrics
+th_sub = Xi_KTZ_unified
+th_sub_n = Xi_KTZ_unified_noD
+th_sub_legacy = Xi_KTZ_obs[np.ix_(cross_idx, cross_idx)]
 kt_sub = Xi_KT25[np.ix_(cross_idx, cross_idx)]
 diff = th_sub - kt_sub; lim = np.nanmax(np.abs(diff))
 fig, axes = plt.subplots(1, 3, figsize=(13.2, 4.25), constrained_layout=True)
 for ax, (M, title, cmap, norm_) in zip(axes, [
         (kt_sub, r'Published KT25 (uniform): $\Xi_{AB}$', 'viridis', None),
-        (th_sub, r'Full KTZ (beam-matched): $\Xi_{AB}$', 'viridis', None),
+        (th_sub, r'Full KTZ (projected): $\Xi_{AB,\Omega}$', 'viridis', None),
         (diff, r'$\Delta\Xi_{AB}={\rm KTZ}-{\rm KT25}$', 'RdBu_r', TwoSlopeNorm(vmin=-lim, vcenter=0, vmax=lim))]):
     im = ax.imshow(M, origin='lower', cmap=cmap, vmin=None if norm_ else 0, vmax=None if norm_ else 1, norm=norm_)
     ax.set_xticks(range(16)); ax.set_yticks(range(16)); ax.set_xticklabels(cross_elements, rotation=90); ax.set_yticklabels(cross_elements)
     ax.set_title(title, fontsize=11); fig.colorbar(im, ax=ax, fraction=0.046, pad=0.03)
-fig.savefig(figure_path('cross_matrices'), dpi=160, bbox_inches='tight'); plt.close(fig)
+fig.savefig(figure_path('unified_cross_matrices'), dpi=160, bbox_inches='tight'); plt.close(fig)
 
 iu = np.triu_indices(16, 1)
 s_, se_, t_, tn_ = Xi_sim[iu], Xi_sim_err[iu], th_sub[iu], th_sub_n[iu]
@@ -869,7 +981,7 @@ ax.plot([lo_, hi_], [lo_, hi_], 'k--', lw=1.2, label='1:1')
 ax.set_xlim(lo_ - 0.03, hi_ + 0.03); ax.set_ylim(lo_ - 0.03, hi_ + 0.03); ax.set_aspect('equal', adjustable='box')
 ax.set_xlabel(r'Simulation $\Xi^{\rm sim}_{AB,\Omega}$'); ax.set_ylabel(r'KTZ prediction $\Xi^{\rm KTZ}_{AB,\Omega}$')
 ax.grid(alpha=0.25); ax.legend(fontsize=7.5, loc='lower right')
-fig.savefig(figure_path('cross_scatter'), dpi=160, bbox_inches='tight'); plt.close(fig)
+fig.savefig(figure_path('unified_cross_scatter'), dpi=160, bbox_inches='tight'); plt.close(fig)
 
 dd = s_ - t_
 METRICS['cross_setup'] = dict(dx_kpc=dx_cross, fwhm_beam_kpc=fwhm_beam_cross, sigma_beam_kpc=float(sigma_beam_cross),
@@ -887,16 +999,34 @@ _uk = Xi_uniform_KTZ_limit[np.ix_(cross_idx, cross_idx)]
 METRICS['ktz_minus_uniform_ktz_limit'] = dict(min=float((th_sub - _uk)[iu].min()), max=float((th_sub - _uk)[iu].max()))
 METRICS['uniform_ktz_limit_minus_kt25'] = dict(min=float((_uk - kt_sub)[iu].min()), max=float((_uk - kt_sub)[iu].max()),
                                                max_abs=float(np.max(np.abs((_uk - kt_sub)[iu]))))
-# Diagnostic: the arcsinh closed form used by the earlier notebooks, which differs from eq. (J0_AB) when dt != 0
+# Audit of the earlier prescription on the same regenerated fields: known axisymmetric profile, no projection,
+# local window prediction (reproduces the archived 'before' metrics), and its arcsinh-kernel diagnostic.
+Xi_sim_old = normalize_cross_covariance(np.array(covs_old).mean(0))
+_so = Xi_sim_old[iu]; _dl = _so - th_sub_legacy[iu]
+METRICS['cross_known_profile_legacy'] = dict(rmse=float(np.sqrt(np.mean(_dl**2))), bias=float(_dl.mean()), max_abs=float(np.abs(_dl).max()),
+                                             note='earlier known-profile prescription, before; not the unified statistic')
 _cp0_as = kt25_covariance_matrix(cross_sigma_obs, channel_second_moment=kt25_second_yield_normalized, kernel='arcsinh')
 _cp0_j0 = kt25_covariance_matrix(cross_sigma_obs, channel_second_moment=kt25_second_yield_normalized)
 _tot_as = sum(cross_comps.values()) - cross_comps['CP0'] + _cp0_as * (cross_comps['CP0'][0, 0] / _cp0_j0[0, 0])
 _th_as = normalize_cross_covariance(_tot_as)[np.ix_(cross_idx, cross_idx)][iu]
-METRICS['cross_arcsinh_kernel_diagnostic'] = dict(rmse=float(np.sqrt(np.mean((s_ - _th_as)**2))), bias=float(np.mean(s_ - _th_as)),
-    max_abs=float(np.max(np.abs(s_ - _th_as))),
+METRICS['cross_arcsinh_kernel_diagnostic_legacy'] = dict(rmse=float(np.sqrt(np.mean((_so - _th_as)**2))),
     kt25_baseline_change_max=float(np.max(np.abs((Xi_uniform_KTZ_limit - Xi_KT25)[np.ix_(cross_idx, cross_idx)][iu]))))
-np.savez(OUT_DIR / 'cross_results.npz', Xi_sim=Xi_sim, Xi_sim_err=Xi_sim_err, Xi_KTZ=th_sub, Xi_KTZ_noCNP=th_sub_n, Xi_KT25=kt_sub, Xi_uniform_KTZ_limit=_uk, elements=np.array(cross_elements))
+_o24 = s_ - Xi_KTZ_unified_old24[iu]
+METRICS['cross_old_linear24_variant'] = dict(rmse=float(np.sqrt(np.mean(_o24**2))), bias=float(_o24.mean()), max_abs=float(np.abs(_o24).max()),
+                                             max_abs_change=float(np.max(np.abs(Xi_KTZ_unified_old24 - th_sub))), note='11-03 delivered (unconverged) age integral')
+# element-group and variance diagnostics (re-evaluated after the age-integral fix)
+_tot = cross_U_exactdiag + cross_D + cross_M
+_auto = np.diag(sim_cov) / np.diag(_tot)
+METRICS['cross_auto_variance_ratio_sim_over_theory_rel_median'] = {e: float(v) for e, v in zip(cross_elements, _auto / np.median(_auto))}
+_agbish = np.isin(np.array(cross_elements), ['N', 'Sr', 'Y', 'Zr', 'Ba', 'Ce'])
+_g = np.array([_agbish[i] or _agbish[j] for i, j in zip(*iu)])
+METRICS['cross_groups'] = {k: dict(n=int(sel.sum()), rmse=float(np.sqrt(np.mean(dd[sel]**2))), bias=float(dd[sel].mean()))
+                           for k, sel in (('without_N_or_s_process', ~_g), ('with_N_or_s_process', _g))}
+_ld = s_ - Xi_KTZ_unified_localdiag[iu]
+METRICS['cross_localdiag_variant'] = dict(rmse=float(np.sqrt(np.mean(_ld**2))), bias=float(_ld.mean()), max_abs=float(np.abs(_ld).max()), within_2sigma=int(np.sum(np.abs(_ld) <= 2 * se_)))
+METRICS['cross_legacy_local_prediction_vs_projected_sim'] = dict(rmse=float(np.sqrt(np.mean((s_ - th_sub_legacy[iu])**2))), note='earlier known-profile local prediction compared with the projected simulation; not a valid comparison, recorded for audit')
+np.savez(OUT_DIR / 'cross_results_unified.npz', Xi_KTZ_old_linear24=Xi_KTZ_unified_old24, Xi_sim_known_profile=Xi_sim_old, Xi_sim=Xi_sim, Xi_sim_err=Xi_sim_err, Xi_KTZ=th_sub, Xi_KTZ_noCNP=th_sub_n, Xi_KT25=kt_sub, Xi_uniform_KTZ_limit=_uk, Xi_KTZ_legacy_local=th_sub_legacy, elements=np.array(cross_elements))
 print('cross', METRICS['cross']); print('cross_noCNP', METRICS['cross_noCNP']); print('KTZ-KT25', METRICS['ktz_minus_kt25'])
 METRICS['runtime_s'] = time.time() - T_START
-json.dump(METRICS, open(OUT_DIR / 'validation_metrics.json', 'w'), indent=1)
+json.dump(METRICS, open(OUT_DIR / 'validation_metrics_unified.json', 'w'), indent=1)
 print(json.dumps(METRICS, indent=1))

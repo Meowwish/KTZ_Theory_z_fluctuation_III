@@ -1,0 +1,309 @@
+{
+ "scalar_setup": {
+  "dx_kpc": 0.2,
+  "fwhm_beam_kpc": 0.4,
+  "sigma_beam_kpc": 0.16986436005760383,
+  "s_eff_kpc": 0.18014966227495202,
+  "q": 1.1101880374038757,
+  "ell_star_kpc": 0.6012487006222965,
+  "cluster_fraction": 0.5,
+  "sigma_cl_kpc": 0.35,
+  "N_ch": 20.0,
+  "ell_src_kpc": 0.4949747468305833,
+  "n_realizations": 10,
+  "expected_events_per_realisation": 24919.84464394308
+ },
+ "unified_operators": {
+  "n_valid_cells": 16168,
+  "n_annuli": 17,
+  "annulus_width_kpc": 0.6726067397088684,
+  "response": "Gaussian beam FWHM_b = 2 dx, sampled at valid cell centres (no cell average)",
+  "full_window": "both endpoints valid; no midpoint cut",
+  "threads": 2,
+  "sector_window": {
+   "R_m": [
+    4.5,
+    13.5
+   ],
+   "phase_halfwidth_deg": 30.0,
+   "r_max_kpc": 1.5
+  },
+  "radial_check_radii": [
+   3.78,
+   5.87,
+   7.96,
+   10.04,
+   12.13,
+   14.22
+  ],
+  "radial_check_halfwidth_kpc": 0.1
+ },
+ "field_audit_max_abs_vs_archived_xi3": {
+  "realisation_1": 1.4432899320127035e-15,
+  "realisation_last": 5.551115123125783e-16
+ },
+ "component_shares_r0_full": {
+  "CU": 0.09638878974173538,
+  "CT": -5.143764486346489e-19,
+  "SM": 0.47374208206159224,
+  "CD": 0.4298691281966724
+ },
+ "scalar_fields_unified": {
+  "projected_residual_rms": 13.55106712692198,
+  "projected_mean_rms": 9.856052697482632,
+  "projected_mean_axisymmetric_residual_rms": 1.8260195744691885
+ },
+ "xi_full": {
+  "n": 10,
+  "rmse": 0.004563522058183998,
+  "bias": 0.003968454256317273,
+  "pearson": 0.9999744160620475,
+  "max_abs": 0.007269376899276508,
+  "within_1sigma": 10,
+  "max_abs_CT": 2.976209513304447e-18
+ },
+ "xi_full_noCD": {
+  "n": 10,
+  "rmse": 0.0343898680703251,
+  "bias": 0.019754891084496802,
+  "pearson": 0.9973720332837479,
+  "max_abs": 0.0626728694102605,
+  "within_1sigma": 1
+ },
+ "sector": {
+  "n": 3,
+  "rmse": 0.018373181280719474,
+  "bias": -0.015412541897398787,
+  "pearson": 0.999997001266221,
+  "max_abs": 0.027761736308226093,
+  "within_1sigma": 0,
+  "max_abs_CT": 0.01552804245662476
+ },
+ "sector_noCD": {
+  "n": 3,
+  "rmse": 0.12123147080295299,
+  "bias": -0.10197868535901004,
+  "pearson": 0.9999682019715299,
+  "max_abs": 0.18403053370605638,
+  "within_1sigma": 0
+ },
+ "sector_modulated_CD_diagnostic": {
+  "n": 3,
+  "rmse": 0.000851771799009255,
+  "bias": 0.000508511550252814,
+  "pearson": 0.9999941511617627,
+  "max_abs": 0.0013028339971395964,
+  "within_1sigma": 3
+ },
+ "radial_check": {
+  "n": 60,
+  "rmse": 0.02699731491785344,
+  "bias": -0.005572008100680506,
+  "pearson": 0.9961668368544819,
+  "max_abs": 0.07898067701899697,
+  "within_1sigma": 40
+ },
+ "radial_check_noCD": {
+  "n": 60,
+  "rmse": 0.105272190645022,
+  "bias": -0.03307903556260295,
+  "pearson": 0.9593175225716702,
+  "max_abs": 0.2520278946692787,
+  "within_1sigma": 13
+ },
+ "radial_check_modulated_CD_diagnostic": {
+  "n": 60,
+  "rmse": 0.026997314917853416,
+  "bias": -0.005572008100680504,
+  "pearson": 0.9961668368544819,
+  "max_abs": 0.07898067701899697,
+  "within_1sigma": 40
+ },
+ "xi_full_modulated_CD_diagnostic": {
+  "n": 10,
+  "rmse": 0.004563522058183996,
+  "bias": 0.003968454256317184,
+  "pearson": 0.9999744160620478,
+  "max_abs": 0.007269376899276779,
+  "within_1sigma": 10
+ },
+ "radial_check_per_radius_modulated_CD_diagnostic": {
+  "3.78": {
+   "n": 10,
+   "rmse": 0.05138569601629498,
+   "bias": -0.0408245204552119,
+   "pearson": 0.9933734149627068,
+   "max_abs": 0.07898067701899697,
+   "within_1sigma": 4
+  },
+  "5.87": {
+   "n": 10,
+   "rmse": 0.020195411695128593,
+   "bias": -0.006751393733990145,
+   "pearson": 0.998282784192268,
+   "max_abs": 0.0318867868282921,
+   "within_1sigma": 6
+  },
+  "7.96": {
+   "n": 10,
+   "rmse": 0.006078390408549575,
+   "bias": -0.0004878971350557947,
+   "pearson": 0.9998755563470914,
+   "max_abs": 0.010697389636963983,
+   "within_1sigma": 10
+  },
+  "10.04": {
+   "n": 10,
+   "rmse": 0.021130914039032195,
+   "bias": -0.0034805805697511586,
+   "pearson": 0.9988712679004471,
+   "max_abs": 0.03410270312580216,
+   "within_1sigma": 8
+  },
+  "12.13": {
+   "n": 10,
+   "rmse": 0.021307249849803495,
+   "bias": 0.006134152934374132,
+   "pearson": 0.9984418848687915,
+   "max_abs": 0.03530126650669995,
+   "within_1sigma": 5
+  },
+  "14.22": {
+   "n": 10,
+   "rmse": 0.01968055928529539,
+   "bias": 0.011978190355551848,
+   "pearson": 0.9980304103066304,
+   "max_abs": 0.03316964139964404,
+   "within_1sigma": 7
+  }
+ },
+ "radial_check_per_radius": {
+  "3.78": {
+   "n": 10,
+   "rmse": 0.051385696016294995,
+   "bias": -0.04082452045521191,
+   "pearson": 0.9933734149627068,
+   "max_abs": 0.07898067701899697,
+   "within_1sigma": 4
+  },
+  "5.87": {
+   "n": 10,
+   "rmse": 0.02019541169512859,
+   "bias": -0.006751393733990113,
+   "pearson": 0.9982827841922678,
+   "max_abs": 0.03188678682829209,
+   "within_1sigma": 6
+  },
+  "7.96": {
+   "n": 10,
+   "rmse": 0.006078390408549562,
+   "bias": -0.0004878971350558058,
+   "pearson": 0.9998755563470912,
+   "max_abs": 0.010697389636964094,
+   "within_1sigma": 10
+  },
+  "10.04": {
+   "n": 10,
+   "rmse": 0.021130914039032278,
+   "bias": -0.003480580569751132,
+   "pearson": 0.9988712679004471,
+   "max_abs": 0.03410270312580238,
+   "within_1sigma": 8
+  },
+  "12.13": {
+   "n": 10,
+   "rmse": 0.021307249849803547,
+   "bias": 0.0061341529343740655,
+   "pearson": 0.9984418848687912,
+   "max_abs": 0.03530126650669994,
+   "within_1sigma": 5
+  },
+  "14.22": {
+   "n": 10,
+   "rmse": 0.019680559285295416,
+   "bias": 0.01197819035555186,
+   "pearson": 0.9980304103066304,
+   "max_abs": 0.0331696413996444,
+   "within_1sigma": 7
+  }
+ },
+ "max_abs_CD_contribution": {
+  "full": 0.36513266343656786,
+  "sector": 0.20620270440649555
+ },
+ "cross_unified_operators": {
+  "n_valid_cells": 268228,
+  "n_annuli": 71,
+  "annulus_width_kpc": 0.16702223441919273,
+  "response": "Gaussian beam FWHM_b = 2 dx_cross, sampled at valid cell centres"
+ },
+ "cross_theory_diagnostics": {
+  "n_distinct_separations": 80610,
+  "annular_correction_fraction_U": 0.0991115787567104,
+  "max_abs_linear_harmonic_ring_sum": 1.0949294846045517e-16,
+  "mean_radius_nodes": 9450,
+  "n_lnV": 80,
+  "runtime_s": 1077.269909620285,
+  "D0_vs_geomspace_cnp_max_rel": 1.9575104664992793e-06,
+  "same_parent_diag_exact_vs_local_max_rel": 0.021634475562282707
+ },
+ "cross_field_audit_max_rel_vs_archived": 4.2988263890899896e-10,
+ "cross_setup": {
+  "dx_kpc": 0.05,
+  "fwhm_beam_kpc": 0.1,
+  "sigma_beam_kpc": 0.04246609001440096,
+  "q_AGB": 1.1770837108434267,
+  "q_CCSN": 0.6802016779123486,
+  "expected_parent_events": 1128917.5554486217,
+  "n_realisations": 12,
+  "narrow_limit_kpc": 0.1,
+  "NFFT": 1024
+ },
+ "cross": {
+  "rmse": 0.019156550753913995,
+  "bias": -0.014202856969327445,
+  "pearson": 0.9988635072137444,
+  "max_abs": 0.04624481049108531,
+  "within_2sigma": 110
+ },
+ "cross_noCNP": {
+  "rmse": 0.01727852722155339,
+  "bias": -0.012174440305790813,
+  "max_abs": 0.04368669805290343
+ },
+ "ktz_minus_kt25": {
+  "min": -0.00585820886966959,
+  "max": 0.4448572791401574,
+  "baseline": "published KT25 Dawson/asinh closed form (KT25 eqs. 28-29, App. A10)"
+ },
+ "ktz_minus_uniform_ktz_limit": {
+  "min": -0.024873658315374247,
+  "max": 0.3904996242257464
+ },
+ "uniform_ktz_limit_minus_kt25": {
+  "min": 1.436837812063274e-07,
+  "max": 0.06888943023654968,
+  "max_abs": 0.06888943023654968
+ },
+ "cross_known_profile_legacy": {
+  "rmse": 0.011323091291260167,
+  "bias": -0.0055272330479148426,
+  "max_abs": 0.028307330115233897,
+  "note": "earlier known-profile prescription, before; not the unified statistic"
+ },
+ "cross_arcsinh_kernel_diagnostic_legacy": {
+  "rmse": 0.03774216478209587,
+  "kt25_baseline_change_max": 0.06888943023654968
+ },
+ "cross_localdiag_variant": {
+  "rmse": 0.014911998669499759,
+  "bias": -0.010069548229223079,
+  "max_abs": 0.035932972821764664,
+  "within_2sigma": 111
+ },
+ "cross_legacy_local_prediction_vs_projected_sim": {
+  "rmse": 0.014695819304880047,
+  "note": "earlier known-profile local prediction compared with the projected simulation; not a valid comparison, recorded for audit"
+ },
+ "runtime_s": 37.212804079055786
+}

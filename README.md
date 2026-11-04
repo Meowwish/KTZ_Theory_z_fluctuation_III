@@ -9,7 +9,9 @@ working likelihoods and the stated source-completion assumption.
 
 - Numerical validation: `KTZ_validation.ipynb` and `KTZ_validation.py`;
   [execution and Figures 1/5 redraw instructions](validation/README.md).
-  This experiment is unchanged.
+  The 4 November update unifies xi_b, applies per-map annular projection,
+  and fixes the multi-element diagonal age quadrature; new synthetic
+  products are in `validation/outputs_rework_20261104/`.
 - Observational production code: [source-integral entrypoints](amusing/source_integral/),
   ordinary Python scripts rather than notebooks.
 - Current evidence table: `amusing/metadata/table3_numbers.json`.
@@ -28,3 +30,6 @@ the text follow-up hash is in `amusing/release_20261030_pps/manuscript_state.jso
 Older releases and production workers are retained for provenance and do not
 produce the current source-integral results. No raw cubes or MAUVE products are
 added by this release.
+
+The current manuscript fingerprint and the 4 November validation checksums are in
+`validation/release_20261104/`. The complete manuscript is not public.

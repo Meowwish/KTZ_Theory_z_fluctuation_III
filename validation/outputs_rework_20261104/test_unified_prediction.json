@@ -1,0 +1,15 @@
+{
+ "pairsum_CU_max_abs_over_den": 2.1082182615306807e-17,
+ "pairsum_CT_max_abs_over_den": 4.7694133389076326e-18,
+ "pairsum_CD_max_abs_over_den": 4.2164365230613617e-16,
+ "pairsum_CDmod_max_abs_over_den": 9.199497868497516e-17,
+ "pairsum_SM_max_abs_over_den": 7.359598294798013e-16,
+ "den_rel": 1.2265997157996688e-15,
+ "xi_max_abs_diff": 3.4416913763379853e-15,
+ "psd_total_min_eig_rel": 1.0003209250970404e-07,
+ "psd_CD_min_eig_rel": -4.41133456573127e-11,
+ "psd_CDmod_min_eig_rel": -9.609784114440395e-11,
+ "psd_projected_total_min_eig_rel": 2.3566601506057932e-17,
+ "n_cells": 384,
+ "passed": true
+}

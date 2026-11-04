@@ -1,0 +1,22 @@
+{
+ "uniform_rate_all_channel_pairs_max_rel_err": {
+  "new_nt64": 5.551115123125783e-16,
+  "new_nt128": 5.551115123125783e-16,
+  "old_ns24": 0.037056462315401495
+ },
+ "linear_spatial_factor_equal_delay_rel_err": {
+  "AGB+beam": {
+   "new_nt128": 2.864702556282239e-07,
+   "old_ns24": 0.024233082637949876
+  },
+  "CCSN+beam": {
+   "new_nt128": 2.3811766625136954e-07,
+   "old_ns24": 9.311542609191648e-06
+  },
+  "TNSN+beam": {
+   "new_nt128": 2.0493673691390768e-07,
+   "old_ns24": 0.003276167696751764
+  }
+ },
+ "passed": true
+}
