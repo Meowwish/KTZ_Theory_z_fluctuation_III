@@ -1,4 +1,26 @@
-# Current release: unified finite-map statistics (4 November 2026)
+# Current entry: single-element finite-map validation (15 November 2026)
+
+`KTZ_validation.ipynb` and its matching `KTZ_validation.py` now contain only the
+single-element calculation. The default outputs are
+`validation/outputs_single_element/` and `validation/figs_single_element/`, with
+metrics in `validation_metrics_single_element.json`. The archived ten-field
+stack and prediction cache reproduce the existing single-element results.
+
+```sh
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMBA_NUM_THREADS=2 python KTZ_validation.py
+```
+
+The cross-element manuscript and independent calculation are maintained at
+<https://github.com/Meowwish/Cross-correlation>. Its entry points are
+`Cross_validation.ipynb` and `Cross_cached_results.ipynb`. This restructuring
+does not change the numerical model or observational fits.
+See [SINGLE_ELEMENT_ENTRY.md](SINGLE_ELEMENT_ENTRY.md).
+
+The notes below document earlier combined releases. Their filenames, section
+numbers and combined-entry commands are historical, not current instructions.
+The old files and output directories remain on disk for provenance.
+
+# Archived combined release: unified finite-map statistics (4 November 2026)
 
 The current producer is `KTZ_validation.py` (with the matching executed notebook).
 It writes `validation/outputs_rework_20261104/` and `validation/figs_rework_20261104/`.

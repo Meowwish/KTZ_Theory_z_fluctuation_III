@@ -1,0 +1,9 @@
+{
+  "date": "2026-11-15",
+  "manuscript_repository": "Meowwish/TITANIC",
+  "manuscript_file": "dimensionless_KTZ+numerical_validation.tex",
+  "manuscript_sha256": "4954e8a0653ead790f51bb2fa8084fb2abbf404cb2380cfddaadff78f422e639",
+  "manuscript_base_commit": "cbe5bddace02195d00d75549054f14a0ffd229fe",
+  "scope": "single-element manuscript restructuring and validation entry split; no change to observational fits",
+  "cross_element_repository": "Meowwish/Cross-correlation"
+}

@@ -2,3 +2,4 @@
 __pycache__/
 *.pyc
 amusing/outputs/
+validation/figs_single_element/
