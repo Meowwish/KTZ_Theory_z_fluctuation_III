@@ -1,0 +1,313 @@
+{
+  "scope": "NGC2466 S, 40 dominant-interval posterior means under the stored signal-amplitude recipe; not a refit or joint predictive calibration. Stored amplitudes have finite pilot-MC error.",
+  "S": {
+    "refinement": 4,
+    "actual_observed_slope": 0.0025222472645477063,
+    "archived_observed_slope": 0.0025222472451699564,
+    "predicted_slope_quantiles_16_50_84": [
+      0.0066762911887867284,
+      0.007639805633500119,
+      0.00825173889490653
+    ],
+    "mean_variance_fraction_quantiles_16_50_84": [
+      0.29568965325853636,
+      0.38923313759369393,
+      0.4539911843484191
+    ],
+    "points": [
+      {
+        "posterior_index": 750,
+        "predicted_slope": 0.006138531910483657,
+        "mean_variance_fraction": 0.24929051457462004,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.006117253245476558
+      },
+      {
+        "posterior_index": 2664,
+        "predicted_slope": 0.007267745945605791,
+        "mean_variance_fraction": 0.3467490820507881,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.006921386268270274
+      },
+      {
+        "posterior_index": 711,
+        "predicted_slope": 0.007656949903756661,
+        "mean_variance_fraction": 0.3940652108848285,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.007216186052124081
+      },
+      {
+        "posterior_index": 3780,
+        "predicted_slope": 0.007831094400624473,
+        "mean_variance_fraction": 0.4078733017175297,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.007339104308475221
+      },
+      {
+        "posterior_index": 2157,
+        "predicted_slope": 0.008767739734115288,
+        "mean_variance_fraction": 0.5107229939683062,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.008247761389647341
+      },
+      {
+        "posterior_index": 1864,
+        "predicted_slope": 0.00844949649545041,
+        "mean_variance_fraction": 0.4755268986529313,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.008009050255637733
+      },
+      {
+        "posterior_index": 1256,
+        "predicted_slope": 0.008338503188485153,
+        "mean_variance_fraction": 0.46627624913729654,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.007896786261393809
+      },
+      {
+        "posterior_index": 2309,
+        "predicted_slope": 0.008039584402184071,
+        "mean_variance_fraction": 0.42842395637005715,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.0076633915574830565
+      },
+      {
+        "posterior_index": 791,
+        "predicted_slope": 0.006953259353193206,
+        "mean_variance_fraction": 0.322906351250822,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.00653101728730624
+      },
+      {
+        "posterior_index": 3752,
+        "predicted_slope": 0.0075283712796935034,
+        "mean_variance_fraction": 0.3742619251589053,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.006913512126899289
+      },
+      {
+        "posterior_index": 1190,
+        "predicted_slope": 0.00692568340494276,
+        "mean_variance_fraction": 0.3175673202210808,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.006785748602364809
+      },
+      {
+        "posterior_index": 1916,
+        "predicted_slope": 0.008196124149369067,
+        "mean_variance_fraction": 0.44275048869838457,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.007723964409231585
+      },
+      {
+        "posterior_index": 3855,
+        "predicted_slope": 0.007897921990080986,
+        "mean_variance_fraction": 0.4139794480961862,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.007524093423604102
+      },
+      {
+        "posterior_index": 1883,
+        "predicted_slope": 0.008252715187260376,
+        "mean_variance_fraction": 0.4591783374323281,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.007736724328928632
+      },
+      {
+        "posterior_index": 635,
+        "predicted_slope": 0.00827996467861769,
+        "mean_variance_fraction": 0.45053467422972665,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.0077922838636621606
+      },
+      {
+        "posterior_index": 2426,
+        "predicted_slope": 0.008514007184205056,
+        "mean_variance_fraction": 0.4840034388225674,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.007888265487488269
+      },
+      {
+        "posterior_index": 915,
+        "predicted_slope": 0.006362050018651323,
+        "mean_variance_fraction": 0.267912659696254,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.006124221831588229
+      },
+      {
+        "posterior_index": 2639,
+        "predicted_slope": 0.006093650088352015,
+        "mean_variance_fraction": 0.2492331319139728,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.006000711574981016
+      },
+      {
+        "posterior_index": 873,
+        "predicted_slope": 0.007622661363243577,
+        "mean_variance_fraction": 0.3844010643025594,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.007230904562157028
+      },
+      {
+        "posterior_index": 3415,
+        "predicted_slope": 0.00806549441486324,
+        "mean_variance_fraction": 0.43769915359278294,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.007667773061216761
+      },
+      {
+        "posterior_index": 2958,
+        "predicted_slope": 0.005835789367613359,
+        "mean_variance_fraction": 0.22605920908322893,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.005828290424640268
+      },
+      {
+        "posterior_index": 2231,
+        "predicted_slope": 0.006723408663001065,
+        "mean_variance_fraction": 0.2985064707399867,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.006591191174294681
+      },
+      {
+        "posterior_index": 1400,
+        "predicted_slope": 0.007730760245292168,
+        "mean_variance_fraction": 0.3981765120093761,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.007209111323664534
+      },
+      {
+        "posterior_index": 3130,
+        "predicted_slope": 0.006661411986403254,
+        "mean_variance_fraction": 0.29480013194860466,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.00643316434668024
+      },
+      {
+        "posterior_index": 11,
+        "predicted_slope": 0.007405407820275377,
+        "mean_variance_fraction": 0.3672272538371942,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.007137826819755348
+      },
+      {
+        "posterior_index": 255,
+        "predicted_slope": 0.007851351503547118,
+        "mean_variance_fraction": 0.40787448433788487,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.007405210997923262
+      },
+      {
+        "posterior_index": 3565,
+        "predicted_slope": 0.008248647302452687,
+        "mean_variance_fraction": 0.45202551686453707,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.007877740474967183
+      },
+      {
+        "posterior_index": 1810,
+        "predicted_slope": 0.007562342082794611,
+        "mean_variance_fraction": 0.3776123474242863,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.007216153849649112
+      },
+      {
+        "posterior_index": 751,
+        "predicted_slope": 0.007287929800255405,
+        "mean_variance_fraction": 0.35673578858248356,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.0067951065731678955
+      },
+      {
+        "posterior_index": 1034,
+        "predicted_slope": 0.0070239003934428786,
+        "mean_variance_fraction": 0.32717708341101776,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.006894457785246544
+      },
+      {
+        "posterior_index": 993,
+        "predicted_slope": 0.007876840814990573,
+        "mean_variance_fraction": 0.40846948833706137,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.007412931131655875
+      },
+      {
+        "posterior_index": 1389,
+        "predicted_slope": 0.006989496550874832,
+        "mean_variance_fraction": 0.3233798196487066,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.006742457042665452
+      },
+      {
+        "posterior_index": 1663,
+        "predicted_slope": 0.008089658659292903,
+        "mean_variance_fraction": 0.43567873642819527,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.0076588120090215345
+      },
+      {
+        "posterior_index": 1869,
+        "predicted_slope": 0.005215065771607064,
+        "mean_variance_fraction": 0.17930312545333113,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.005214235389581216
+      },
+      {
+        "posterior_index": 3345,
+        "predicted_slope": 0.007514987168884901,
+        "mean_variance_fraction": 0.37494790715366094,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.007075872280352233
+      },
+      {
+        "posterior_index": 457,
+        "predicted_slope": 0.008024459347691868,
+        "mean_variance_fraction": 0.42900902413521785,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.007454933033036982
+      },
+      {
+        "posterior_index": 3706,
+        "predicted_slope": 0.006468304499090226,
+        "mean_variance_fraction": 0.27696584568789817,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.006046670169815049
+      },
+      {
+        "posterior_index": 425,
+        "predicted_slope": 0.008189576681953692,
+        "mean_variance_fraction": 0.4546119214485924,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.007565232360808746
+      },
+      {
+        "posterior_index": 2868,
+        "predicted_slope": 0.006927758083563943,
+        "mean_variance_fraction": 0.31828166097893396,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.006803465586659007
+      },
+      {
+        "posterior_index": 1028,
+        "predicted_slope": 0.00874578486930301,
+        "mean_variance_fraction": 0.5189545152515594,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.008175768587695743
+      }
+    ],
+    "inputs_sha256": {
+      "amusing/release_20261026/figure_inputs/NGC2466/ngc2466_pixel_map.npz": "343b08f97f329cb5ebf5585f50352df282dbb95d6499b7ed3304efa5a854ed86",
+      "amusing/release_20261026/figure_inputs/NGC2466/ngc2466_morphology.json": "85589e74a82f3ce98acc259c0daeb1efcf86f919c7d45cb9003eba814c28ebf1",
+      "amusing/release_20261026/checks/regsig/S_L2_postpred.json": "7aed9974fb26196691be44c5b3413edb39b3d0e8664e9a96f3a57c4adca68a15",
+      "amusing/release_20261026/outputs/S/ngc2466_paper_nested_v3_ell0.08-0.22.npz": "9ea26fcb6404da486dc8331ccc8fce8effd4a39992066d705b47d9223eb4a13b"
+    }
+  },
+  "refinement": {
+    "refinement": 8,
+    "actual_observed_slope": 0.0025222472645477063,
+    "archived_observed_slope": 0.0025222472451699564,
+    "predicted_slope_quantiles_16_50_84": [
+      0.006498411086661946,
+      0.0072660313904995945,
+      0.007530738262061086
+    ],
+    "mean_variance_fraction_quantiles_16_50_84": [
+      0.28036718020981255,
+      0.3466065543226463,
+      0.37878117333383904
+    ],
+    "points": [
+      {
+        "posterior_index": 750,
+        "predicted_slope": 0.006137178002503052,
+        "mean_variance_fraction": 0.24919571003906724,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.0061159040306953665
+      },
+      {
+        "posterior_index": 2664,
+        "predicted_slope": 0.0072660313904995945,
+        "mean_variance_fraction": 0.3466065543226463,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.006919753423883989
+      },
+      {
+        "posterior_index": 711,
+        "predicted_slope": 0.007655306201619434,
+        "mean_variance_fraction": 0.39392217051557676,
+        "predicted_slope_including_dipole_in_amplitude_normalisation": 0.007214636967882237
+      }
+    ],
+    "inputs_sha256": {
+      "amusing/release_20261026/figure_inputs/NGC2466/ngc2466_pixel_map.npz": "343b08f97f329cb5ebf5585f50352df282dbb95d6499b7ed3304efa5a854ed86",
+      "amusing/release_20261026/figure_inputs/NGC2466/ngc2466_morphology.json": "85589e74a82f3ce98acc259c0daeb1efcf86f919c7d45cb9003eba814c28ebf1",
+      "amusing/release_20261026/checks/regsig/S_L2_postpred.json": "7aed9974fb26196691be44c5b3413edb39b3d0e8664e9a96f3a57c4adca68a15",
+      "amusing/release_20261026/outputs/S/ngc2466_paper_nested_v3_ell0.08-0.22.npz": "9ea26fcb6404da486dc8331ccc8fce8effd4a39992066d705b47d9223eb4a13b"
+    }
+  },
+  "max_relative_refinement_change": 0.00023591291151736637,
+  "generator_check": {
+    "posterior_index": 750,
+    "production_Generator_mean_slope": 0.006139310505833513,
+    "relative_difference": 0.00012683738737706562
+  }
+}

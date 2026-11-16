@@ -48,6 +48,14 @@ def main():
             np.testing.assert_allclose(np.exp(np.log(f)+raw-box), ev[model]['weights'], atol=1e-12)
         print(key, 'full prior and posterior records PASS')
     status = json.loads((REL/'checks/tmplcmp/STATUS.json').read_text())
+    for variant, galaxy in [('S_EB2', 'ngc2466'), ('S_r5_EB2', 'ngc2466'),
+                            ('D16_EB2', 'ngc2466'), ('N1084D16_EB2', 'ngc1084')]:
+        folder = REL/'inputs'/variant
+        diagnostics = np.genfromtxt(folder/f'{galaxy}_diagnostics.csv', delimiter=',', names=True)
+        covariance = np.load(folder/f'{galaxy}_fit_covariance.npz')['covariance']
+        np.testing.assert_allclose(diagnostics['total_error'], np.sqrt(np.diag(covariance)),
+                                   rtol=1e-12, atol=0)
+    print('EB diagnostic CSV errors match the fitted covariance diagonals PASS')
     for name in status['manuscript_examples']:
         record = json.loads((REL/'checks/tmplcmp'/name).read_text())
         assert np.isfinite(list(record['dchi2_old_minus_new'].values())).all()
@@ -70,6 +78,7 @@ def main():
             with np.load(d/f'{gal.lower()}_paper_nested_v3_ell{a:g}-{b:g}.npz') as z:
                 digest = hashlib.sha256(np.ascontiguousarray(z[model+'_pred_p50'], dtype=float).tobytes()).hexdigest()[:16]
             assert digest == dump['inputs_used'][model+'_pred_p50']
+        assert 'dipole nuisance' in dump['texts']['ax2']['legend']
     state = json.loads((REL/'metadata/manuscript_state.json').read_text())
     for name, digest in state['figures'].items():
         assert hashlib.sha256((ROOT/'figs'/name).read_bytes()).hexdigest() == digest

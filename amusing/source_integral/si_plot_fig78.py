@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""si_plot_fig78.py -- Figs 7/8 (ngc2466/ngc1084_single_pointing) from the source-integral posteriors (2026-10-26, review fix).
+"""Redraw the NGC2466/NGC1084 observational figures from archived posteriors.
 
-Differs from amusing/scripts/plot_from_archive_fa.py (which exec'd the figure section of paper_single_pointing.py) in ONE
-respect, requested in review: every model's representative curve is taken from that model's OWN highest-posterior-mass
-transport interval (piece weights of the conditioned evidence file), not from the L2 interval.  Each nested-model curve is a
-single conditional median prediction; its legend gives the interval and the conditional median ell_*.  The L0 and L2 bands
-(16-84 per cent conditional intervals) and the L2 component panel are kept exactly as before; no band or posterior curve
-bundle is added.  All other drawing code (layout, colours, limits, map panel, contours, error bars) is copied verbatim from
-paper_single_pointing.py's figure section.
+The historical filename refers to their former figure numbers (7/8; now 4/5).
+Each model curve is the bin-by-bin median in that model's highest-posterior-mass
+transport interval; its legend gives the interval and conditional median ell_*.
+The L0/L2 bands and four KTZ component curves use the archived arrays unchanged.
+The fifth archived component is shown separately as a grey dashed dipole curve.
+NGC2466 uses a +/-0.06-dex map colour range; NGC1084 uses +/-0.15 dex.
+No fitting, new posterior predictions or extra uncertainty bands are required.
 
 usage: si_plot_fig78.py --name NGC2466|NGC1084 --inputs DIR --evidence EVIDENCE.json --variant KEY --outdir DIR [--dump X.json]
 DIR/<NAME>/ must hold the pixel map, morphology, diagnostics, fit covariance and the <g>_paper_nested_<tag>_ell<lo>-<hi>
@@ -45,7 +45,7 @@ for m in ("L0", "L1", "L1n", "L2"):
     S[m] = j[m]
 ell = {m: S[m]["params"]["ell_star"][1] for m in S}
 lab_iv = lambda m: f"[{dom[m][0]:g},{dom[m][1]:g}]"   # dominant interval of ell_* [kpc]; ell_* = conditional median
-# ---------------- figure (verbatim from paper_single_pointing.py except the four curve labels/sources) ----------------
+# ---------------- figure from archived conditional predictions ----------------
 plt.rcParams.update({"font.size": 8.5, "axes.labelsize": 9, "axes.titlesize": 9, "legend.fontsize": 7.2, "xtick.labelsize": 8, "ytick.labelsize": 8, "pdf.fonttype": 42})
 C_KT18, C_KTZ, C_NP, C_M, C_2P = "#1f77b4", "#7b3294", "#9467bd", "#e6550d", "#1f77b4"
 PLOT_YLIM = (-0.17, 0.45)
@@ -53,7 +53,8 @@ excluded_visible = bool(np.any(excl & (obs >= PLOT_YLIM[0]) & (obs <= PLOT_YLIM[
 fig, axes = plt.subplots(1, 3, figsize=(9.8, 3.3), constrained_layout=True, gridspec_kw=dict(width_ratios=[1.0, 1.25, 1.25]))
 ax = axes[0]; X, Y, valid = pm["x_grid_kpc"], pm["y_grid_kpc"], pm["valid_mask"]; res_map = np.where(valid, pm["residual_dex"], np.nan)
 dx = float(pm["pixel_size_kpc"]); ext = [X.min()-dx/2, X.max()+dx/2, Y.min()-dx/2, Y.max()+dx/2]
-im = ax.imshow(res_map, origin="lower", extent=ext, cmap="RdBu_r", vmin=-0.15, vmax=0.15, interpolation="nearest")
+map_limit = 0.06 if cl.name == "NGC2466" else 0.15
+im = ax.imshow(res_map, origin="lower", extent=ext, cmap="RdBu_r", vmin=-map_limit, vmax=map_limit, interpolation="nearest")
 mod = np.where(pm["template_support"], pm["arm_source_modulation"], np.nan)
 ax.contour(X, Y, np.nan_to_num(mod, nan=-9), levels=[0.3, 0.8] if morph["analysis_rmax_kpc"] < 6 else [0.5, 1.5], colors="k", linewidths=[0.6, 0.9], linestyles=["-", "-"])
 for rr in (morph["analysis_rmin_kpc"], morph["analysis_rmax_kpc"]): ax.add_patch(plt.Circle((0, 0), rr, fill=False, color="0.3", lw=0.7, ls="--"))
@@ -67,11 +68,12 @@ ax.fill_between(r, A["L2_pred_p16"], A["L2_pred_p84"], color=C_KTZ, alpha=0.25, 
 ax.plot(r, A["L2_pred_p50"], color=C_KTZ, lw=1.8, label=f"L2 {lab_iv('L2')}: $\\ell_\\ast={ell['L2']:.2f}$ kpc")
 ax.plot(r, A["L1n_pred_p50"], color=C_NP, lw=1.2, ls="--", label=f"L1n {lab_iv('L1n')}: $\\ell_\\ast={ell['L1n']:.2f}$ kpc")
 ax.plot(r, A["L1_pred_p50"], color=C_M, lw=1.2, ls=":", label=f"L1 {lab_iv('L1')}: $\\ell_\\ast={ell['L1']:.2f}$ kpc")
-ax.axhline(0, color="0.5", lw=0.6); ax.set(xlabel="$r$ [kpc]", ylabel=r"$\xi_b$", xlim=(0, r.max()+0.1), ylim=PLOT_YLIM, title="finite-window statistic, nested models")
+ax.axhline(0, color="0.5", lw=0.6); ax.set(xlabel="$r$ [kpc]", ylabel=r"$\xi_b$", xlim=(0, r.max()+0.1), ylim=PLOT_YLIM, title="finite-window statistic, model comparison")
 ax.legend(frameon=False, loc="upper right", fontsize=7.2)
 ax = axes[2]; cm = A["L2_comp_p50"]
 for i, (lab, col, ls) in enumerate([(r"$C_{\rm U}$ (same event, unmodulated)", C_2P, "-"), (r"$C_{\rm T}$ (same event, H$\alpha$-modulated)", "#2ca02c", "-"), (r"$\mathbf{S}_{\rm M}$ (projected complete mean field)", C_M, "-"), (r"$C_{\rm D}$ (isotropic distinct-event excess)", C_NP, "-")]):
     ax.plot(r, cm[i], color=col, lw=1.4, ls=ls, label=lab)
+ax.plot(r, cm[4], color="0.4", lw=1.3, ls="--", label="dipole nuisance")
 ax.plot(r, A["L2_pred_p50"], color=C_KTZ, lw=1.8, label="L2 total"); ax.errorbar(r[~excl], obs[~excl], err[~excl], fmt="o", ms=2, color="k", lw=0.5, alpha=0.6); ax.errorbar(r[excl], obs[excl], err[excl], fmt="o", ms=2, mfc="w", color="k", lw=0.5, alpha=0.6)
 ax.axhline(0, color="0.5", lw=0.6); ax.set(xlabel="$r$ [kpc]", ylabel="contribution to $\\xi_b$", xlim=(0, r.max()+0.1), ylim=PLOT_YLIM, title="complete KTZ (L2): components")
 ax.legend(frameon=False, loc="upper right", fontsize=7.2)

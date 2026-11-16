@@ -28,10 +28,14 @@ assumptions, not a full generative calibration of the fitted field.
   null covariance files are reused from the 22 October archive. New EB matrices,
   diagnostics and morphologies are in `inputs/`.
 - `figure_inputs/` and `figures/` contain the inputs and numerical fingerprints
-  for Figures 7/8. Each model uses its own highest-posterior-mass interval for its
+  for the NGC2466/NGC1084 observational figures (currently Figures 4/5; formerly
+  7/8). Each model uses its own highest-posterior-mass interval for its
   representative conditional median curve. The complete median need not equal
   the sum of the component medians. Evidence and parameter summaries combine
   all transport intervals.
+- The component panels show the four KTZ terms and the separately archived
+  dipole nuisance. Every pre-existing curve, band and data array is unchanged;
+  the NGC2466 residual map uses a +/-0.06-dex colour range.
 - `checks/` contains source-integral convergence, evaluator, template-response,
   EB reconstruction and local template-regression records. The local regression
   score is conditional on its null fields and does not jointly propagate shared
@@ -55,10 +59,34 @@ From the repository root, with NumPy, SciPy and Matplotlib installed:
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python amusing/source_integral/check_release.py
 python amusing/source_integral/si_plot_fig78.py --name NGC2466 --inputs amusing/release_20261026/figure_inputs --evidence amusing/release_20261026/figure_inputs/NGC2466/evidence_S.json --variant S --outdir /tmp/ktz-si-figures
 python amusing/source_integral/si_plot_fig78.py --name NGC1084 --inputs amusing/release_20261026/figure_inputs --evidence amusing/release_20261026/figure_inputs/NGC1084/evidence_N1084D16.json --variant N1084D16 --outdir /tmp/ktz-si-figures
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python amusing/source_integral/check_mean_regression.py --output /tmp/ktz-S-mean-amplitude.json
 ```
 
 No fitting is needed for these commands. PDF timestamps can differ; compare
 array fingerprints and the rendered figure.
+
+## 17 November 2026 presentation and diagnostic update
+
+The plotting script shows the dipole directly from `L2_comp_p50[4]`, rather than
+inferring it by subtracting component medians from a total median. The title
+uses "model comparison" rather than implying strictly nested priors.
+
+In `inputs/{S_EB2,S_r5_EB2,D16_EB2,N1084D16_EB2}`, the CSV `total_error` column
+is corrected to the square root of the diagonal of the corresponding fitted
+covariance matrix. All other columns and the matrices themselves are unchanged.
+Fits read the matrices; this correction changes no fit, posterior or evidence.
+
+`checks/mean_regression/S_mean_amplitude.json` records a conditional amplitude
+check for NGC2466 S. It reuses the original regression test's 40 posterior points
+and stored signal-normalisation amplitudes and compares their transported means
+with the observed template slope using identical support and dipole controls.
+The predicted 16/50/84-percentile slopes are 0.00668/0.00764/0.00825 dex per unit
+contrast, versus the observed 0.00252. This does not quantitatively recover the
+template-correlated mean amplitude. No new significance is assigned: the stored
+normalisation has finite pilot-Monte-Carlo error and this is not a joint
+predictive calibration. The script also checks a doubled spatial resolution at
+three points and the production mean branch at one point. It generates no
+stochastic fields and does not rerun fitting.
 
 ## Production entrypoints
 
