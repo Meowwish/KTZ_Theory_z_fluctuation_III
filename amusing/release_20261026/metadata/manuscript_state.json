@@ -1,6 +1,6 @@
 {
   "release": "20261026",
-  "manuscript_sha256": "cc630dd6ab7e171202c73d41b87f2687630272b8c2be732361a657f9fcc8c9b9",
+  "manuscript_sha256": "4c1f5c1ae90475b5d38989b41ac9adb2103d12388179088f3a3db603cd523a37",
   "source_completion": "Radial exponential continued over whole plane; unmeasured H-alpha contrast zero, not source rate zero.",
   "primary_covariance": "fixed null; unchanged",
   "secondary_covariance": "rebuilt stationary EB proxy",
