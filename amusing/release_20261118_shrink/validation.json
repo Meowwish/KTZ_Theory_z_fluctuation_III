@@ -1,0 +1,141 @@
+{
+  "matrices": {
+    "S_sh020": {
+      "shape": [
+        66,
+        66
+      ],
+      "max_formula_error": 2.168404344971009e-19,
+      "s035_baseline_reproduced": true
+    },
+    "S_sh050": {
+      "shape": [
+        66,
+        66
+      ],
+      "max_formula_error": 2.168404344971009e-19,
+      "s035_baseline_reproduced": true
+    },
+    "D16_sh020": {
+      "shape": [
+        66,
+        66
+      ],
+      "max_formula_error": 5.421010862427522e-20,
+      "s035_baseline_reproduced": true
+    },
+    "D16_sh050": {
+      "shape": [
+        66,
+        66
+      ],
+      "max_formula_error": 1.0842021724855044e-19,
+      "s035_baseline_reproduced": true
+    },
+    "N1084D16_sh020": {
+      "shape": [
+        83,
+        83
+      ],
+      "max_formula_error": 4.336808689942018e-19,
+      "s035_baseline_reproduced": true
+    },
+    "N1084D16_sh050": {
+      "shape": [
+        83,
+        83
+      ],
+      "max_formula_error": 2.168404344971009e-19,
+      "s035_baseline_reproduced": true
+    }
+  },
+  "evidence": [
+    {
+      "variant": "S_sh020",
+      "model": "L0",
+      "lnZ": -25.50959000772668,
+      "F": 0.5589511222251252,
+      "pieces": 4
+    },
+    {
+      "variant": "S_sh020",
+      "model": "L2",
+      "lnZ": -15.408588212469274,
+      "F": 0.021807242069245995,
+      "pieces": 4
+    },
+    {
+      "variant": "S_sh050",
+      "model": "L0",
+      "lnZ": -29.553990354214402,
+      "F": 0.5589511222251252,
+      "pieces": 4
+    },
+    {
+      "variant": "S_sh050",
+      "model": "L2",
+      "lnZ": -16.020601404205998,
+      "F": 0.021807242069245995,
+      "pieces": 4
+    },
+    {
+      "variant": "D16_sh020",
+      "model": "L0",
+      "lnZ": -38.352303932587404,
+      "F": 0.5589511222251252,
+      "pieces": 4
+    },
+    {
+      "variant": "D16_sh020",
+      "model": "L2",
+      "lnZ": -19.616567340619067,
+      "F": 0.02180979503034521,
+      "pieces": 4
+    },
+    {
+      "variant": "D16_sh050",
+      "model": "L0",
+      "lnZ": -47.041776963123105,
+      "F": 0.5589511222251252,
+      "pieces": 4
+    },
+    {
+      "variant": "D16_sh050",
+      "model": "L2",
+      "lnZ": -19.088965581271303,
+      "F": 0.02180979503034521,
+      "pieces": 4
+    },
+    {
+      "variant": "N1084D16_sh020",
+      "model": "L0",
+      "lnZ": -32.021658325441805,
+      "F": 0.5589511222251252,
+      "pieces": 2
+    },
+    {
+      "variant": "N1084D16_sh020",
+      "model": "L2",
+      "lnZ": -17.023661797132387,
+      "F": 0.02159140190516372,
+      "pieces": 2
+    },
+    {
+      "variant": "N1084D16_sh050",
+      "model": "L0",
+      "lnZ": -35.502535790208974,
+      "F": 0.5589511222251252,
+      "pieces": 2
+    },
+    {
+      "variant": "N1084D16_sh050",
+      "model": "L2",
+      "lnZ": -18.212494599830013,
+      "F": 0.02159140190516372,
+      "pieces": 2
+    }
+  ],
+  "figures": {},
+  "sources": {},
+  "raw_runs_independently_recombined": 40
+}

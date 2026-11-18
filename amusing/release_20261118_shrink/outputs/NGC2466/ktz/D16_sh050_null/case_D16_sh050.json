@@ -1,0 +1,27 @@
+{
+  "D16_sh050": {
+    "galaxy": "NGC2466",
+    "variant": "D16_sh050_null",
+    "dir": "outputs/NGC2466/ktz/D16_sh050_null",
+    "tagprefix": "v3sh050",
+    "pieces": [
+      [
+        0.08,
+        0.22
+      ],
+      [
+        0.22,
+        0.35
+      ],
+      [
+        0.35,
+        0.5
+      ],
+      [
+        0.5,
+        3.2
+      ]
+    ],
+    "morphology": "inputs/D16_sh050/ngc2466_morphology.json"
+  }
+}

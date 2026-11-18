@@ -1,0 +1,96 @@
+{
+  "validation_unified_xi.png": {
+    "shape": [
+      784,
+      2064,
+      3
+    ],
+    "pixels_different": 655,
+    "bbox": [
+      856,
+      73,
+      976,
+      287
+    ]
+  },
+  "validation_unified_radial_check.png": {
+    "shape": [
+      1424,
+      2384,
+      3
+    ],
+    "pixels_different": 646,
+    "bbox": [
+      660,
+      73,
+      779,
+      287
+    ]
+  },
+  "ngc2466_single_pointing.pdf": {
+    "shape": [
+      495,
+      1470,
+      3
+    ],
+    "pixels_different": 4528,
+    "bbox": [
+      1177,
+      45,
+      1439,
+      133
+    ],
+    "baseline_closepath_pixels": {
+      "shape": [
+        495,
+        1470,
+        3
+      ],
+      "pixels_different": 2,
+      "bbox": [
+        188,
+        187,
+        209,
+        242
+      ]
+    },
+    "baseline_operations": {
+      "only_contour_closepath_markers_differ": true,
+      "changed_operators": 2
+    },
+    "before_after_arrays_identical": true
+  },
+  "ngc1084_single_pointing.pdf": {
+    "shape": [
+      495,
+      1470,
+      3
+    ],
+    "pixels_different": 4560,
+    "bbox": [
+      1181,
+      45,
+      1444,
+      133
+    ],
+    "baseline_closepath_pixels": {
+      "shape": [
+        495,
+        1470,
+        3
+      ],
+      "pixels_different": 14,
+      "bbox": [
+        95,
+        261,
+        205,
+        347
+      ]
+    },
+    "baseline_operations": {
+      "only_contour_closepath_markers_differ": true,
+      "changed_operators": 9
+    },
+    "before_after_arrays_identical": true
+  }
+}

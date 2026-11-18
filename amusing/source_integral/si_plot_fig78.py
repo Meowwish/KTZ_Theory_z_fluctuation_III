@@ -46,7 +46,7 @@ for m in ("L0", "L1", "L1n", "L2"):
 ell = {m: S[m]["params"]["ell_star"][1] for m in S}
 lab_iv = lambda m: f"[{dom[m][0]:g},{dom[m][1]:g}]"   # dominant interval of ell_* [kpc]; ell_* = conditional median
 # ---------------- figure from archived conditional predictions ----------------
-plt.rcParams.update({"font.size": 8.5, "axes.labelsize": 9, "axes.titlesize": 9, "legend.fontsize": 7.2, "xtick.labelsize": 8, "ytick.labelsize": 8, "pdf.fonttype": 42})
+plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 8.5, "axes.labelsize": 9, "axes.titlesize": 9, "legend.fontsize": 7.2, "xtick.labelsize": 8, "ytick.labelsize": 8, "pdf.fonttype": 42})
 C_KT18, C_KTZ, C_NP, C_M, C_2P = "#1f77b4", "#7b3294", "#9467bd", "#e6550d", "#1f77b4"
 PLOT_YLIM = (-0.17, 0.45)
 excluded_visible = bool(np.any(excl & (obs >= PLOT_YLIM[0]) & (obs <= PLOT_YLIM[1])))
@@ -71,7 +71,7 @@ ax.plot(r, A["L1_pred_p50"], color=C_M, lw=1.2, ls=":", label=f"L1 {lab_iv('L1')
 ax.axhline(0, color="0.5", lw=0.6); ax.set(xlabel="$r$ [kpc]", ylabel=r"$\xi_b$", xlim=(0, r.max()+0.1), ylim=PLOT_YLIM, title="finite-window statistic, model comparison")
 ax.legend(frameon=False, loc="upper right", fontsize=7.2)
 ax = axes[2]; cm = A["L2_comp_p50"]
-for i, (lab, col, ls) in enumerate([(r"$C_{\rm U}$ (same event, unmodulated)", C_2P, "-"), (r"$C_{\rm T}$ (same event, H$\alpha$-modulated)", "#2ca02c", "-"), (r"$\mathbf{S}_{\rm M}$ (projected complete mean field)", C_M, "-"), (r"$C_{\rm D}$ (isotropic distinct-event excess)", C_NP, "-")]):
+for i, (lab, col, ls) in enumerate([(r"$\mathbf{S}_{\rm U}$ (same event, unmodulated)", C_2P, "-"), (r"$\mathbf{S}_{\rm T}$ (same event, H$\alpha$-modulated)", "#2ca02c", "-"), (r"$\mathbf{S}_{\rm M}$ (projected complete mean field)", C_M, "-"), (r"$\mathbf{S}_{\rm D}$ (isotropic distinct-event excess)", C_NP, "-")]):
     ax.plot(r, cm[i], color=col, lw=1.4, ls=ls, label=lab)
 ax.plot(r, cm[4], color="0.4", lw=1.3, ls="--", label="dipole nuisance")
 ax.plot(r, A["L2_pred_p50"], color=C_KTZ, lw=1.8, label="L2 total"); ax.errorbar(r[~excl], obs[~excl], err[~excl], fmt="o", ms=2, color="k", lw=0.5, alpha=0.6); ax.errorbar(r[excl], obs[excl], err[excl], fmt="o", ms=2, mfc="w", color="k", lw=0.5, alpha=0.6)

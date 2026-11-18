@@ -1,14 +1,17 @@
 {
   "release": "20261026",
-  "manuscript_sha256": "01f932db1fcd6041b0c82d0fcdea3d12ca0ea2088d42b34f3646f4dfd0637672",
+  "manuscript_sha256": "bebc0b6ae6a1a1bedda8ba100a7017bdde0b2917d420ded15c7959b1b301d2fe",
   "source_completion": "Radial exponential continued over whole plane; unmeasured H-alpha contrast zero, not source rate zero.",
   "primary_covariance": "fixed null; unchanged",
   "secondary_covariance": "rebuilt stationary EB proxy",
   "scope": "Selected-field working-likelihood comparisons, not a full generative calibration.",
   "figures": {
-    "ngc2466_single_pointing.pdf": "a1bc4abf30f04e1265150eeaad392a9e8d56c2b4e36fe6fec8834a42d4f59520",
-    "ngc1084_single_pointing.pdf": "c333b95df112f8fe1893bea4befccb73f2001a9af16e209bc6092dc403463735",
-    "fitting_workflow_tikz.tex": "15caf372957e46aebc8cf5dad714ad1efc91779d71034d2c85d21c0f120fcf74"
+    "ngc2466_single_pointing.pdf": "4c3aa0376a143253a72eb385a62989ddff22943cad51a055ffd0ce2b3fe19066",
+    "ngc1084_single_pointing.pdf": "74ffcfb62f8c53025696e0e11a7e46b14aec60cf920f6dead9bcc61f133be5bc",
+    "fitting_workflow_tikz.tex": "15caf372957e46aebc8cf5dad714ad1efc91779d71034d2c85d21c0f120fcf74",
+    "validation_unified_xi.png": "5d03fcf6dc46245506eba1b09a6ae7f8386b18647ab28a382e424ca64cba856a",
+    "validation_unified_radial_check.png": "214f9201ab131cda098a97ab72748c3bf74e6982946a93f25135a2b72509272a"
   },
-  "presentation_revision": "20261117"
+  "presentation_revision": "20261118",
+  "additional_sensitivity_archive": "amusing/release_20261118_shrink"
 }

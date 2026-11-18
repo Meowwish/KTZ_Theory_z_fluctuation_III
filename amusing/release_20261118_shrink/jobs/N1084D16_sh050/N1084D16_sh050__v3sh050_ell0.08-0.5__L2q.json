@@ -1,0 +1,22 @@
+{
+  "out": "runs/N1084D16_sh050__v3sh050_ell0.08-0.5__L2q",
+  "cfg": {
+    "dir": "inputs/N1084D16_sh050",
+    "g": "ngc1084",
+    "m1": -87.0,
+    "rmin_fit": 0.12,
+    "src_max": 2.5,
+    "ell_min": 0.08,
+    "ell_max": 0.5
+  },
+  "tables": "source_work/tables/N1084D16_tables.npz",
+  "fast": "source_work/tables/N1084D16_fast_N1084D16_pixbeam_fa.npz",
+  "model": "L2q",
+  "nlive": 400,
+  "seed": 2,
+  "checkpoint_every": 15,
+  "eps_prior": "manuscript",
+  "variant": "N1084D16_sh050",
+  "tag": "v3sh050_ell0.08-0.5",
+  "priority": 2
+}

@@ -1,0 +1,17 @@
+{
+  "date": "2026-11-18",
+  "manuscript_repository": "Meowwish/TITANIC",
+  "manuscript_sha256": "bebc0b6ae6a1a1bedda8ba100a7017bdde0b2917d420ded15c7959b1b301d2fe",
+  "scope": "Finite-map labels and fixed-null shrinkage sensitivity; primary fits unchanged",
+  "active_producers": {
+    "KTZ_validation.py": "8020949a92ce177c776b58534b382a705f4693a8964565496dce06b9990666ba",
+    "KTZ_validation.ipynb": "f8ef19b9ddd90368a86a790948e10c531911b8d6ace4cfbfb5cc1a4e00310d03",
+    "amusing/source_integral/si_plot_fig78.py": "5858fcfae7bba039421e0490b493979b94957d46862af452f793e2881cd5205f"
+  },
+  "figures": {
+    "figs/validation_unified_xi.png": "5d03fcf6dc46245506eba1b09a6ae7f8386b18647ab28a382e424ca64cba856a",
+    "figs/validation_unified_radial_check.png": "214f9201ab131cda098a97ab72748c3bf74e6982946a93f25135a2b72509272a",
+    "figs/ngc2466_single_pointing.pdf": "4c3aa0376a143253a72eb385a62989ddff22943cad51a055ffd0ce2b3fe19066",
+    "figs/ngc1084_single_pointing.pdf": "74ffcfb62f8c53025696e0e11a7e46b14aec60cf920f6dead9bcc61f133be5bc"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "N1084D16": {
+    "galaxy": "NGC1084",
+    "variant": "N1084D16_ref035_null",
+    "dir": "outputs/NGC1084/ktz/N1084D16_ref035_null",
+    "tagprefix": "v3",
+    "pieces": [
+      [
+        0.08,
+        0.5
+      ],
+      [
+        0.5,
+        3.2
+      ]
+    ],
+    "morphology": "source_work/inputs/N1084D16_pixbeam_fa/ngc1084_morphology.json"
+  }
+}

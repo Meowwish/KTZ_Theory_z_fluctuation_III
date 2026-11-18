@@ -1,0 +1,22 @@
+{
+  "out": "runs/S_sh020__v3sh020_ell0.08-0.22__L2q",
+  "cfg": {
+    "dir": "inputs/S_sh020",
+    "g": "ngc2466",
+    "m1": 1.0,
+    "rmin_fit": 0.45,
+    "src_max": 4.0,
+    "ell_min": 0.08,
+    "ell_max": 0.22
+  },
+  "tables": "source_work/tables/N2466S_tables.npz",
+  "fast": "source_work/tables/N2466S_fast_S_pixbeam_fa.npz",
+  "model": "L2q",
+  "nlive": 400,
+  "seed": 2,
+  "checkpoint_every": 15,
+  "eps_prior": "manuscript",
+  "variant": "S_sh020",
+  "tag": "v3sh020_ell0.08-0.22",
+  "priority": 2
+}

@@ -50,7 +50,7 @@
   }
  },
  "arrays": {
-  "ax0_coll0_QuadContourSet": "cb7119ee0231521c",
+  "ax0_coll0_QuadContourSet": "b45b119c69f591f4",
   "ax0_image0": "f979371dc53c556b",
   "ax1_line0": "0a361a0c062ac9c9",
   "ax1_line1": "57608421604cd4af",
@@ -111,10 +111,10 @@
   "ax2": {
    "title": "complete KTZ (L2): components",
    "legend": [
-    "$C_{\\rm U}$ (same event, unmodulated)",
-    "$C_{\\rm T}$ (same event, H$\\alpha$-modulated)",
+    "$\\mathbf{S}_{\\rm U}$ (same event, unmodulated)",
+    "$\\mathbf{S}_{\\rm T}$ (same event, H$\\alpha$-modulated)",
     "$\\mathbf{S}_{\\rm M}$ (projected complete mean field)",
-    "$C_{\\rm D}$ (isotropic distinct-event excess)",
+    "$\\mathbf{S}_{\\rm D}$ (isotropic distinct-event excess)",
     "dipole nuisance",
     "L2 total"
    ],

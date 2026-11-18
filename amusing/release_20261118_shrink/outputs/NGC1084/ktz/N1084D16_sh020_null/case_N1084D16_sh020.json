@@ -1,0 +1,19 @@
+{
+  "N1084D16_sh020": {
+    "galaxy": "NGC1084",
+    "variant": "N1084D16_sh020_null",
+    "dir": "outputs/NGC1084/ktz/N1084D16_sh020_null",
+    "tagprefix": "v3sh020",
+    "pieces": [
+      [
+        0.08,
+        0.5
+      ],
+      [
+        0.5,
+        3.2
+      ]
+    ],
+    "morphology": "inputs/N1084D16_sh020/ngc1084_morphology.json"
+  }
+}

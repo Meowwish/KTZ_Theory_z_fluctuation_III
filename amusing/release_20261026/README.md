@@ -65,6 +65,18 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python amusing/source_integral/check_me
 No fitting is needed for these commands. PDF timestamps can differ; compare
 array fingerprints and the rendered figure.
 
+## 18 November 2026 labels and shrinkage sensitivity
+
+The finite-map component legends now use bold S_U, S_T, S_M and S_D; continuous
+field quantities retain C. The plotting script fixes DejaVu Sans explicitly.
+Curves, map values, posterior intervals and the primary evidence table are
+unchanged. Figure replay checks and environment details are recorded in
+`validation/release_20261118_relabel/`.
+
+Additional L0/L2 fits at shrinkages 0.20 and 0.50, their input matrices and
+reproduction/verification commands are in `amusing/release_20261118_shrink/`.
+The primary fits here retain 0.35 shrinkage and the original dipole definition.
+
 ## 17 November 2026 presentation and diagnostic update
 
 The plotting script shows the dipole directly from `L2_comp_p50[4]`, rather than

@@ -294,7 +294,7 @@ else:
 assert np.array_equal(pred['cnt'], sim_cnt), 'prediction and data use different pair sets'
 component_order = ['CU', 'CT', 'SM', 'CD']
 component_colors = {'CU': '#7fc97f', 'CT': '#ffff99', 'SM': '#fdc086', 'CD': '#beaed4'}
-component_labels = {'CU': r'$C_{\rm U}$', 'CT': r'$C_{\rm T}$', 'SM': r'$\mathbf{S}_{\rm M}$', 'CD': r'$C_{\rm D}$'}
+component_labels = {'CU': r'$\mathbf{S}_{\rm U}$', 'CT': r'$\mathbf{S}_{\rm T}$', 'SM': r'$\mathbf{S}_{\rm M}$', 'CD': r'$\mathbf{S}_{\rm D}$'}
 with np.errstate(invalid='ignore', divide='ignore'):
     th = {k: pred['comp'][k] / pred['den'] for k in component_order}
     th_total = sum(th[k] for k in component_order)
@@ -371,7 +371,7 @@ def comparison_panel(ax, w, rmax, title=None, legend=True, r0=True):
     ax.fill_between(r, sm - sd, sm + sd, color='k', alpha=0.14, lw=0, label=r'Single-realisation $1\sigma$', zorder=3)
     ax.errorbar(r, sm, yerr=se, fmt='none', ecolor='k', elinewidth=0.9, capsize=2, label=r'Mean $1\sigma$ uncertainty', zorder=5)
     ax.plot(r, pad(th_total[w][sel], 1.0), '-', color='#d62728', lw=1.6, label='Full KTZ', zorder=6)
-    ax.plot(r, pad(th_noD[w][sel], 1.0), ls='--', color='#6a3d9a', lw=1.6, label=r'KTZ without $C_{\rm D}$', zorder=6)
+    ax.plot(r, pad(th_noD[w][sel], 1.0), ls='--', color='#6a3d9a', lw=1.6, label=r'KTZ without $\mathbf{S}_{\rm D}$', zorder=6)
     ax.axhline(0, color='grey', lw=0.5); ax.set_xlabel('r (kpc)'); ax.set_xlim(0, rmax); ax.grid(alpha=0.25)
     if title:
         ax.set_title(title)

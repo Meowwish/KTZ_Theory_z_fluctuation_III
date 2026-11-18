@@ -1,0 +1,14 @@
+{
+  "variant": "N1084D16",
+  "shrinkage": 0.5,
+  "floor": 0.01,
+  "null_reference": {
+    "ell": 0.35,
+    "eps": 0.1
+  },
+  "raw_from": "source_work/inputs/N1084D16_pixbeam_fa/ngc1084_fit_covariance.npz",
+  "formula": "(1-s) raw + s diag(raw) + floor^2 I",
+  "cov_sha256": "012d5c43c447a8792104bbc591c1fa6f3105292004815be11a1045947e335099",
+  "min_eig": 0.00013361090600916249,
+  "cond": 95.18435396144154
+}

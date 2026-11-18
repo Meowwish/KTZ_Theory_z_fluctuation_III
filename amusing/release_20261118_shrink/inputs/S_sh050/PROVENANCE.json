@@ -1,0 +1,14 @@
+{
+  "variant": "S",
+  "shrinkage": 0.5,
+  "floor": 0.01,
+  "null_reference": {
+    "ell": 0.35,
+    "eps": 0.1
+  },
+  "raw_from": "source_work/inputs/S_pixbeam_fa/ngc2466_fit_covariance.npz",
+  "formula": "(1-s) raw + s diag(raw) + floor^2 I",
+  "cov_sha256": "513bcfc35cbcc60007f1cef3779e99a1dc61610df07404c0016d9c1fdb0456c0",
+  "min_eig": 0.00023561121568058176,
+  "cond": 28.88560279703543
+}

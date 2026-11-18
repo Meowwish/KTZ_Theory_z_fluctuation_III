@@ -1,0 +1,27 @@
+{
+  "S": {
+    "galaxy": "NGC2466",
+    "variant": "S_ref035_null",
+    "dir": "outputs/NGC2466/ktz/S_ref035_null",
+    "tagprefix": "v3",
+    "pieces": [
+      [
+        0.08,
+        0.22
+      ],
+      [
+        0.22,
+        0.35
+      ],
+      [
+        0.35,
+        0.5
+      ],
+      [
+        0.5,
+        3.2
+      ]
+    ],
+    "morphology": "source_work/inputs/S_pixbeam_fa/ngc2466_morphology.json"
+  }
+}
