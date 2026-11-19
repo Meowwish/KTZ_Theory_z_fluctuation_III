@@ -1,7 +1,7 @@
 {
   "release": "20261026",
-  "manuscript_sha256": "ba47463b8322b386fdf0f4afad985d437aded230afed50a641840d19376a9fdb",
-  "manuscript_commit": "236d7f9e34120aa905ddd027d232eb90b12c88f3",
+  "manuscript_sha256": "f9bff8ff9438bc61a975e32dd08d65916a8337987a07dd26fdaf0c47075824f9",
+  "manuscript_commit": "04bb2c69055d68cc433284da3310c7fdbff7ef4e",
   "source_completion": "Radial exponential continued over whole plane; unmeasured H-alpha contrast zero, not source rate zero.",
   "primary_covariance": "fixed null; unchanged",
   "secondary_covariance": "rebuilt stationary EB proxy",
@@ -14,6 +14,6 @@
     "validation_unified_radial_check.png": "214f9201ab131cda098a97ab72748c3bf74e6982946a93f25135a2b72509272a"
   },
   "presentation_revision": "20261119",
-  "text_revision": "Keep the main exposition in position space, leave template-wavenumber cell-response limits in Appendix A, remove the appendix-only mean multiplier from the main symbol table and explain it directly through the existing local spiral harmonics. No equations, code, figures or numerical results changed.",
+  "text_revision": "Remove the redundant continuous-to-cell assembly table while retaining all adjacent equations and explanations; subsequent table numbers update automatically. No equations, code, figures or numerical results changed.",
   "additional_sensitivity_archive": "amusing/release_20261118_shrink"
 }
