@@ -1,6 +1,7 @@
 {
   "release": "20261026",
-  "manuscript_sha256": "bebc0b6ae6a1a1bedda8ba100a7017bdde0b2917d420ded15c7959b1b301d2fe",
+  "manuscript_sha256": "8ab5152758c07675585f5ca1028ccb6ef3ac98d5d5bb10df1a6776a87884760d",
+  "manuscript_commit": "1cdac763dca230a31e8f4710d7ba1012d45b7125",
   "source_completion": "Radial exponential continued over whole plane; unmeasured H-alpha contrast zero, not source rate zero.",
   "primary_covariance": "fixed null; unchanged",
   "secondary_covariance": "rebuilt stationary EB proxy",
@@ -12,6 +13,7 @@
     "validation_unified_xi.png": "5d03fcf6dc46245506eba1b09a6ae7f8386b18647ab28a382e424ca64cba856a",
     "validation_unified_radial_check.png": "214f9201ab131cda098a97ab72748c3bf74e6982946a93f25135a2b72509272a"
   },
-  "presentation_revision": "20261118",
+  "presentation_revision": "20261119",
+  "text_revision": "Clarify mean-transport Fourier modes and link to the finite-map source integral; no code, figures or numerical results changed.",
   "additional_sensitivity_archive": "amusing/release_20261118_shrink"
 }
