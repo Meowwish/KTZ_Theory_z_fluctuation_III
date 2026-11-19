@@ -1,7 +1,7 @@
 {
   "release": "20261026",
-  "manuscript_sha256": "48b29d4f6df168d4995eaec7d92c781f9eade30cd76e9f07eb147e65f3caab66",
-  "manuscript_commit": "fb8d6a959a393d8682b5e80682b98a4e976a2e3a",
+  "manuscript_sha256": "6d09e07df66a551cb92870cf11178aed452a852a132bc8d918e61c5350c4f201",
+  "manuscript_commit": "a67e2a878ddd2898d33fc13f102413d7a2953c59",
   "source_completion": "Radial exponential continued over whole plane; unmeasured H-alpha contrast zero, not source rate zero.",
   "primary_covariance": "fixed null; unchanged",
   "secondary_covariance": "rebuilt stationary EB proxy",
@@ -14,6 +14,6 @@
     "validation_unified_radial_check.png": "214f9201ab131cda098a97ab72748c3bf74e6982946a93f25135a2b72509272a"
   },
   "presentation_revision": "20261119",
-  "text_revision": "Clarify the translation-invariant kernels behind the Appendix D Fourier multiplier and remove the appendix-only source spectrum from the main symbol table. No equations, code, figures or numerical results changed.",
+  "text_revision": "Add a concise physical-interpretation table, explain transport combinations and resolution at their definitions, scope the Thomas sector interpretation and remove duplicated covariance numbers from the application introduction. No model equations, code, figures or numerical results changed.",
   "additional_sensitivity_archive": "amusing/release_20261118_shrink"
 }
