@@ -1,7 +1,7 @@
 {
   "release": "20261026",
-  "manuscript_sha256": "6d09e07df66a551cb92870cf11178aed452a852a132bc8d918e61c5350c4f201",
-  "manuscript_commit": "a67e2a878ddd2898d33fc13f102413d7a2953c59",
+  "manuscript_sha256": "ba47463b8322b386fdf0f4afad985d437aded230afed50a641840d19376a9fdb",
+  "manuscript_commit": "236d7f9e34120aa905ddd027d232eb90b12c88f3",
   "source_completion": "Radial exponential continued over whole plane; unmeasured H-alpha contrast zero, not source rate zero.",
   "primary_covariance": "fixed null; unchanged",
   "secondary_covariance": "rebuilt stationary EB proxy",
@@ -14,6 +14,6 @@
     "validation_unified_radial_check.png": "214f9201ab131cda098a97ab72748c3bf74e6982946a93f25135a2b72509272a"
   },
   "presentation_revision": "20261119",
-  "text_revision": "Add a concise physical-interpretation table, explain transport combinations and resolution at their definitions, scope the Thomas sector interpretation and remove duplicated covariance numbers from the application introduction. No model equations, code, figures or numerical results changed.",
+  "text_revision": "Keep the main exposition in position space, leave template-wavenumber cell-response limits in Appendix A, remove the appendix-only mean multiplier from the main symbol table and explain it directly through the existing local spiral harmonics. No equations, code, figures or numerical results changed.",
   "additional_sensitivity_archive": "amusing/release_20261118_shrink"
 }
