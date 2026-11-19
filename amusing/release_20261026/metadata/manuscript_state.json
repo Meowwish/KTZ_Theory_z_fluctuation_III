@@ -1,7 +1,7 @@
 {
   "release": "20261026",
-  "manuscript_sha256": "e401fa8b44fe9f08b7013d13f4b6ae2b88b08f24958f59ae20da5c8f89fccd97",
-  "manuscript_commit": "04964c2e4035cdaa5997e190ae7fa8fdf3110b37",
+  "manuscript_sha256": "48b29d4f6df168d4995eaec7d92c781f9eade30cd76e9f07eb147e65f3caab66",
+  "manuscript_commit": "fb8d6a959a393d8682b5e80682b98a4e976a2e3a",
   "source_completion": "Radial exponential continued over whole plane; unmeasured H-alpha contrast zero, not source rate zero.",
   "primary_covariance": "fixed null; unchanged",
   "secondary_covariance": "rebuilt stationary EB proxy",
@@ -14,6 +14,6 @@
     "validation_unified_radial_check.png": "214f9201ab131cda098a97ab72748c3bf74e6982946a93f25135a2b72509272a"
   },
   "presentation_revision": "20261119",
-  "text_revision": "Keep the position-space mean transport in the main text and consolidate its Fourier multiplier in the local spiral appendix; update the symbol table and cell-response wavenumber definition. No code, figures or numerical results changed.",
+  "text_revision": "Clarify the translation-invariant kernels behind the Appendix D Fourier multiplier and remove the appendix-only source spectrum from the main symbol table. No equations, code, figures or numerical results changed.",
   "additional_sensitivity_archive": "amusing/release_20261118_shrink"
 }
