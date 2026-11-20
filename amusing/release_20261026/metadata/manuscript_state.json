@@ -1,7 +1,7 @@
 {
   "release": "20261026",
-  "manuscript_sha256": "f9bff8ff9438bc61a975e32dd08d65916a8337987a07dd26fdaf0c47075824f9",
-  "manuscript_commit": "04bb2c69055d68cc433284da3310c7fdbff7ef4e",
+  "manuscript_sha256": "b304188a488ab5541dfcf1780c387a8a800e20799f47ef41b3a1b3f7976b093d",
+  "manuscript_commit": "1c7b5c56cd16b44eeb5c9421ab75effbbf022da2",
   "source_completion": "Radial exponential continued over whole plane; unmeasured H-alpha contrast zero, not source rate zero.",
   "primary_covariance": "fixed null; unchanged",
   "secondary_covariance": "rebuilt stationary EB proxy",
@@ -13,7 +13,7 @@
     "validation_unified_xi.png": "5d03fcf6dc46245506eba1b09a6ae7f8386b18647ab28a382e424ca64cba856a",
     "validation_unified_radial_check.png": "214f9201ab131cda098a97ab72748c3bf74e6982946a93f25135a2b72509272a"
   },
-  "presentation_revision": "20261119",
-  "text_revision": "Remove the redundant continuous-to-cell assembly table while retaining all adjacent equations and explanations; subsequent table numbers update automatically. No equations, code, figures or numerical results changed.",
+  "presentation_revision": "20261120",
+  "text_revision": "Lead the galaxy results with observed structure and model comparisons; consolidate fixed-template regression scope in Appendix A and covariance-dependent interpretation in Discussion. Equations, numerical results, tables, figures and scientific implementation are unchanged.",
   "additional_sensitivity_archive": "amusing/release_20261118_shrink"
 }
