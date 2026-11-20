@@ -1,7 +1,7 @@
 {
   "release": "20261026",
-  "manuscript_sha256": "b304188a488ab5541dfcf1780c387a8a800e20799f47ef41b3a1b3f7976b093d",
-  "manuscript_commit": "1c7b5c56cd16b44eeb5c9421ab75effbbf022da2",
+  "manuscript_sha256": "abc3d9d797e52cd1ce7030a09666e0b3d1239cf1b4ba1e1d30cb09ce210acc92",
+  "manuscript_commit": "bb25583e87e3919736bcd6cd43f9f684319f63a1",
   "source_completion": "Radial exponential continued over whole plane; unmeasured H-alpha contrast zero, not source rate zero.",
   "primary_covariance": "fixed null; unchanged",
   "secondary_covariance": "rebuilt stationary EB proxy",
@@ -14,6 +14,6 @@
     "validation_unified_radial_check.png": "214f9201ab131cda098a97ab72748c3bf74e6982946a93f25135a2b72509272a"
   },
   "presentation_revision": "20261120",
-  "text_revision": "Lead the galaxy results with observed structure and model comparisons; consolidate fixed-template regression scope in Appendix A and covariance-dependent interpretation in Discussion. Equations, numerical results, tables, figures and scientific implementation are unchanged.",
+  "text_revision": "Identify the shared H-alpha line flux beside the D16 regression score, describe the regressed signal as an abundance component and clarify the joint test of the template-modulated same-event and mean terms. Equations, numerical results, tables, figures and scientific implementation are unchanged.",
   "additional_sensitivity_archive": "amusing/release_20261118_shrink"
 }
