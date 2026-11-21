@@ -51,6 +51,39 @@ The 22 October products are retained for provenance. Their midpoint-rate fits,
 prior-sensitivity runs and modulation refit are not source-integral results.
 The numerical-validation notebook and its experiment are unchanged.
 
+## Manuscript methods and files
+
+The manuscript specifies the mathematical prediction, data processing and
+inference settings. File locations, archived coordinate names and executable
+entrypoints are indexed here. Paths in the table are relative to this release
+directory unless they start with `../source_integral/`. Within each row,
+script basenames following a source-integral path share that directory.
+
+| Manuscript method or input | Released files | Contents or entrypoint |
+| --- | --- | --- |
+| Fixed inputs for the displayed maps | `figure_inputs/NGC2466/`, `figure_inputs/NGC1084/` | The filename prefixes are `ngc2466` and `ngc1084`, respectively. |
+| Cell fields and supports | `<prefix>_pixel_map.npz` in each figure-input directory | Disc-plane coordinates, valid-cell mask, abundance residuals, H-alpha contrast and template support. |
+| Geometry and radial source-rate prior | `<prefix>_morphology.json` | Geometry, effective beam, reference radius and radial-rate prior. |
+| Binned measurements and measurement layer | `<prefix>_diagnostics.csv` | Bin centres, pair counts, measured statistic, signal fraction `s_b` and additive noise term `n_b`. |
+| Fixed sampling covariance | `<prefix>_fit_covariance.npz` | The matrix used by the corresponding displayed fit. Other null/EB cases are mapped by `metadata/input_index.json`. |
+| Forward source integrals, response tables and likelihood | `../source_integral/si_tables.py`, `si_cnp_build.py`, `si_assemble.py`, `si_fasttables.py`, `si_model.py` | Same-event, transported-mean and distinct-event responses on the actual mask, then model assembly. The production workflow is given below. |
+| Fits, interval combination and posterior summaries | `../source_integral/si_fit.py`, `post_variant.py`, `si_condition_subset.py`; `outputs/` and `metadata/evidences.json` | Combine coordinate-box interval evidences with their logarithmic prior masses, then apply the global physical-prior normalisation. |
+| H-alpha-template regression scores | `../source_integral/si_regsig.py`, `si_generate.py`; `checks/regsig/` | The fixed-template regression and source-integral stochastic-field null calculations. |
+| Transported-mean amplitude comparison | `../source_integral/check_mean_regression.py`; `checks/mean_regression/S_mean_amplitude.json` | Regress the transported means at the original 40 posterior points, using the stored signal amplitudes, the same template support and the same dipole controls. |
+| Fixed-null shrinkage sensitivity | `../release_20261118_shrink/` | Configurations, interval results and combined summaries; see [its reproduction instructions](../release_20261118_shrink/README.md). |
+| Joint-field common-covariance checks | `../release_20261030_pps/` | Generating points and weights, configurations, covariance matrices and interval-evidence summaries; see [its reproduction instructions](../release_20261030_pps/README.md). |
+
+The archived parameter name `beta_src` denotes the manuscript's reference-radius
+quantity `beta_ref`. In the post-processed eight-coordinate `*_samples` arrays
+under `outputs/` (not the raw sampler's unit-cube arrays),
+`exp(samples[:, 2])` is this quantity; `exp(samples[:, 3])` is `eta`.
+The transported mean is built from `R * (1 + eta * g)`, so the model slope in
+the mean-amplitude comparison already includes each sample's `eta`. Both the
+model and data are regressed against the same unscaled template contrast.
+
+Use method names and figure filenames when matching files to the manuscript;
+table and figure numbers can change between manuscript versions.
+
 ## Read-only checks and figure redraw
 
 From the repository root, with NumPy, SciPy and Matplotlib installed:

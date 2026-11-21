@@ -1,7 +1,7 @@
 {
   "release": "20261026",
-  "manuscript_sha256": "abc3d9d797e52cd1ce7030a09666e0b3d1239cf1b4ba1e1d30cb09ce210acc92",
-  "manuscript_commit": "bb25583e87e3919736bcd6cd43f9f684319f63a1",
+  "manuscript_sha256": "c37ec7d02fc7aaf0abbe468dc46391afc7133f0c8be6a726baaf724b8c1b6f2b",
+  "manuscript_commit": "3b067b4fd581458e07e44cab05a94591b3383235",
   "source_completion": "Radial exponential continued over whole plane; unmeasured H-alpha contrast zero, not source rate zero.",
   "primary_covariance": "fixed null; unchanged",
   "secondary_covariance": "rebuilt stationary EB proxy",
@@ -13,7 +13,7 @@
     "validation_unified_xi.png": "5d03fcf6dc46245506eba1b09a6ae7f8386b18647ab28a382e424ca64cba856a",
     "validation_unified_radial_check.png": "214f9201ab131cda098a97ab72748c3bf74e6982946a93f25135a2b72509272a"
   },
-  "presentation_revision": "20261120",
-  "text_revision": "Identify the shared H-alpha line flux beside the D16 regression score, describe the regressed signal as an abundance component and clarify the joint test of the template-modulated same-event and mean terms. Equations, numerical results, tables, figures and scientific implementation are unchanged.",
+  "presentation_revision": "20261121",
+  "text_revision": "Move implementation paths, filenames and archived coordinate aliases to the repository's manuscript-methods index. Keep the manuscript's scientific input definitions, settings, numerical checks, software citation and data identifiers. Equations, numerical results, tables, figures and scientific implementation are unchanged.",
   "additional_sensitivity_archive": "amusing/release_20261118_shrink"
 }
