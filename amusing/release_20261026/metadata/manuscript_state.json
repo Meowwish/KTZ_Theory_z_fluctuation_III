@@ -1,7 +1,7 @@
 {
   "release": "20261026",
-  "manuscript_sha256": "134f331d2be86c1074ef0f24ca115f531244335c3564316beaa266fd49b527e5",
-  "manuscript_commit": "b6c52f2a813ba22a06c290f45f55f276ed442f84",
+  "manuscript_sha256": "ecdefad0c2e7ce3c89593a7022e1feef685256bc697e62376eb8d5411ed91b9a",
+  "manuscript_commit": "ccec99914f6f7595475eae817cd2195f58d52146",
   "source_completion": "Radial exponential continued over whole plane; unmeasured H-alpha contrast zero, not source rate zero.",
   "primary_covariance": "fixed null; unchanged",
   "secondary_covariance": "rebuilt stationary EB proxy",
@@ -14,6 +14,6 @@
     "validation_unified_radial_check.png": "214f9201ab131cda098a97ab72748c3bf74e6982946a93f25135a2b72509272a"
   },
   "presentation_revision": "20261125",
-  "text_revision": "Clarify ensemble versus explicitly stated spatial or bin averages, the uniform-source-rate condition for the KT18 limit, and the common midpoint background in the local appendix. Keep the parameter-identifiability table before Appendix G. Text and layout only; scientific equations, fitting code, numerical results, priors, masks and figure files are unchanged.",
+  "text_revision": "Revert the 20261125 convention and appendix-layout revision while retaining subsequent manuscript updates from Overleaf. The Git manuscript matches the Overleaf export commit 479d68c. Fitting code, numerical products, priors, masks and figure files are unchanged.",
   "additional_sensitivity_archive": "amusing/release_20261118_shrink"
 }
