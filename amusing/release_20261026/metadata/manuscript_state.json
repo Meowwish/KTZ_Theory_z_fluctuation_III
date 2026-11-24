@@ -1,7 +1,7 @@
 {
   "release": "20261026",
-  "manuscript_sha256": "c37ec7d02fc7aaf0abbe468dc46391afc7133f0c8be6a726baaf724b8c1b6f2b",
-  "manuscript_commit": "3b067b4fd581458e07e44cab05a94591b3383235",
+  "manuscript_sha256": "044075d329d26b8da35fbf3f05b67d27240b16763b4afb668fc8645bd94237ee",
+  "manuscript_commit": "cea2e08275fbd031940ed995f249d6a0ef1d6346",
   "source_completion": "Radial exponential continued over whole plane; unmeasured H-alpha contrast zero, not source rate zero.",
   "primary_covariance": "fixed null; unchanged",
   "secondary_covariance": "rebuilt stationary EB proxy",
@@ -9,11 +9,11 @@
   "figures": {
     "ngc2466_single_pointing.pdf": "4c3aa0376a143253a72eb385a62989ddff22943cad51a055ffd0ce2b3fe19066",
     "ngc1084_single_pointing.pdf": "74ffcfb62f8c53025696e0e11a7e46b14aec60cf920f6dead9bcc61f133be5bc",
-    "fitting_workflow_tikz.tex": "15caf372957e46aebc8cf5dad714ad1efc91779d71034d2c85d21c0f120fcf74",
+    "fitting_workflow_tikz.tex": "9a36a6d196dcec2bd387c4be5ecd7a44c37255fda703b6e1ba2748820adb0eb3",
     "validation_unified_xi.png": "5d03fcf6dc46245506eba1b09a6ae7f8386b18647ab28a382e424ca64cba856a",
     "validation_unified_radial_check.png": "214f9201ab131cda098a97ab72748c3bf74e6982946a93f25135a2b72509272a"
   },
-  "presentation_revision": "20261121",
-  "text_revision": "Move implementation paths, filenames and archived coordinate aliases to the repository's manuscript-methods index. Keep the manuscript's scientific input definitions, settings, numerical checks, software citation and data identifiers. Equations, numerical results, tables, figures and scientific implementation are unchanged.",
+  "presentation_revision": "20261124",
+  "text_revision": "Clarify the residual ensemble mean, complete-circle versus finite-template centring, and non-negative source convention. Distinguish local diagnostics from the full source-integral calculation, consolidate the EB recipe in Appendix A, state the measurement-corrected xi convention, and correct the width-ratio reference and workflow covariance labels. Introduction wording, displayed equations, fitted results, parameter priors, masks and scientific implementation are unchanged.",
   "additional_sensitivity_archive": "amusing/release_20261118_shrink"
 }

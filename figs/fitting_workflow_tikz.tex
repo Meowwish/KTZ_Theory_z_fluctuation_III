@@ -53,10 +53,10 @@
       {Measured H$\alpha$\\ morphology: fixed $g$;\\ no fitted spiral\\ geometry};
 
   % ---- covariance branch ----
-  \node[cov, text width=5.9cm, minimum height=0.8cm] (C1) at ({(\kwfxc+\kwfxd)/2},\kwfyBu) {300 noise-free signal-field mocks};
-  \node[cov, text width=5.9cm, minimum height=0.8cm] (C2) at ({(\kwfxc+\kwfxd)/2},\kwfyBl) {200 flux draws, per spaxel and per line};
+  \node[cov, text width=5.9cm, minimum height=0.8cm] (C1) at ({(\kwfxc+\kwfxd)/2},\kwfyBu) {Covariance of curves from 300 noise-free signal-field mocks};
+  \node[cov, text width=5.9cm, minimum height=0.8cm] (C2) at ({(\kwfxc+\kwfxd)/2},\kwfyBl) {Covariance of curves from 200 flux draws, per spaxel and per line};
   \path (\kwfxe,\kwfyBu) -- (\kwfxe,\kwfyBl) coordinate[midway] (sc);
-  \node[cov, text width=\kwfwe, minimum height=1.95cm] (S) at (sc) {Sum and shrink\\ $\to$ fixed $\boldsymbol\Sigma$};
+  \node[cov, text width=\kwfwe, minimum height=1.95cm] (S) at (sc) {Sum covariances\\ and regularise\\ $\to$ fixed $\boldsymbol\Sigma$};
 
   % ---- arrows ----
   \draw[flow] (D1) -- (D2);
