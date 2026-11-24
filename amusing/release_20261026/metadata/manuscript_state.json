@@ -1,7 +1,7 @@
 {
   "release": "20261026",
-  "manuscript_sha256": "044075d329d26b8da35fbf3f05b67d27240b16763b4afb668fc8645bd94237ee",
-  "manuscript_commit": "cea2e08275fbd031940ed995f249d6a0ef1d6346",
+  "manuscript_sha256": "dae75e347cc7d248ce3770533579be7f40549b55b7c9bcb74e508772b50bfcf7",
+  "manuscript_commit": "e9c9b55ae1f7150c9be019963c4dfbd998aa33ad",
   "source_completion": "Radial exponential continued over whole plane; unmeasured H-alpha contrast zero, not source rate zero.",
   "primary_covariance": "fixed null; unchanged",
   "secondary_covariance": "rebuilt stationary EB proxy",
@@ -14,6 +14,6 @@
     "validation_unified_radial_check.png": "214f9201ab131cda098a97ab72748c3bf74e6982946a93f25135a2b72509272a"
   },
   "presentation_revision": "20261124",
-  "text_revision": "Clarify the residual ensemble mean, complete-circle versus finite-template centring, and non-negative source convention. Distinguish local diagnostics from the full source-integral calculation, consolidate the EB recipe in Appendix A, state the measurement-corrected xi convention, and correct the width-ratio reference and workflow covariance labels. Introduction wording, displayed equations, fitted results, parameter priors, masks and scientific implementation are unchanged.",
+  "text_revision": "Use the original tilde-x source-position notation consistently in the main text and appendices, removing the bold-y alias and its explanatory sentence. Scalar y remains the yield and x_i the fixed cell centre. This is a dummy-variable rename only; the scientific equations, code, fitted results, priors, masks and figures are unchanged.",
   "additional_sensitivity_archive": "amusing/release_20261118_shrink"
 }
