@@ -1,7 +1,7 @@
 {
   "release": "20261026",
-  "manuscript_sha256": "dae75e347cc7d248ce3770533579be7f40549b55b7c9bcb74e508772b50bfcf7",
-  "manuscript_commit": "e9c9b55ae1f7150c9be019963c4dfbd998aa33ad",
+  "manuscript_sha256": "134f331d2be86c1074ef0f24ca115f531244335c3564316beaa266fd49b527e5",
+  "manuscript_commit": "b6c52f2a813ba22a06c290f45f55f276ed442f84",
   "source_completion": "Radial exponential continued over whole plane; unmeasured H-alpha contrast zero, not source rate zero.",
   "primary_covariance": "fixed null; unchanged",
   "secondary_covariance": "rebuilt stationary EB proxy",
@@ -13,7 +13,7 @@
     "validation_unified_xi.png": "5d03fcf6dc46245506eba1b09a6ae7f8386b18647ab28a382e424ca64cba856a",
     "validation_unified_radial_check.png": "214f9201ab131cda098a97ab72748c3bf74e6982946a93f25135a2b72509272a"
   },
-  "presentation_revision": "20261124",
-  "text_revision": "Use the original tilde-x source-position notation consistently in the main text and appendices, removing the bold-y alias and its explanatory sentence. Scalar y remains the yield and x_i the fixed cell centre. This is a dummy-variable rename only; the scientific equations, code, fitted results, priors, masks and figures are unchanged.",
+  "presentation_revision": "20261125",
+  "text_revision": "Clarify ensemble versus explicitly stated spatial or bin averages, the uniform-source-rate condition for the KT18 limit, and the common midpoint background in the local appendix. Keep the parameter-identifiability table before Appendix G. Text and layout only; scientific equations, fitting code, numerical results, priors, masks and figure files are unchanged.",
   "additional_sensitivity_archive": "amusing/release_20261118_shrink"
 }
